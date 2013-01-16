@@ -1,0 +1,12 @@
+lineup
+<% if current_user %>
+
+ <% current_user.festivals.each do |festival| %>
+    <div class="lineup-box">
+      <%= festival.name %>
+      <%= festival.date %>
+    </div>
+  <%end%>
+
+
+<%end%>

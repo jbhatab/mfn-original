@@ -1,0 +1,68 @@
+// Place all the styles related to the Festivals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'bootstrap'
+
+$lightblue: rgb(106,201,197)
+$lightyellow: rgb(255,225,94)
+$skyblue: rgb(94,185,232)
+$red: rgb(239,49,34)
+$darkblue: #23238E
+
+
+
+.asc
+  @include gradient-vertical($startColor: $lightblue, $endColor: $lightyellow)
+  background-color: $lightyellow
+
+.desc
+  @include gradient-vertical($startColor: $lightyellow, $endColor: $lightblue)
+  background-color: $lightblue
+
+.festival-list
+  width: 100%
+  table
+    th
+      a
+        padding: 8px  50px
+        margin-bottom: 50px
+        @include border-radius(3px)
+        border-bottom: 2px solid $darkblue
+    tr:first-child
+      margin-bottom: 100px
+    tr
+      font-weight: bold
+    tr:hover
+      background-color: $lightyellow
+    tr:first-child:hover
+      background-color: $skyblue
+
+div.festival-modal 
+  position: absolute
+  left: 320px
+  width: 90%
+  height: 70%
+  img
+    max-height: 500px
+  .modal-header
+    border-bottom: 5px solid $red
+
+.modal-box
+  h3
+    margin: 0px
+    color: $darkblue
+  p
+    margin: 0px
+  .box-header
+    border-bottom: 1px solid #000000
+
+th.ec-month-nav
+  font-size: 24px
+  border: 1px solid #000000
+  background-color: $lightyellow
+  height: 30px
+
+
+
+

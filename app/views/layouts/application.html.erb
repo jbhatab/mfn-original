@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mfn</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <div id="application-container" class="container">
+    <header>
+    <aside>
+      <div id="login-link">
+        <% if current_user %>
+          Logged in as <%= current_user.email %>.
+        <%= link_to "Log out", log_out_path %>
+        
+        <% else %>
+          <%= link_to "Sign up", sign_up_path %> or
+          <%= link_to "log in", log_in_path %>
+        <% end %>
+      </div>
+    </aside>
+    <aside>
+      <div class="row">
+        <div id="logo" class="span12">
+          <%=image_tag("mfn_banner_box.jpg", alt:"MFN banner") %>
+        </div>
+      </div>
+    </aside>
+    <nav>
+      <div class="row">
+        <div id="main-nav-span" class="span12">
+          <div id="main-nav" class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav" role="navigation">
+                <li class="main-nav-li dropdown active">
+                  <%= link_to 'Home', root_path, :class => 'dropdown-toggle' %>
+                </li>
+                <li class="main-nav-li dropdown">
+                  <a id="drop2" class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="festivals.html" >
+                    Festivals
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                    <li class="dropdown-li">
+                      <%= link_to 'Name', festivals_path %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Calendar', '/calendar' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Map', '/festival-map' %>
+                    </li>
+                  </ul> 
+                </li>   
+                <li class="main-nav-li dropdown">
+                  <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                    My Profile
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                    <li class="dropdown-li">
+                      <a href="#">My Festivals</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">My Pics</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">My Videos</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'My Comments', '/my-comments' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'My Summer Line Up', '/lineup' %>
+                    </li>
+                  </ul> 
+                </li>      
+                <li class="main-nav-li dropdown">
+                  <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                    Ride Share
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                    <li class="dropdown-li">
+                      <a href="#">Requests</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Offers</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Map</a>
+                    </li>
+                  </ul> 
+                </li>  
+                <li class="main-nav-li dropdown">
+                  <a id="drop4" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                    Mobile Apps
+     </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                    <li class="dropdown-li">
+                      <a href="#">Friend Finder</a>
+                    </li>
+                  </ul> 
+                </li> 
+                <li class="main-nav-li dropdown">
+                  <a id="drop5" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                    Merchandise
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                    <li class="dropdown-li">
+                      <a href="#">Hats</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">T-shirts</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Sunglasses</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Ponchos</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Water Bottles</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Beer Packs</a>
+                    </li>
+                  </ul> 
+                </li> 
+                <li class="main-nav-li">
+                  <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
+                </li> 
+                <li class="main-nav-li">
+                  <%= link_to 'Contact', '/contact', :class => 'dropdown-toggle' %>
+                </li> 
+                  </ul> 
+                </li>  
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+  <%= yield %>
+  </div>
+</body>
+</html>

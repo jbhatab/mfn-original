@@ -1,0 +1,85 @@
+
+<div class='festival-list'>
+<h1>Listing festivals</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= sortable 'name' %></th>
+      <th><%= sortable 'city' %></th>
+      <th><%= sortable 'state' %></th>
+      <th><%= sortable 'date' %></th>
+      <th><%= sortable 'genre' %></th>
+      <th><%= sortable 'website' %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @festivals.each do |festival| %>
+
+
+  <tr  href="#modal" data-toggle="modal">
+    <td><%= festival.name %></td>
+    <td><%= festival.city %></td>
+    <td><%= festival.state %></td>
+    <td><%= festival.date %></td>
+    <td><%= festival.genre %></td>
+    <td><%= festival.website %></td>
+    <td>
+    <% if current_user %>
+      <%= button_to "Add To Lineup", :action => "lineup", :controller =>"users", :form => { "data-type" => "json" }, method: :put %>
+
+    <%end%>
+    </td>
+    <td><%= link_to 'Show', festival %></td>
+    <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
+    <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<%end%>
+
+
+  </tbody>
+</table>
+<%= link_to 'New Festival', new_festival_path %>
+<div id='modal' class="festival-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><%=@festivals.first.name%></h3>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <%=image_tag("infrasound.jpg", alt:"infrasound") %>
+    </div>
+    <div class="span6">
+      <div class="modal-body">
+        <div class="well modal-box">
+          <div class="box-header">
+          <h3>Type of Music</h3>
+        </div>
+          <p><%=@festivals.first.genre%></p>
+        </div>
+        <div class="well modal-box">
+          <div class="box-header">
+          <h3>Date</h3>
+        </div>
+          <p><%=@festivals.first.date%></p>
+        </div>
+        <div class="well modal-box">
+          <div class="box-header">
+          <h3>Website</h3>
+        </div>
+          <p><%=@festivals.first.website%></p>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br />
+
+
+</div>
