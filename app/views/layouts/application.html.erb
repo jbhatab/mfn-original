@@ -5,8 +5,32 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript"
+src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SLuj1hMfM&sensor=true">
+    </script>
+    <script type="text/javascript">
+      var map;
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-40, 150),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        google.maps.event.addListener(map, 'click', function(event) {
+          placeMarker(event.latLng);
+        });
+      }
+      function placeMarker(location) {
+        var marker = new google.maps.Marker({
+          position: location, 
+          map: map
+        });
+        map.setCenter(location);
+        }
+    </script>
 </head>
-<body>
+<body onload="initialize()">
   
   <div id="application-container" class="container">
     <header>
