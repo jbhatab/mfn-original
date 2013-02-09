@@ -2,84 +2,90 @@
 <!--<%= link_to "Log in with Facebook", "/auth/facebook" %>-->
 
   
-  <div role="main">
-    
-    <section>
-      <div class="row">
-        <div id="carousel" class="span7">
-          <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-              <div id="festival-month" class="active carousel-div item">
-                <div class="item-container">
-                  <%=image_tag("pic1.jpg", alt:"pic1")%>
-                  <div class="item-header">
-                    <h2>
-                      FESTIVAL OF THE MONTH
-                    </h2>
-                  </div>
-                  <div class="item-footer well well-large">
-                    <h3>
-                      Infrasound
-                    </h3>
-                    <p>
-                      Dubstep, electronic, and it was fun... 
-                    </p>
-                  </div>
-                </div>
+  <div role="main" class="main-page-container">
+    <section id="carousel">
+      <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div id="festival-month" class="active carousel-div item">
+            <div class="item-container">
+              <%=image_tag("pic1.jpg", alt:"pic1")%>
+              <div class="item-header">
+                <h2>
+                  FESTIVAL OF THE MONTH
+                </h2>
               </div>
-              <div id="musician-month"  class="item carousel-div">
-                <div class="item-container">
-                  <%=image_tag("pic4.jpg", alt:"pic4")%>
-                  <div class="item-header">
-                    <h2>
-                      MUSICIAN OF THE MONTH
-                    </h2>
-                  </div>
-                  <div class="item-footer well well-large">
-                    <h3>
-                      Childish Gambino
-                    </h3>
-                    <p>
-                      His shits dope!
-                    </p>
-                  </div>
-                </div>
+              <div class="item-footer well well-large">
+                <h3>
+                  Infrasound
+                </h3>
+                <p>
+                  Dubstep, electronic, and it was fun... 
+                </p>
               </div>
-              <div id="festival-review" class="item carousel-div">
-                <div class="item-container">
-                  <%=image_tag("pic2.jpg", alt:"pic2")%>
-                  <div class="item-header">
-                    <h2>
-                      JARED'S FESTIVAL REVIEW
-                    </h2>
-                  </div>
-                  <div class="item-footer well well-large">
-                    <h3>
-                      BONNAROO
-                  </h3>
-                    <p>
-                      It was pretty crazy.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div> 
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
           </div>
-        </div>
-        <div class="span4">
-          <%= link_to image_tag('bebo.png'), 'bebo.com' %>
-          <%= link_to image_tag('facebook.png'), 'bebo.com' %>
-          <%= link_to image_tag('twitter.png'), 'bebo.com' %>
-          <%= link_to image_tag('bebo.png'), 'bebo.com' %>
-          <%= link_to image_tag('youtube.png'), 'bebo.com' %>
-          <%= link_to image_tag('tumblr.png'), 'bebo.com' %>
-          <%= link_to image_tag('stumbleupon.png'), 'bebo.com' %>
-          <%= link_to image_tag('spurl.png'), 'bebo.com' %>
-        </div>
-      </div>
+          <div id="musician-month"  class="item carousel-div">
+            <div class="item-container">
+              <%=image_tag("pic4.jpg", alt:"pic4")%>
+              <div class="item-header">
+                <h2>
+                  MUSICIAN OF THE MONTH
+                </h2>
+              </div>
+              <div class="item-footer well well-large">
+                <h3>
+                  Childish Gambino
+                </h3>
+                <p>
+                  His shits dope!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div id="festival-review" class="item carousel-div">
+            <div class="item-container">
+              <%=image_tag("pic2.jpg", alt:"pic2")%>
+              <div class="item-header">
+                <h2>
+                  JARED'S FESTIVAL REVIEW
+                </h2>
+              </div>
+              <div class="item-footer well well-large">
+                <h3>
+                  BONNAROO
+              </h3>
+                <p>
+                  It was pretty crazy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </section>
+    <div class= "sidebar">
+      <section id="facebook-widget">
+        <iframe src="http://www.facebook.com/plugins/like.php?href=https://www.facebook.com/MusicFestivalNation?ref=ts&fref=ts&amp;layout=standard&amp;show_faces=true&amp;action=like&amp;colorscheme=light"
+        scrolling="no" frameborder="0"
+        style="border:none; height:75px; width: 440px;">
+        </iframe>
+      </section>
+      <section id="twitter-widget">
+        <a class="twitter-timeline"  href="https://twitter.com/MusicFestNation"  data-widget-id="300359219029360640">Tweets by @MusicFestNation</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </section>
+      <aside id="social-links">
+        <%= link_to image_tag('bebo.png'), 'bebo.com' %>
+        <%= link_to image_tag('facebook.png'), 'bebo.com' %>
+        <%= link_to image_tag('twitter.png'), 'bebo.com' %>
+        <%= link_to image_tag('bebo.png'), 'bebo.com' %>
+        <%= link_to image_tag('youtube.png'), 'bebo.com' %>
+        <%= link_to image_tag('tumblr.png'), 'bebo.com' %>
+        <%= link_to image_tag('stumbleupon.png'), 'bebo.com' %>
+        <%= link_to image_tag('spurl.png'), 'bebo.com' %>
+      </aside>
+    </div>
   </div>
   <footer>
 

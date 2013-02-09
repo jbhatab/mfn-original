@@ -21,18 +21,30 @@ $orange: rgb(233, 86, 36)
 $skyblue: rgb(94,185,232)
 $car-rad: 0px
 $darkorange: rgb(233, 74, 19)
+$green: #55ad5f
+$brown: #5d3c1d
 
 
 body
+  font-size: 62.5%
   height: 800px
-  background-color: $skyblue
+  background-color: $green
 
 
 #application-container
-  background-color: $skyblue
+  background-color: $green
   height: 100%
-  width: 1024px
+  width: 100%
   margin: 0 auto
+
+.main-page-container
+  position: relative
+  margin-top: 30px
+  width: 95%
+  height: 800px
+  margin-left: 2.5%
+  background-color: rgba(255,255,255,.5)
+  border: 3px solid $darkorange
   
 
 #login-link
@@ -43,21 +55,29 @@ body
     font-size: 20px
 
 #logo
+  width: 100%
   img
-    height: 170px
+    height: 200px
     width: 100%
-    max-width: 1280px
+
+.sidebar
+  float: right
+  width: 25%
+  margin: 1% 1% 0px 0px
 
 #main-nav-span
   height: 30px
+  width: 100%
+
 
 div.navbar#main-nav
   position: relative
-  top: -20px
+  @include box-shadow(3px 3px 5px #000)
   div.navbar-inner
+    @include border-radius(0px)
     -webkit-box-shadow: none
     box-shadow: none
-    background: rgba(0, 0, 0, 0.0)
+    background: $brown
     border: none
     ul.nav
       width: 100%
@@ -65,16 +85,17 @@ div.navbar#main-nav
       .main-nav-li
         position: relative
         a.dropdown-toggle
-          text-shadow: none
+          text-shadow: 2px 2px 5px #000
           text-align: center
           margin: 15px 0 0 2px 
           padding-top: 0px
           padding-bottom: 0px
           font-family: impact
+          font-weight: bold
           width: auto
           color: #000000
-          font-size: 16px
-          color: $darkblue
+          font-size: 2em
+          color: #FFF
           background: rgba(0,0,0,0.0)
           box-shadow: none
           border: none
@@ -86,10 +107,15 @@ div.navbar#main-nav
         a.dropdown-toggle
           border-bottom: 2px solid $red
 
+.dropdown-li
+  font-size: 1.4em
+
 
 div#myCarousel
-  width: 500px
-  height: 300px
+  width: 60%
+  margin: 1% 0px 0px 1%
+  float: left
+  height: 400px
   @include border-radius($car-rad)
   border: 1px solid #000000
   @include box-shadow(1px 1px 1px #000000)
@@ -98,7 +124,7 @@ div.carousel-div
   img
     @include border-radius($car-rad)
     position: static
-    height: 300px
+    height: 400px
     width: 100%
     z-index: -100
   .item-header
