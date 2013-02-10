@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
   validates_format_of :email, :with => /^.+@.+$/, :allow_blank => true
-
+  validates_uniqueness_of :festivals
 
   has_many :comments
 

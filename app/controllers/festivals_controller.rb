@@ -21,7 +21,7 @@ class FestivalsController < ApplicationController
   end
 
   def lineup
-    
+    current_user.festivals << Festival.find(4)
   end
 
   def map

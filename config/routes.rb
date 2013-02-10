@@ -31,6 +31,7 @@ Mfn::Application.routes.draw do
 
   match '/my-comments', :to => 'comments#index'
 
+  post '/festivals/:id' => 'users#line'
 
   resources :homes
 

@@ -10,8 +10,9 @@
     end
   end
 
-  def lineup
-
+  def line
+    current_user.festivals << Festival.find(params[:id])
+    redirect_to '/lineup'
   end
 
   # GET /users/1
