@@ -1,6 +1,5 @@
 
 <div class='festival-list'>
-<h1>Listing festivals</h1>
 <table class="table">
   <thead>
     <tr>
@@ -19,7 +18,7 @@
 <% @festivals.each do |festival| %>
 
 
-  <tr  href="#<%=festival.id%>" data-toggle="modal">
+  <tr href="#<%=festival.id%>" data-toggle="modal">
     <td><%= festival.name %></td>
     <td><%= festival.city %></td>
     <td><%= festival.state %></td>
@@ -34,13 +33,13 @@
       <% i=0 %>
       <% current_user.festivals.each do |x| %>
         <% if x.id == festival.id %>
-           <a class="lineup-deactivated">Already Added</a>
+           <a class="btn disabled lineup-deactivated">Already Added</a>
            <%break%>
         <%else%>
           <% i=i+1 %>
         <%end%>
         <%if current_user.festivals.count == i %>
-        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, method: :post %>
+        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
         <%end%>
       <% end%>
     <%end%>

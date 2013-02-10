@@ -16,6 +16,9 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :festival_id %><br />
+    <%= f.collection_select :festival_id, Festival.all, :id, :name %>
+  <div class="field">
     <%= f.label :start_at %><br />
     <%= f.date_select :start_at %>
   </div>

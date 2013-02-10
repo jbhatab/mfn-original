@@ -30,7 +30,6 @@ class FestivalsController < ApplicationController
   # GET /festivals/1.json
   def show
     @festival = Festival.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @festival }

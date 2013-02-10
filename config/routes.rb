@@ -8,11 +8,11 @@ Mfn::Application.routes.draw do
   resources :sessions
 
   resources :users do
-    resources :comments, :only => [:index, :create, :destroy]
+    resources :comments
   end
 
   resources :festivals do
-    resources :comments, :only => [:index, :create, :destroy]
+    resources :comments
   end
   get "sign_up" => "users#new", :as => "sign_up"
 

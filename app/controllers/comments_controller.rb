@@ -1,24 +1,20 @@
 class CommentsController < ApplicationController
-  before_filter :find_user
-  
-  def find_user
-    @user = current_user
+  before_filter :get_festival
+
+  def get_festival
+    @festtival = Festival.find(params[:id])
   end
 
   def index
-    @comments = @user.comments
-    @comment = @user.comments.build(params[:comment])
+    @comments = @festival.comments.all
   end
 
   def create
-    @comment = @user.comments.build(params[:comment])
+    @comment = @festival.Comment.new
     if current_user
-      @comment.user = current_user
-    else 
-      @comment.user = 'guest'
+      @comment.user = current_user.id
+    else
+      @comment.user = 'guy'
     end
-  end
-
-  def destroy
   end
 end

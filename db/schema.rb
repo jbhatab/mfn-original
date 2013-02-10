@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210022544) do
+ActiveRecord::Schema.define(:version => 20130210153734) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20130210022544) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
-    t.datetime "start_at"
-    t.datetime "end_at"
+    t.date     "start_at"
+    t.date     "end_at"
     t.integer  "festival_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
