@@ -11,7 +11,7 @@ group :production do
   gem 'pg'
 end
 
-
+gem 'hassle'
 
 gem 'acts_as_commentable', '3.0.1'
 
