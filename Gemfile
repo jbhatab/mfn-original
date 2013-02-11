@@ -11,6 +11,8 @@ group :production do
   gem 'pg'
 end
 
+
+
 gem 'acts_as_commentable', '3.0.1'
 
 gem 'bootstrap-sass'
