@@ -15,7 +15,7 @@
 
 $lightblue: rgb(106,201,197)
 $forestgreen: #228B22
-$lightgreen: #90EE90 
+$lightgreen: #66ba56 
 $aquamarine: #66CDAA
 $darkblue: #23238E
 $yellow: #FFFF00
@@ -29,15 +29,14 @@ $orange: rgb(233, 86, 36)
 $skyblue: rgb(94,185,232)
 $car-rad: 0px
 $darkorange: rgb(233, 74, 19)
-$green: #55ad5f
+$green: #3fad49
 $brown: #5d3c1d
 
 
 body
   font-size: 62.5%
   font-family: 'BebasNeueRegular', sans-serif, Georgia
-  height: 800px
-  background-color: $green
+  overflow-x: hidden
 
 
 #application-container
@@ -52,8 +51,9 @@ body
   width: 95%
   height: 800px
   margin-left: 2.5%
-  background-color: rgba(255,255,255,.5)
-  border: 3px solid $darkorange
+  background-color: rgba(255,255,255, .5)
+  @include border-radius(5px)
+  border: 2px solid $darkorange
   
 
 #login-link
@@ -78,6 +78,8 @@ body
   height: 30px
   width: 100%
 
+#main-page-nav
+  margin-bottom: 20px
 
 div.navbar#main-nav
   position: relative

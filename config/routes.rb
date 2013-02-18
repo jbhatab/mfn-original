@@ -1,11 +1,21 @@
 Mfn::Application.routes.draw do
 
+
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
+                     controllers: {omniauth_callbacks: "omniauth_callbacks"}
+                     
+
+  #facebook login routes
+  #match 'auth/facebook/callback', to: 'sessions#create'
+  #match 'auth/failure', to: redirect('/')
+  #match 'signout', to: 'sessions#destroy', as: 'signout'
+
   get "comments/index"
 
   #for sessions and logging in
-  get "log_out" => "sessions#destroy", :as => "log_out"
-  get "log_in" => "sessions#new", :as => "log_in"
-  resources :sessions
+  #get "log_out" => "sessions#destroy", :as => "log_out"
+  #get "log_in" => "sessions#new", :as => "log_in"
+  #resources :sessions
 
   resources :users do
     resources :comments
@@ -14,7 +24,7 @@ Mfn::Application.routes.draw do
   resources :festivals do
     resources :comments
   end
-  get "sign_up" => "users#new", :as => "sign_up"
+
 
   #calender routes
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
@@ -26,7 +36,6 @@ Mfn::Application.routes.draw do
   resources :festivals
   resources :events
 
-
   match '/lineup', :to => 'users#lineup'
 
   match '/my-comments', :to => 'comments#index'
@@ -35,6 +44,7 @@ Mfn::Application.routes.draw do
 
   resources :homes
 
+  match '/ride_share', :to => 'festivals#ride_share'
   match '/festival-map', :to => 'festivals#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'

@@ -12,15 +12,11 @@ $darkblue: #23238E
 $orange: rgb(233, 86, 36)
 $brown: #5d3c1d
 $gold: #CDAD00
+$greenbrown: rgb(90, 58, 0)
 
 
-.asc
-  @include gradient-vertical($startColor: $brown, $endColor: $orange)
-  background-color: $brown
 
-.desc
-  @include gradient-vertical($startColor: $orange, $endColor: $brown)
-  background-color: $orange
+
 
 .festival-list
   width: 100%
@@ -28,20 +24,24 @@ $gold: #CDAD00
   table
     th
       a
-        color: $darkblue
+        color: $greenbrown 
+        text-shadow: 1px 1px 1px #000
         font-size: 1.5em
         padding: 8px  50px
         margin-bottom: 50px
         @include border-radius(3px)
+      a:hover
+        color: $red
+        text-decoration: none
     tr:first-child
       margin-bottom: 100px
     tr
       font-weight: bold
       font-size: 1.5em
-    tr:hover
+    .fest-list-item:hover
       background-color: $orange
-    tr:first-child:hover
-      background-color: $orange
+    
+
 
 div.festival-modal 
   position: absolute
@@ -68,3 +68,14 @@ th.ec-month-nav
   background-color: $lightyellow
   height: 30px
 
+.asc
+  color: $red !important
+
+
+.desc
+  color: $red !important
+
+#festival-map
+  margin-top: 20px
+
+  

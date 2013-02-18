@@ -35,8 +35,12 @@ gem 'jquery-rails'
 
 gem 'event-calendar', :require => 'event_calendar'
 
+#authentication
+gem 'devise'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-twitter'
+
 
 group :test, :development do
   gem 'turn'

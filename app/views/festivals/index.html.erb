@@ -1,14 +1,14 @@
-
+<div class="main-page-container">
 <div class='festival-list'>
 <table class="table">
   <thead>
     <tr>
-      <th><%= sortable 'name' %></th>
-      <th><%= sortable 'city' %></th>
-      <th><%= sortable 'state' %></th>
-      <th><%= sortable 'date' %></th>
-      <th><%= sortable 'genre' %></th>
-      <th><%= sortable 'website' %></th>
+      <th><h3><%= sortable 'name' %></h3></th>
+      <th><h3><%= sortable 'city' %></h3></th>
+      <th><h3><%= sortable 'state' %></h3></th>
+      <th><h3><%= sortable 'date' %></h3></th>
+      <th><h3><%= sortable 'genre' %></h3></th>
+      <th><h3><%= sortable 'website' %></h3></th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,7 +18,7 @@
 <% @festivals.each do |festival| %>
 
 
-  <tr href="#<%=festival.id%>" data-toggle="modal">
+  <tr class='fest-list-item'href="#<%=festival.id%>" data-toggle="modal">
     <td><%= festival.name %></td>
     <td><%= festival.city %></td>
     <td><%= festival.state %></td>
@@ -95,4 +95,5 @@
 <br />
 
 
+</div>
 </div>

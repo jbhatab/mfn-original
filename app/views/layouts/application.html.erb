@@ -49,7 +49,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
 
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-    var contentString = '<div id="content">'+'<%=User.first.first%>'+ 
+    var contentString = '<div id="content">'+'<%=Festival.first.name%>'+ 
         '<div id="siteNotice">'+
         '</div>'+
         '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
@@ -106,16 +106,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
   <div id="application-container" class="container">
     <header>
     <aside>
-      <div id="login-link">
-        <% if current_user %>
-          Logged in as <%= current_user.email %>.
-        <%= link_to "Log out", log_out_path %>
-        
-        <% else %>
-          <%= link_to "Sign up", sign_up_path %> or
-          <%= link_to "log in", log_in_path %>
-        <% end %>
-      </div>
+
     </aside>
     <aside>
       <div class="row">
@@ -124,7 +115,18 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         </div>
       </div>
     </aside>
-    <nav>
+    <div id="user_nav">
+      <% if user_signed_in? %>
+        Signed in as <%= current_user.username %>. Not you?
+        <%= link_to "Edit Profile",edit_user_registration_path%>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> or
+      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %> or 
+        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+      <% end %>
+      </div>
+    <nav id="main-page-nav">
       <div class="row">
         <div id="main-nav-span" class="span12">
           <div id="main-nav" class="navbar">
@@ -146,6 +148,9 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Map', '/festival-map' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Ride Share', '/ride_share' %>
                     </li>
                   </ul> 
                 </li>   
