@@ -20,9 +20,6 @@ class FestivalsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-  def lineup
-    current_user.festivals << Festival.find(4)
-  end
 
   def map
   end
