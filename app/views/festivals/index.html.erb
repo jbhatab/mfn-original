@@ -1,4 +1,5 @@
-<div class="main-page-container">
+
+<div class="festival-container">
 <div class='festival-list'>
 <table class="table">
   <thead>
@@ -7,8 +8,7 @@
       <th><h3><%= sortable 'city' %></h3></th>
       <th><h3><%= sortable 'state' %></h3></th>
       <th><h3><%= sortable 'date' %></h3></th>
-      <th><h3><%= sortable 'genre' %></h3></th>
-      <th><h3><%= sortable 'website' %></h3></th>
+      <th><h3><%= sortable 'type' %></h3></th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,16 +19,18 @@
 
 
   <tr class='fest-list-item'href="#<%=festival.id%>" data-toggle="modal">
-    <td><%= festival.name %></td>
+    <td>
+      <%unless festival.img_url=='-'%>
+        <%=image_tag(festival.img_url[0..-13], alt:festival.name+" Facebook Image") %>
+      <%end%><%= festival.name %></td>
     <td><%= festival.city %></td>
     <td><%= festival.state %></td>
-    <td><%= festival.date %></td>
-    <td><%= festival.genre %></td>
-    <td><%= festival.website %></td>
+    <td><%= festival.start_date %></td>
+    <td><%= festival.festivaltype %></td>
     <td>
     <% if current_user %>
       <%if current_user.festivals.empty? %>
-        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, method: :post %>
+        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, class: "btn", method: :post %>
       <%end%>
       <% i=0 %>
       <% current_user.festivals.each do |x| %>
@@ -47,49 +49,24 @@
     <td><%= link_to 'Show', festival %></td>
     <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
     <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
-<div id="<%=festival.id%>" class="festival-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel"><%=festival.name%></h3>
-  </div>
-  <div class="row-fluid">
-    <div class="span6">
-      <%=image_tag("infrasound.jpg", alt:"infrasound") %>
-    </div>
-    <div class="span6">
-      <div class="modal-body">
-        <div class="well modal-box">
-          <div class="box-header">
-          <h3>Type of Music</h3>
-        </div>
-          <p><%=festival.genre%></p>
-        </div>
-        <div class="well modal-box">
-          <div class="box-header">
-          <h3>Date</h3>
-        </div>
-          <p><%=festival.date%></p>
-        </div>
-        <div class="well modal-box">
-          <div class="box-header">
-          <h3>Website</h3>
-        </div>
-          <p><%=festival.website%></p>
-        </div>
-      </div>
-    </div>
-
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
+  </tr>
+  <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
 <%end%>
 
 
   </tbody>
 </table>
 <%= link_to 'New Festival', new_festival_path %>
+
+
+<h2>Import Products</h2>
+
+<%= form_tag import_festivals_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+
 
 
 <br />

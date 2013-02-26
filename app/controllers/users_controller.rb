@@ -17,9 +17,7 @@ class UsersController < ApplicationController
     redirect_to '/lineup'
   end
 
-  def lineup
 
-  end
 
   # GET /users/1
   # GET /users/1.json

@@ -1,0 +1,16 @@
+<div role="main" class="main-page-container">
+My Comments
+<% if user_signed_in? %>
+
+ <% current_user.comments.each do |comment| %>
+    <div class="comment-container">
+      <header class="comment-header">
+        <%= comment.title %> 
+      </header>
+      <%= comment.comment %>
+    </div>
+  <%end%>
+
+
+<%end%>
+</div>

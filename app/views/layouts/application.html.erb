@@ -50,7 +50,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
 
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-    var contentString = '<div id="content">'+'<%=Festival.first.name%>'+ 
+    var contentString = '<div id="content">'+'<%=User%>'+ 
         '<div id="siteNotice">'+
         '</div>'+
         '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
@@ -100,14 +100,25 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         
     </script>
     <% end%>
-
+<!--[if lt IE 9]>
+<script src="dist/html5shiv.js"></script>
+<![endif]-->
 </head>
 <body onload="initialize()">
   
   <div id="application-container" class="container">
     <header>
-    <aside>
-
+    <aside id="user_nav">
+      <% if user_signed_in? %>
+        Signed in as <%= current_user.username %>. Not you?
+        <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
+      <% else %>
+      <%= link_to "Sign in with Facebook",user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary' %> 
+      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => 'btn btn-mini btn-primary' %> 
+      <%= link_to "Sign In", new_user_session_path, :class => 'btn btn-mini btn-primary' %>
+        <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-mini btn-primary' %>  
+      <% end %>
     </aside>
     <aside>
       <div class="row">
@@ -116,17 +127,6 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         </div>
       </div>
     </aside>
-    <div id="user_nav">
-      <% if user_signed_in? %>
-        Signed in as <%= current_user.username %>. Not you?
-        <%= link_to "Edit Profile",edit_user_registration_path%>
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <% else %>
-      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> or
-      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %> or 
-        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-      <% end %>
-      </div>
     <nav id="main-page-nav">
       <div class="row">
         <div id="main-nav-span" class="span12">
@@ -162,9 +162,6 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                     <li class="dropdown-li">
                       <a href="#">My Pics</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">My Videos</a>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'My Comments', '/my-comments' %>

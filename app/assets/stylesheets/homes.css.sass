@@ -38,6 +38,10 @@ body
   font-family: 'BebasNeueRegular', sans-serif, Georgia
   overflow-x: hidden
 
+#user_nav
+  position: absolute
+  top: 3px
+  right: 5px
 
 #application-container
   background-color: $green
@@ -47,13 +51,15 @@ body
 
 .main-page-container
   position: relative
-  margin-top: 30px
-  width: 95%
+  margin-top: 40px
+  width: 94%
   height: 800px
-  margin-left: 2.5%
-  background-color: rgba(255,255,255, .5)
-  @include border-radius(5px)
-  border: 2px solid $darkorange
+  margin-left: 2%
+  margin-right: 2%
+  padding: 1%
+  background-color: rgb(241,241,241)
+  @include border-radius(10px)
+
   
 
 #login-link
@@ -81,7 +87,7 @@ body
 #main-page-nav
   margin-bottom: 20px
 
-div.navbar#main-nav
+.navbar#main-nav
   position: relative
   @include box-shadow(3px 3px 5px #000)
   div.navbar-inner
@@ -122,7 +128,7 @@ div.navbar#main-nav
   font-size: 1.4em
 
 
-div#myCarousel
+#myCarousel
   width: 70%
   margin: 1% 0px 0px 1%
   float: left
@@ -133,7 +139,7 @@ div#myCarousel
     
 
 
-div.carousel-div
+.carousel-div
   img
     @include border-radius($car-rad)
     position: static

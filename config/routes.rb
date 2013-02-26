@@ -10,7 +10,7 @@ Mfn::Application.routes.draw do
   #match 'auth/failure', to: redirect('/')
   #match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  get "comments/index"
+
 
   #for sessions and logging in
   #get "log_out" => "sessions#destroy", :as => "log_out"
@@ -23,6 +23,7 @@ Mfn::Application.routes.draw do
 
   resources :festivals do
     resources :comments
+    collection {post :import}
   end
 
 
@@ -33,12 +34,11 @@ Mfn::Application.routes.draw do
 
   #match '/auth/:provider/callback', :to => 'sessions#omni'  
 
-  resources :festivals
   resources :events
 
   match '/lineup', :to => 'users#lineup'
 
-  match '/my-comments', :to => 'comments#index'
+  match '/my-comments', :to => 'users#my-comments'
 
   post '/festivals/:id' => 'users#line'
 

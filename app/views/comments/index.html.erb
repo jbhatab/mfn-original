@@ -1,4 +1,13 @@
+<h1>
+  <%= @commentable.name%>
+</h1>
 
-<%= @comments.last.content %>
+<% @comments.each do |comment| %>
+  <div class="comment-container">
+    <header class="comment-header">
+      <%= comment.title %>
+    </header>
+    <%=comment.comment%>
+  </div>
+<%end%>
 
-<%= render 'user' %>

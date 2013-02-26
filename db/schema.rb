@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218043820) do
+ActiveRecord::Schema.define(:version => 20130222041223) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -44,11 +44,16 @@ ActiveRecord::Schema.define(:version => 20130218043820) do
     t.string   "state"
     t.float    "lat"
     t.float    "long"
-    t.date     "date"
-    t.string   "genre"
+    t.date     "start_date"
     t.string   "website"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "facebook"
+    t.string   "region"
+    t.string   "festivaltype"
+    t.string   "img_url"
+    t.string   "lg_img_url"
+    t.date     "end_date"
   end
 
   create_table "lineups", :force => true do |t|

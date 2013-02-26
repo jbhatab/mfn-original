@@ -1,0 +1,21 @@
+<div class="comment-container">
+  <header class="comment-header">
+    <%= comment.title %> <i>by</i>
+    <% if comment.user_id == nil %>
+      Anonymous
+    <% else%>
+      <%= User.find(comment.user_id).username %>
+    <%end%>
+  </header>
+  <%=comment.comment%></br>
+  <% if user_signed_in? %>
+    <% if current_user.id == comment.user_id %>
+      <%= link_to 'Delete Comment', [comment.commentable, comment],
+               :confirm => 'Are you sure?',
+               :method => :delete %>
+    <%end%>
+  <%end%>
+</div>
+
+  
+

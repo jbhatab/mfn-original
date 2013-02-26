@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, 
          :validatable, :omniauthable
-
+  attr_accessor :login
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :first, :last, :password, :provider, :uid
+  attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :first, :last, :password, :provider, :uid
   # attr_accessible :title, :body
   
 
@@ -15,12 +15,20 @@ class User < ActiveRecord::Base
 
   #has many through
   has_many :festivals, through: :lineups
-  def self.find_for_authentication(conditions={})
-    unless conditions[:email] =~ /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i # email regex
-      conditions[:username] = conditions.delete("email")
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
     end
-      super
   end
+
+### This is the correct method you override with the code above
+###  def self.find_for_database_authentication(warden_conditions)
+###  end 
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       if auth.provider == 'facebook'
@@ -31,7 +39,6 @@ class User < ActiveRecord::Base
       elsif auth.provider == 'twitter'
         user.provider = auth.provider
         user.uid = auth.uid
-        user.email = 'twitter@mfn.com'
         user.username = auth.info.nickname
       end
     end

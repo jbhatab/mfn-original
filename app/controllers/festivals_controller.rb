@@ -3,6 +3,11 @@ class FestivalsController < ApplicationController
   # GET /festivals.json
   helper_method :sort_column, :sort_direction
 
+  def import
+    Festival.import(params[:file])
+    redirect_to root_url, notice: "festivals imported"
+  end
+  
   def index
     @festivals = Festival.order(sort_column + " " + sort_direction)
 

@@ -6,9 +6,14 @@ class CreateFestivals < ActiveRecord::Migration
       t.string :state
       t.float :lat
       t.float :long
-      t.date :date
-      t.string :genre
+      t.date :start_date
+      t.date :end_date
       t.string :website
+      t.string :facebook
+      t.string :region
+      t.string :festivaltype
+      t.string :img_url
+      t.string :lg_img_url
 
       t.timestamps
     end
