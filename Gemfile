@@ -13,11 +13,12 @@ end
 
 gem 'roo'
 
+#comments and voting
 gem 'acts_as_commentable', '3.0.1'
+gem 'acts_as_votable', '~> 0.5.0'
 
 gem 'bootstrap-sass'
 
-gem "bcrypt-ruby", :require => "bcrypt"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,6 +43,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 
 
+#testing
 group :test, :development do
   gem 'turn'
   gem 'rspec-rails'     #rspec

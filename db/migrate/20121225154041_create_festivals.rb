@@ -14,6 +14,9 @@ class CreateFestivals < ActiveRecord::Migration
       t.string :festivaltype
       t.string :img_url
       t.string :lg_img_url
+      t.integer :zip 
+      t.string :address
+      t.string :twitter
 
       t.timestamps
     end

@@ -1,0 +1,324 @@
+/* Event Calendar stylesheet
+  
+  Colors:
+  #d5d5d5 - border (gray)
+  #303030 - day names bg (gray)
+  #444 - number (gray)
+  #ecede2 - day header bg (light tan)
+  #d7d7ba - today header bg (tan)
+  #ffffdd - today bg light (yellow)
+  #777 - other month number (gray)
+  #efefef - other month day header (gray)
+  #2eac6a - hover (green)*/
+
+@import 'bootstrap'
+
+$lightblue: rgb(106,201,197)
+$lightyellow: rgb(255,225,94)
+$skyblue: rgb(94,185,232)
+$red: rgb(239,49,34)
+$darkblue: #23238E
+$orange: rgb(233, 86, 36)
+$brown: #5d3c1d
+$gold: #CDAD00
+$greenbrown: rgb(90, 58, 0)
+$darkorange: rgb(233, 74, 19)
+$green: #3fad49
+$forestgreen: #228B22
+$lightgreen: #66ba56  
+$grey: #696969
+
+body
+  font-size: 62.5%
+  font-family: 'BebasNeueRegular', sans-serif, Georgia
+  overflow-x: hidden
+
+/* Outer most container */
+
+.ec-calendar 
+  font-family: verdana, arial, helvetica, sans-serif
+  font-size: 11px
+  line-height: 14px
+  margin: 0
+  padding: 0
+  padding-bottom: 13px
+  border: 5px solid $brown
+  border-bottom: 5px solid $brown
+
+
+/* Month name header & links */
+table.ec-calendar-header 
+  padding: 5px 0
+  color: #000
+  width: 100%
+  table-layout: fixed
+  
+
+
+.ec-month-name 
+  font-size: 2.5em
+  height: 40px
+  background: $green
+  border-bottom: 3px solid $brown
+
+th.ec-month-nav 
+  height: 50px
+  border: none
+  border-bottom: 3px solid $brown
+  background: $green
+  a
+    @include transition(font-size .15s ease-in-out)
+    color: #000
+  a:hover
+    text-decoration: none
+
+th.ec-month-nav:hover
+  a
+    color: $brown
+    font-size: 2em
+    
+
+th.ec-next-month
+  border-left: 3px solid $brown
+
+th.ec-previous-month
+  border-right: 3px solid $brown
+
+
+
+/* Containers */
+.ec-body 
+  position: relative
+  white-space: nowrap
+
+
+/* Day names */
+table.ec-day-names 
+  position: absolute
+  font-size: 2em
+  height: 50px
+  top: 0
+  left: 0
+  width: 100%
+  table-layout: fixed
+  padding: 2px 0
+  float: right
+  background-color: $green
+  color: #000
+  tr
+    height: 30px
+    border-bottom: 3px solid $brown
+    th
+
+      
+
+
+
+.ec-day-name 
+  font-weight: normal
+
+
+/* Rows container and Row */
+.ec-rows 
+  margin-top: 13px
+  position: absolute
+  left: 0
+  bottom: 0
+  width: 100%
+  background: white
+  overflow: hidden
+
+
+
+.ec-row 
+  position: absolute
+  left: 0
+  width: 100%
+  overflow: hidden
+
+
+/* Background */
+.ec-row-bg 
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  table-layout: fixed
+
+
+
+.ec-day-bg 
+  border-left: 1px solid $brown
+  background-color: $green
+
+
+.ec-today-bg 
+  background-color: $gold
+
+
+.ec-row-table 
+  position: relative
+  width: 100%
+  table-layout: fixed
+
+
+/* Day header */
+.ec-day-header 
+  color: #000
+  text-align: right
+  padding: 0 5px
+  line-height: 16px
+  border-top: 1px solid $brown
+  border-left: 1px solid $brown
+  border-bottom: 1px solid $brown
+  background-color: $forestgreen
+  overflow: hidden
+
+
+a.ec-day-link 
+  color: #000
+
+
+.ec-today-header 
+  background-color: $gold
+
+
+.ec-weekend-day-header 
+
+  
+
+
+.ec-other-month-header 
+  background-color: rgba(0,0,0,.5)
+  color: #000
+
+
+.ec-other-month-bg 
+  background-color: rgba(0,0,0, .4)
+  
+
+
+
+/* Event cell and container */
+.ec-event-cell 
+  cursor: pointer
+  vertical-align: top
+  padding-right: 1px
+  padding-left: 2px
+  padding: 0px
+  .ec-event
+    padding-top: 0px !important
+    a
+      text-decoration: none
+      display: block
+      width: 100%
+      height: 100%
+      background-color: $brown
+      padding: 2px 0px 1px 2px
+      font-weight: bold
+      font-size: 1em
+
+.ec-event-cell:hover
+  a
+    font-size: 1.1em
+
+
+
+  
+
+.ec-no-event-cell 
+  cursor: default
+
+
+      
+
+.ec-no-event-cell:hover 
+  height: 16px
+  background-color: rgba(0,0,0,0.0)
+  .ec-event-bg
+    height: 16px
+
+
+
+
+.ec-event 
+  color: white
+  padding-right: 1px
+  padding-left: 11px
+  -webkit-border-radius: 3px
+  -khtml-border-radius: 3px
+  -moz-border-radius: 3px
+  overflow: hidden
+  white-space: nowrap
+  padding: 0 0 1px 0
+
+
+
+
+/* doesn't look as good as js highlighting */
+/* background-color: #2eac6a */
+
+
+.ec-event-bg a 
+  color: white
+
+
+/* used to distinguish non-all_day events */
+.ec-event-no-bg 
+  position: relative
+  /* padding-left: 5px */
+
+
+.ec-event-no-bg a 
+  /* isn't implemented in all browsers */
+  color: inherit
+
+
+.ec-event-time 
+  font-size: 85%
+  font-weight: bold
+  padding-right: 3px
+
+
+
+/* Left and right arrows */
+/* Doesn't work in IE6, use bg images instead */
+.ec-left-arrow , .ec-right-arrow
+  position: relative
+  top: 3px
+  width: 0
+  height: 0
+  font-size: 0
+  line-height: 0
+  margin-bottom: -8px
+  border-top: 4px solid transparent
+  border-bottom: 4px solid transparent
+
+
+
+.ec-left-arrow 
+  margin-left: -7px
+  margin-right: auto
+  border-right: 4px solid white
+
+
+.ec-right-arrow 
+  margin-left: auto
+  margin-right: 3px
+  border-left: 4px solid white
+
+
+/* remove this to not have a bullet */
+/* don't look as good in ie */
+.ec-bullet 
+  position: absolute
+  top: 7px
+  width: 4px
+  height: 4px
+  margin-left: -7px
+  margin-right: auto
+  -webkit-border-radius: 2px
+  -khtml-border-radius: 2px
+  -moz-border-radius: 2px
+

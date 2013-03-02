@@ -1,14 +1,28 @@
-lineup
-<% if user_signed_in? %>
+<div role="main" class="main-page-container">
+  <h2> My Summer Lineup</h2>
+  <% if user_signed_in? %>
 
- <% current_user.festivals.each do |festival| %>
-    <div href="#<%=festival.id%>" data-toggle="modal"class="lineup-box">
-      <%= festival.name %>
-      <%= festival.start_date %>
-      <%=image_tag(festival.lg_img_url, alt:festival.name+" Facebook Image") %>
-    </div>
-    <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
+    <% current_user.festivals.order('start_date ASC').each do |festival| %>
+      <%if false%>
+        <div href="#<%=festival.id%>" data-toggle="modal"class="lineup-box">
+      <%end%>
+      <div class="lineup-box">
+        <a href="festivals/<%=festival.id%>">
+          <span class="lineup-span">
+            <div class="lineup-date">
+              <%= festival.start_date %>
+            </div>
+            <%unless festival.img_url=='-'%>
+            <%=image_tag(festival.lg_img_url, alt:festival.name+" Facebook Image") %>
+            <%end%>
+            <%= festival.name %> 
+        
+            <%if false%>
+            <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
+            <%end%>
+          </span>
+        </div>
+      </a>
+    <%end%>
   <%end%>
-
-
-<%end%>
+</div>

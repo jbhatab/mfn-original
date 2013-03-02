@@ -1,12 +1,29 @@
-<p id="notice"><%= notice %></p>
 <div class="festival-show-container">
   <section class="row-fluid">
-    <article class="span6 festival-show festival-left">
+    <article class="span5 festival-show festival-left">
       <h2>
         <%= @festival.name %>
       </h2>
+      
       <%unless @festival.img_url=='-'%>
         <%=image_tag(@festival.lg_img_url, alt:@festival.name+" Facebook Image") %>
+      <%end%></br>
+      <% if user_signed_in? %>
+        <%if current_user.festivals.empty? %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => @festival.id}, class: "btn", method: :post %>
+        <%end%>
+        <% i=0 %>
+        <% current_user.festivals.each do |x| %>
+          <% if x.id == @festival.id %>
+             <a class="btn disabled lineup-deactivated">Already Added</a>
+             <%break%>
+          <%else%>
+            <% i=i+1 %>
+          <%end%>
+          <%if current_user.festivals.count == i %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => @festival.id}, :class => 'btn', method: :post %>
+          <%end%>
+        <% end%>
       <%end%>
       
       <h2>
@@ -15,6 +32,13 @@
       <p>
         <%= @festival.city %>,
         <%= @festival.state %>
+      </p>
+      <h2>
+        Dates
+      </h2>
+      <p>
+        <%= @festival.start_date %> - 
+        <%= @festival.end_date%>
       </p>
       <h2>
         Festival Type
@@ -36,7 +60,7 @@
       <%= link_to 'Edit', edit_festival_path(@festival) %> |
       <%= link_to 'Back', festivals_path %>
     </article>
-    <article class="span6 festival-show festival-right">
+    <article class="span7 festival-show festival-right">
       <h3>Comments</h3>
       <%= render @festival.comments %>
       <div class="comment-form">

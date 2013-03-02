@@ -7,7 +7,11 @@ My Comments
       <header class="comment-header">
         <%= comment.title %> 
       </header>
-      <%= comment.comment %>
+      <%= comment.comment %> </br>
+      <%= link_to comment.commentable.name, comment.commentable %>,
+      <%= link_to 'Delete Comment', [comment.commentable, comment],
+               confirm: 'Are you sure?',
+               method: :delete %>
     </div>
   <%end%>
 

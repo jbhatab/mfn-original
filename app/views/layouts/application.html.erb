@@ -34,6 +34,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         });
         map.setCenter(location);
         }
+        
     </script>
     <% end %>
     <%if true%>
@@ -108,6 +109,10 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
   
   <div id="application-container" class="container">
     <header>
+    <aside id="social-links">
+        <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/MusicFestivalNation', :target=>'_blank' %>
+        <%= link_to image_tag('twitter.png'), 'http://www.twitter.com/MusicFestNation', :target=>'_blank' %>
+    </aside>
     <aside id="user_nav">
       <% if user_signed_in? %>
         Signed in as <%= current_user.username %>. Not you?

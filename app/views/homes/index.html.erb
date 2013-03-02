@@ -5,18 +5,18 @@
         <div class="carousel-inner">
           <div id="festival-month" class="active carousel-div item">
             <div class="item-container">
-              <%=image_tag("pic1.jpg", alt:"pic1")%>
+              <%=link_to image_tag("festivalmap.png", alt:"Festival Map"), '/festival-map'%>
               <div class="item-header">
                 <h2>
-                  FESTIVAL OF THE MONTH
+                  FESTIVAL MAP
                 </h2>
               </div>
               <div class="item-footer well well-large">
                 <h3>
-                  Infrasound
+                  Never Been Done Map
                 </h3>
                 <p>
-                  Dubstep, electronic, and it was fun... 
+                  Find any US festival using our new festival map
                 </p>
               </div>
             </div>
@@ -77,10 +77,7 @@
         <a class="twitter-timeline"  href="https://twitter.com/MusicFestNation"  data-widget-id="300359219029360640">Tweets by @MusicFestNation</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </section>
-      <aside id="social-links">
-        <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/MusicFestivalNation', :target=>'_blank' %>
-        <%= link_to image_tag('twitter.png'), 'http://www.twitter.com/MusicFestNation', :target=>'_blank' %>
-      </aside>
+      
     </div>
   </div>
   <footer>

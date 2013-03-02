@@ -61,6 +61,7 @@ class FestivalsController < ApplicationController
 
     respond_to do |format|
       if @festival.save
+        FestivalMailer.submit_festival(@festival).deliver
         format.html { redirect_to @festival, notice: 'Festival was successfully created.' }
         format.json { render json: @festival, status: :created, location: @festival }
       else
@@ -96,5 +97,11 @@ class FestivalsController < ApplicationController
       format.html { redirect_to festivals_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def submit_festival_email
+    FestivalMailer.submit_festival(self).deliver
   end
 end

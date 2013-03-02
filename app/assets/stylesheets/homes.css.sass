@@ -32,11 +32,23 @@ $darkorange: rgb(233, 74, 19)
 $green: #3fad49
 $brown: #5d3c1d
 
+#flash_notice
+  position: absolute
+  z-index: 1000
+  font-size: 14px
+  margin-left: 1%
 
 body
   font-size: 62.5%
   font-family: 'BebasNeueRegular', sans-serif, Georgia
   overflow-x: hidden
+
+#social-links
+  position: absolute
+  top: 3px
+  left: 5px
+  img
+    width: 30px
 
 #user_nav
   position: absolute
@@ -52,10 +64,11 @@ body
 .main-page-container
   position: relative
   margin-top: 40px
+  padding-bottom: 20px
   width: 94%
-  height: 800px
+  height: auto
   margin-left: 2%
-  margin-right: 2%
+  float: left
   padding: 1%
   background-color: rgb(241,241,241)
   @include border-radius(10px)
@@ -158,7 +171,7 @@ body
     width: 300px
     padding-top: 5px
     h2
-      font-size: 15px
+      font-size: 2em
       margin-top: -2px
       text-align: center
       color: #000000
@@ -176,6 +189,7 @@ body
       margin: -5px 0 0 0 
     p 
       color: #FFFFFF
+      font-size: 1.4em
 
 .fb_ltr
   background-color: #FFF

@@ -1,5 +1,8 @@
 
 <div class="festival-container">
+<aside id ='festival-submit'>
+  <%= link_to "Don't see a festival on our list? Please submit it", new_festival_path %>
+</aside>
 <div class='festival-list'>
 <table class="table">
   <thead>
@@ -17,8 +20,12 @@
   <tbody>
 <% @festivals.each do |festival| %>
 
+  
+  <tr onclick="document.location = '/festivals/<%=festival.id%>';"class='fest-list-item'>
+  <%if false%>
+    <tr class='fest-list-item' href="#<%=festival.id%>" data-toggle="modal">
+  <%end%>
 
-  <tr class='fest-list-item'href="#<%=festival.id%>" data-toggle="modal">
     <td>
       <%unless festival.img_url=='-'%>
         <%=image_tag(festival.img_url[0..-13], alt:festival.name+" Facebook Image") %>
@@ -28,7 +35,8 @@
     <td><%= festival.start_date %></td>
     <td><%= festival.festivaltype %></td>
     <td>
-    <% if current_user %>
+
+    <% if user_signed_in? %>
       <%if current_user.festivals.empty? %>
         <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, class: "btn", method: :post %>
       <%end%>
@@ -44,13 +52,17 @@
         <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
         <%end%>
       <% end%>
+    <%else%>
+      <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
     <%end%>
     </td>
     <td><%= link_to 'Show', festival %></td>
     <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
     <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+  <%if false%>
   <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
+  <%end%>
 <%end%>
 
 

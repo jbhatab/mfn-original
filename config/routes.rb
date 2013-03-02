@@ -22,8 +22,9 @@ Mfn::Application.routes.draw do
   end
 
   resources :festivals do
-    resources :comments
     collection {post :import}
+    resources :comments
+    
   end
 
 
@@ -39,8 +40,13 @@ Mfn::Application.routes.draw do
   match '/lineup', :to => 'users#lineup'
 
   match '/my-comments', :to => 'users#my-comments'
-
+  
   post '/festivals/:id' => 'users#line'
+  put '/comments/:id/:action' => 'comments#upvote'
+  put '/comments/:id/:action' => 'comments#downvote'
+  
+
+
 
   resources :homes
 

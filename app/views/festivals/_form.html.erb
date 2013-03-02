@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
     <%= f.label :city %><br />
     <%= f.text_field :city %>
   </div>
@@ -24,12 +28,8 @@
     <%= f.text_field :state %>
   </div>
   <div class="field">
-    <%= f.label :lat %><br />
-    <%= f.text_field :lat %>
-  </div>
-  <div class="field">
-    <%= f.label :long %><br />
-    <%= f.text_field :long %>
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br />
@@ -44,14 +44,10 @@
     <%= f.text_field :facebook %>
   </div>
   <div class="field">
-    <%= f.label :img_url %><br />
-    <%= f.text_field :img_url %>
-  </div>
-  <div class="field">
-    <%= f.label :lg_img_url %><br />
-    <%= f.text_field :lg_img_url %>
+    <%= f.label :twitter %><br />
+    <%= f.text_field :twitter %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create' %>
   </div>
 <% end %>

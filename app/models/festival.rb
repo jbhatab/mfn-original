@@ -1,6 +1,6 @@
 class Festival < ActiveRecord::Base
   acts_as_commentable
-  attr_accessible :city, :start_date, :end_date, :festivaltype, :lat, :long, :name, :state, :website, :facebook, :region, :img_url, :lg_img_url
+  attr_accessible :zip, :address, :city, :start_date, :end_date, :festivaltype, :lat, :long, :name, :state, :website, :facebook, :region, :img_url, :lg_img_url
   has_many :lineups
   has_many :events
   has_many :users, through: :lineups
