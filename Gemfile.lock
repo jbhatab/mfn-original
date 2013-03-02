@@ -223,7 +223,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_commentable (= 3.0.1)
   acts_as_votable (~> 0.5.0)
-  bcrypt-ruby
   bootstrap-sass
   capybara
   coffee-rails (~> 3.2.1)
