@@ -21,7 +21,6 @@ class FestivalMailer < ActionMailer::Base
     @end_date = @festival.end_date
     @address = @festival.address
     @zip = @festival.zip
-    @twitter @festival.twitter
 
 
     mail to: "jbhatab@gmail.com", subject: 'festival submision'
