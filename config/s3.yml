@@ -1,0 +1,14 @@
+development:
+  bucket: mfn-dev
+ access_key_id: ENV['AWS_ACCESS_KEY']
+  secret_access_key: ENV['AWS_SECRET_KEY']
+  secret_access_key: 
+test:
+  bucket: mfn-test
+ access_key_id: ENV['AWS_ACCESS_KEY']
+  secret_access_key: ENV['AWS_SECRET_KEY']
+  secret_access_key: 
+production:
+  bucket: mfn-production
+  access_key_id: ENV['AWS_ACCESS_KEY']
+  secret_access_key: ENV['AWS_SECRET_KEY']

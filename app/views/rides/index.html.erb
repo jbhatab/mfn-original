@@ -1,0 +1,31 @@
+
+<h1>Listing Rides</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Festival</th>
+    <th>Leave Date</th>
+    <th>Return Date</th>
+    <th>Cost</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rides.each do |ride| %>
+  <tr>
+    <td><%= ride.user.username %></td>
+    <td><%= ride.festival.name %></td>
+    <td><%= ride.leave_date %></td>
+    <td><%= ride.return_date %></td>
+    <td><%= ride.cost %></td>
+
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

@@ -11,11 +11,16 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   acts_as_voter
-  has_many :lineups
+  has_many :lineups, :dependent => :destroy
 
   #has many through
   has_many :festivals, through: :lineups
 
+  has_many :rides, :dependent => :destroy
+  accepts_nested_attributes_for :rides
+
+  #login instead of email replacement that is necessary
+  
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

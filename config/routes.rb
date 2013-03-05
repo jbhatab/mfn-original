@@ -1,6 +1,7 @@
 Mfn::Application.routes.draw do
 
 
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
                      controllers: {omniauth_callbacks: "omniauth_callbacks"}
                      
@@ -18,13 +19,14 @@ Mfn::Application.routes.draw do
   #resources :sessions
 
   resources :users do
-    resources :comments
+    resources :comments, :except => :new
+    resources :rides
   end
 
   resources :festivals do
     collection {post :import}
     resources :comments
-    
+    resources :rides, :only => [:index, :show]
   end
 
 
@@ -41,16 +43,16 @@ Mfn::Application.routes.draw do
 
   match '/my-comments', :to => 'users#my-comments'
   
-  post '/festivals/:id' => 'users#line'
+  post '/festivals/:id/:action' => 'users#line'
+  post '/festivals/:id/:action' => 'users#remove_line'
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'
-  
 
 
 
   resources :homes
 
-  match '/ride_share', :to => 'festivals#ride_share'
+  match '/rideshare', :to => 'festivals#rideshare'
   match '/festival-map', :to => 'festivals#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'

@@ -1,7 +1,7 @@
 
 <div class="festival-container">
 <aside id ='festival-submit'>
-  <%= link_to "Don't see a festival on our list? Please submit it", new_festival_path %>
+  <%= link_to "Don't see a festival on our list? Submit Here", new_festival_path, :class=>'festival-submit-link' %>
 </aside>
 <div class='festival-list'>
 <table class="table">
@@ -32,7 +32,10 @@
       <%end%><%= festival.name %></td>
     <td><%= festival.city %></td>
     <td><%= festival.state %></td>
-    <td><%= festival.start_date %></td>
+    <td><% unless festival.start_date == nil%>
+        <%= l festival.start_date, format: :full %>
+      <%end%>
+    </td>
     <td><%= festival.festivaltype %></td>
     <td>
 

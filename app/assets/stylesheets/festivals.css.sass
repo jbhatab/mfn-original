@@ -27,6 +27,10 @@ $darkorange: rgb(233, 74, 19)
   background-color: rgba(255,255,255, .5)
   @include border-radius(5px)
   border: 2px solid $darkorange
+  .festival-submit-link
+    font-size: 16px
+    margin: 5px 0 0 5px
+    color: $brown
 
 
 
@@ -119,3 +123,23 @@ th.ec-month-nav
 .festival-right
   padding-right: 30px
   
+//this fixes the broken zoom thingy on the gmap4rails map
+#map img 
+  max-width: none
+
+#map label 
+  width: auto
+  display:inline
+
+.festival-infowindow
+  h3
+    line-height: 10px
+    a
+      color: $brown
+      text-decoration: none
+    a:hover
+      color: $orange
+  img
+    margin-bottom: 5px
+  p
+    line-height: 7px

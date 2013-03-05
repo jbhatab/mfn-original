@@ -3,7 +3,8 @@
 <head>
   <title>Music Festival Nation - Info, Maps, and More</title>
   <meta name="description=" content="Our goal is to make the music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "gmaps4rails" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
@@ -37,7 +38,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         
     </script>
     <% end %>
-    <%if true%>
+    <%if false%>
     <script type="text/javascript">
     var map;
     function initialize() {
@@ -104,8 +105,9 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
 <!--[if lt IE 9]>
 <script src="dist/html5shiv.js"></script>
 <![endif]-->
+
 </head>
-<body onload="initialize()">
+<body>
   
   <div id="application-container" class="container">
     <header>
@@ -121,7 +123,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
       <% else %>
       <%= link_to "Sign in with Facebook",user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary' %> 
       <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => 'btn btn-mini btn-primary' %> 
-      <%= link_to "Sign In", new_user_session_path, :class => 'btn btn-mini btn-primary' %>
+      <%= link_to "Sign In", new_user_session_path, :class => 'sign-in-btn btn btn-mini btn-primary' %>
         <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-mini btn-primary' %>  
       <% end %>
     </aside>
@@ -141,11 +143,11 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                 <li class="main-nav-li dropdown active">
                   <%= link_to 'Home', root_path, :class => 'dropdown-toggle' %>
                 </li>
-                <li class="main-nav-li dropdown">
-                  <a id="drop2" class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="festivals.html" >
+                <li class="main-nav-li dropdown dropdown-helper">
+                  <a id="drop1" class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="festivals.html" >
                     Festivals
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                     <li class="dropdown-li">
                       <%= link_to 'Name', festivals_path %>
                     </li>
@@ -156,15 +158,15 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                       <%= link_to 'Map', '/festival-map' %>
                     </li>
                     <li class="dropdown-li">
-                      <%= link_to 'Ride Share', '/ride_share' %>
+                      <%= link_to 'Ride Share', '/rideshare' %>
                     </li>
                   </ul> 
                 </li>   
-                <li class="main-nav-li dropdown">
-                  <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                <li class="main-nav-li dropdown dropdown-helper">
+                  <a id="drop2" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                     My Profile
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
                     <li class="dropdown-li">
                       <a href="#">My Pics</a>
                     </li>
@@ -176,7 +178,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li>      
-                <li class="main-nav-li dropdown">
+                <li class="main-nav-li dropdown dropdown-helper">
                   <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                     Ride Share
                   </a>
@@ -192,17 +194,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li>  
-                <li class="main-nav-li dropdown">
-                  <a id="drop4" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                    Mobile Apps
-     </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                    <li class="dropdown-li">
-                      <a href="#">Friend Finder</a>
-                    </li>
-                  </ul> 
-                </li> 
-                <li class="main-nav-li dropdown">
+                <li class="main-nav-li dropdown dropdown-helper">
                   <a id="drop5" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                     Merchandise
                   </a>
@@ -247,6 +239,8 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
   <% end %>
   <%= yield %>
   </div>
+  <!--for google maps, keep in footer for speed-->
+  <%= yield :scripts %>
   
 </body>
 </html>

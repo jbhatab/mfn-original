@@ -6,10 +6,6 @@
 $(document).ready(function() {
 
 //main navbar change active
-  $('.dropdown-toggle').click(function(){
-    $('.main-nav-li').removeClass('active');
-    $('main-nav-li').addClass('active');
-  });
 
     
 });

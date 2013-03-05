@@ -37,8 +37,10 @@
         Dates
       </h2>
       <p>
-        <%= @festival.start_date %> - 
-        <%= @festival.end_date%>
+        <% unless @festival.start_date == nil or @festival.end_date == nil %>
+          <%= l @festival.start_date, format: :full %> -
+          <%= l @festival.end_date, format: :full%>
+        <%end%>
       </p>
       <h2>
         Festival Type

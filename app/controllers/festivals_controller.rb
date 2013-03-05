@@ -2,7 +2,8 @@ class FestivalsController < ApplicationController
   # GET /festivals
   # GET /festivals.json
   helper_method :sort_column, :sort_direction
-
+  http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD'],
+                               only: [:new, :edit, :destroy]
   def import
     Festival.import(params[:file])
     redirect_to root_url, notice: "festivals imported"
@@ -10,7 +11,6 @@ class FestivalsController < ApplicationController
   
   def index
     @festivals = Festival.order(sort_column + " " + sort_direction)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @festivals }
@@ -27,6 +27,15 @@ class FestivalsController < ApplicationController
 
 
   def map
+  end
+
+  def rideshare
+    @festivals = Festival.find(:all, :conditions => 'longitude!=0')
+    @json = @festivals.to_gmaps4rails do |festival, marker|
+    marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
+      marker.title "#{festival.name}"
+      marker.json({ :festivaltype => festival.festivaltype,:start_date => festival.start_date })
+    end
   end
   # GET /festivals/1
   # GET /festivals/1.json

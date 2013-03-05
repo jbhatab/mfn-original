@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302005639) do
+ActiveRecord::Schema.define(:version => 20130302213441) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(:version => 20130302005639) do
     t.string   "name"
     t.string   "city"
     t.string   "state"
-    t.float    "lat"
-    t.float    "long"
+    t.float    "latitude"
+    t.float    "longitude"
     t.date     "start_date"
     t.string   "website"
     t.datetime "created_at",   :null => false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130302005639) do
     t.integer  "zip"
     t.string   "address"
     t.string   "twitter"
+    t.boolean  "gmaps"
   end
 
   create_table "lineups", :force => true do |t|
@@ -68,6 +69,26 @@ ActiveRecord::Schema.define(:version => 20130302005639) do
 
   add_index "lineups", ["festival_id"], :name => "index_lineups_on_festival_id"
   add_index "lineups", ["user_id"], :name => "index_lineups_on_user_id"
+
+  create_table "rides", :force => true do |t|
+    t.integer  "festival_id"
+    t.integer  "user_id"
+    t.date     "leave_date"
+    t.date     "return_date"
+    t.boolean  "giving_ride"
+    t.decimal  "cost"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "rides", ["festival_id"], :name => "index_rides_on_festival_id"
+  add_index "rides", ["user_id"], :name => "index_rides_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

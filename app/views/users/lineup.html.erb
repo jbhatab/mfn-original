@@ -3,26 +3,31 @@
   <% if user_signed_in? %>
 
     <% current_user.festivals.order('start_date ASC').each do |festival| %>
-      <%if false%>
-        <div href="#<%=festival.id%>" data-toggle="modal"class="lineup-box">
-      <%end%>
+
       <div class="lineup-box">
         <a href="festivals/<%=festival.id%>">
           <span class="lineup-span">
             <div class="lineup-date">
-              <%= festival.start_date %>
+              <% unless festival.start_date == nil%>
+              <%= l festival.start_date, format: :full %>
+              <%end%>
+
             </div>
-            <%unless festival.img_url=='-'%>
-            <%=image_tag(festival.lg_img_url, alt:festival.name+" Facebook Image") %>
-            <%end%>
-            <%= festival.name %> 
-        
-            <%if false%>
-            <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
-            <%end%>
+
+              <%unless festival.img_url=='-'%>
+                <%=image_tag(festival.lg_img_url, alt:festival.name+" Facebook Image") %>
+              <%end%>
+              
+              <%= festival.name %> 
+
+              
+            
+
           </span>
-        </div>
-      </a>
+        </a>
+        <%= link_to "Remove From Lineup", {:controller =>"users", :action => "remove_line", :id => festival.id}, :class => 'btn remove-button btn-danger', method: :post %>
+      </div>
+
     <%end%>
   <%end%>
 </div>

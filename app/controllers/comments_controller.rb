@@ -1,12 +1,13 @@
 class CommentsController < ApplicationController
   before_filter :load_commentable
-  before_filter :find_comment, :only => [:upvote, :downvote]
+  before_filter :authenticate_user!, :find_comment, :only => [:upvote, :downvote]
 
 
 
   def index
     @comments = @commentable.comments
   end
+
 
   def upvote
     @comment.upvote_from current_user
@@ -33,7 +34,12 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @commentable.comments.find(params[:id])
     @comment.destroy
-    redirect_to(@commentable)
+
+    respond_to do |format|
+      format.html {redirect_to(@commentable)}
+      format.json { head :no_content }
+      format.js
+    end
   end
 
 private
@@ -44,11 +50,7 @@ private
   end
 
   def find_comment
-    @comment = Comment.find(@commentable.id)
-    unless user_signed_in?
-      redirect_to(@comment.commentable) 
-      flash[:notice] = "You have to log in to vote"
-    end
+    @comment = Comment.find(params[:id])
     if current_user.id == @comment.user_id
       flash[:notice] = "You can't vote on your own comment"
       redirect_to(@comment.commentable)

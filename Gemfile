@@ -11,14 +11,22 @@ group :production do
   gem 'pg'
 end
 
+#importing csv files for festivals
 gem 'roo'
 
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
 gem 'acts_as_votable', '~> 0.5.0'
 
+#enable bootstraps
 gem 'bootstrap-sass'
 
+#google maps for rails
+gem 'gmaps4rails'
+
+#storage and picture uploads
+gem "paperclip", "~> 3.1"
+gem 'aws-s3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,8 +41,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'event-calendar', :require => 'event_calendar'
+
+#private configuration and easy to push to heroku
+gem 'figaro'
 
 #authentication
 gem 'devise'
@@ -44,13 +56,14 @@ gem 'omniauth-twitter'
 
 
 #testing
-group :test, :development do
-  gem 'turn'
-  gem 'rspec-rails'     #rspec
-  gem 'capybara'      #something about end users
-  gem 'guard-rspec'     #autorun rspec
-  gem 'libnotify'      #the notifications
+gem "rspec-rails", :group => [:test, :development]
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+  gem 'libnotify' 
 end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

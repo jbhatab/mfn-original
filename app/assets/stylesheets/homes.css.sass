@@ -37,11 +37,7 @@ $brown: #5d3c1d
   z-index: 1000
   font-size: 14px
   margin-left: 1%
-
-body
-  font-size: 62.5%
-  font-family: 'BebasNeueRegular', sans-serif, Georgia
-  overflow-x: hidden
+  
 
 #social-links
   position: absolute
@@ -56,10 +52,8 @@ body
   right: 5px
 
 #application-container
-  background-color: $green
   height: 100%
   width: 100%
-  margin: 0 auto
 
 .main-page-container
   position: relative
@@ -111,31 +105,43 @@ body
     border: none
     ul.nav
       width: 100%
-      margin-bottom: 10px
+      height: 45px
       .main-nav-li
         position: relative
         a.dropdown-toggle
           text-shadow: 2px 2px 5px #000
           text-align: center
           margin: 15px 0 0 2px 
-          padding-top: 0px
-          padding-bottom: 0px
+          padding: 0px 10px
           font-family: impact
           font-weight: bold
           width: auto
           color: #000000
           font-size: 2em
+          @include transition(all .1s ease-in-out)
           color: #FFF
           background: rgba(0,0,0,0.0)
           box-shadow: none
           border: none
         a.dropdown-toggle:hover
-          border-bottom: 2px solid $red
+          padding-right: 0px
+          color: $darkorange
+          font-size: 2.4em
         a.dropdown-toggle:focus
           outline: none
       .main-nav-li.active
         a.dropdown-toggle
-          border-bottom: 2px solid $red
+          color: $darkorange
+          font-size: 2.4em
+
+//hovering menu vs click
+//.dropdown-menu
+//  margin-top: 0px
+
+//.dropdown-helper:hover
+//  ul
+//    display: block
+
 
 .dropdown-li
   font-size: 1.4em

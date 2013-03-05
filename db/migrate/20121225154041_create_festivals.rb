@@ -4,8 +4,9 @@ class CreateFestivals < ActiveRecord::Migration
       t.string :name
       t.string :city
       t.string :state
-      t.float :lat
-      t.float :long
+      t.float :latitude
+      t.float :longitude
+      t.boolean :gmaps
       t.date :start_date
       t.date :end_date
       t.string :website
@@ -17,6 +18,7 @@ class CreateFestivals < ActiveRecord::Migration
       t.integer :zip 
       t.string :address
       t.string :twitter
+
 
       t.timestamps
     end

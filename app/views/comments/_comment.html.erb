@@ -1,4 +1,4 @@
-<div class="comment-container">
+<div id='comment_<%=comment.id%>' class="comment-container">
   <div class="vote-area">
     <% if user_signed_in? %>
       <%if current_user.voted_up_on? comment%>
@@ -34,8 +34,8 @@
     <% if user_signed_in? %>
       <% if current_user.id == comment.user_id %>
         <%= link_to 'Delete Comment', [comment.commentable, comment],
-                 :confirm => 'Are you sure?',
-                 :method => :delete %>
+                 :method => :delete,
+                 remote: true %>
       <%end%>
     <%end%>
   </div>
