@@ -1,7 +1,7 @@
 /*
  * Smart event highlighting
  * Handles when events span rows, or don't have a background color
- */
+ 
 jQuery(document).ready(function($) {
   var highlight_color = "#2EAC6A";
   
@@ -35,3 +35,4 @@ jQuery(document).ready(function($) {
     ele.css("background-color", "transparent");
   });
 });
+*/

@@ -28,7 +28,11 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id
     end
     @comment.save
-    redirect_to(@commentable)
+    respond_to do |format|
+      format.html { redirect_to(@commentable) }
+      format.js 
+    end
+    
   end
 
   def destroy
@@ -36,7 +40,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html {redirect_to(@commentable)}
+      format.html {redirect_to('/my-comments')}
       format.json { head :no_content }
       format.js
     end

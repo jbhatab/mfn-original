@@ -1,7 +1,6 @@
 <div role="main" class="main-page-container">
 My Comments
 <% if user_signed_in? %>
-
  <% current_user.comments.each do |comment| %>
     <div class="comment-container">
       <header class="comment-header">
@@ -11,7 +10,8 @@ My Comments
       <%= link_to comment.commentable.name, comment.commentable %>,
       <%= link_to 'Delete Comment', [comment.commentable, comment],
                confirm: 'Are you sure?',
-               method: :delete %>
+               method: :delete
+               %>
     </div>
   <%end%>
 

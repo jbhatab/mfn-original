@@ -1,21 +1,16 @@
-<%= form_for (@comment) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+<div class="comment-form">
+  <%= form_for([commentable, commentable.comments.build], remote: :true) do |f| %>
+    <div class="field form-horizontal">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, :placeholder=>"Title" %>
+    </div>
+    <div class="field">
+      <%= f.label :comment %><br />
+      <%= f.text_area :comment, :placeholder=>"Add comment here...", :rows=> 3 %>
+    </div>
 
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

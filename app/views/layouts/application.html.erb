@@ -4,8 +4,9 @@
   <title>Music Festival Nation - Info, Maps, and More</title>
   <meta name="description=" content="Our goal is to make the music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
   <%= stylesheet_link_tag "gmaps4rails" %>
-  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  
   <%= csrf_meta_tags %>
 
   <script type="text/javascript"
@@ -102,6 +103,8 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
         
     </script>
     <% end%>
+
+
 <!--[if lt IE 9]>
 <script src="dist/html5shiv.js"></script>
 <![endif]-->
@@ -140,14 +143,16 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
           <div id="main-nav" class="navbar">
             <div class="navbar-inner">
               <ul class="nav" role="navigation">
-                <li class="main-nav-li dropdown active">
+                <li class="main-nav-li dropdown <%='active' if current_page?(root_path)%>">
                   <%= link_to 'Home', root_path, :class => 'dropdown-toggle' %>
                 </li>
-                <li class="main-nav-li dropdown dropdown-helper">
-                  <a id="drop1" class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="festivals.html" >
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festivals') or current_page?('/calendar') or
+                  current_page?('/festival-map') or
+                  current_page?('/rideshare') %>">
+                  <a class="dropdown-toggle" data-target="#" href="#" >
                     Festivals
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                  <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
                       <%= link_to 'Name', festivals_path %>
                     </li>
@@ -162,11 +167,11 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li>   
-                <li class="main-nav-li dropdown dropdown-helper">
-                  <a id="drop2" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/lineup') %>">
+                  <a class="dropdown-toggle"  href="#" role="button">
                     My Profile
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                  <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
                       <a href="#">My Pics</a>
                     </li>
@@ -179,10 +184,10 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                   </ul> 
                 </li>      
                 <li class="main-nav-li dropdown dropdown-helper">
-                  <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                  <a class="dropdown-toggle"  href="#" role="button">
                     Ride Share
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                  <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
                       <a href="#">Requests</a>
                     </li>
@@ -194,11 +199,17 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li>  
+                <li class="main-nav-li <%='active' if current_page?('/about')%>">
+                  <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
+                </li> 
+                <li class="main-nav-li <%='active' if current_page?('/contact')%>">
+                  <%= link_to 'Contact', '/contact', :class => 'dropdown-toggle' %>
+                </li> 
                 <li class="main-nav-li dropdown dropdown-helper">
-                  <a id="drop5" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                  <a class="dropdown-toggle" href="#" role="button">
                     Merchandise
                   </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                  <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
                       <a href="#">Hats</a>
                     </li>
@@ -219,12 +230,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li> 
-                <li class="main-nav-li">
-                  <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
-                </li> 
-                <li class="main-nav-li">
-                  <%= link_to 'Contact', '/contact', :class => 'dropdown-toggle' %>
-                </li> 
+                
                   </ul> 
                 </li>  
               </ul>

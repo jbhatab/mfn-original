@@ -88,11 +88,11 @@ $brown: #5d3c1d
   margin: 1% 1% 0px 0px
 
 #main-nav-span
-  height: 30px
+  height: 45px
   width: 100%
 
 #main-page-nav
-  margin-bottom: 20px
+
 
 .navbar#main-nav
   position: relative
@@ -108,27 +108,31 @@ $brown: #5d3c1d
       height: 45px
       .main-nav-li
         position: relative
+        .dropdown-menu
+        width: 14%
         a.dropdown-toggle
           text-shadow: 2px 2px 5px #000
+          padding-top: 10px
           text-align: center
-          margin: 15px 0 0 2px 
-          padding: 0px 10px
+          margin: 0 auto
+          height: 45px
           font-family: impact
           font-weight: bold
-          width: auto
           color: #000000
           font-size: 2em
-          @include transition(all .1s ease-in-out)
+          @include transition(all .15s ease-in-out)
           color: #FFF
           background: rgba(0,0,0,0.0)
           box-shadow: none
           border: none
         a.dropdown-toggle:hover
-          padding-right: 0px
           color: $darkorange
           font-size: 2.4em
         a.dropdown-toggle:focus
           outline: none
+      .main-nav-li:hover
+        .dropdown-menu 
+          display: block 
       .main-nav-li.active
         a.dropdown-toggle
           color: $darkorange
@@ -142,9 +146,11 @@ $brown: #5d3c1d
 //  ul
 //    display: block
 
-
-.dropdown-li
-  font-size: 1.4em
+.dropdown-menu
+  margin-top: -25px !important
+  margin-left: 5px !important
+  .dropdown-li
+    font-size: 1.4em
 
 
 #myCarousel

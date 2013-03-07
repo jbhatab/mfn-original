@@ -30,6 +30,8 @@ $grey: #696969
 
 body
   font-size: 62.5%
+  height: auto
+  background-color: $green
   font-family: 'BebasNeueRegular', sans-serif, Georgia
   overflow-x: hidden
 
@@ -62,27 +64,27 @@ table.ec-calendar-header
   border-bottom: 3px solid $brown
 
 th.ec-month-nav 
-  height: 50px
-  border: none
-  border-bottom: 3px solid $brown
-  background: $green
+  height: 50px !important
+  border: none !important
+  border-bottom: 3px solid $brown !important
+  background: $green !important
   a
     @include transition(font-size .15s ease-in-out)
-    color: #000
+    color: #000 !important
   a:hover
-    text-decoration: none
+    text-decoration: none !important
 
 th.ec-month-nav:hover
   a
-    color: $brown
-    font-size: 2em
+    color: $brown !important
+    font-size: 2em !important
     
 
 th.ec-next-month
-  border-left: 3px solid $brown
+  border-left: 3px solid $brown !important
 
 th.ec-previous-month
-  border-right: 3px solid $brown
+  border-right: 3px solid $brown !important
 
 
 
@@ -222,6 +224,7 @@ a.ec-day-link
 .ec-event-cell:hover
   a
     font-size: 1.1em
+    color: #fff
 
 
 
