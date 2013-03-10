@@ -10,7 +10,7 @@ class FestivalsController < ApplicationController
   end
   
   def index
-    @festivals = Festival.order(sort_column + " " + sort_direction)
+    @festivals = Festival.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @festivals }

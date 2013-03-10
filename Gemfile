@@ -14,9 +14,13 @@ end
 #importing csv files for festivals
 gem 'roo'
 
+
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
 gem 'acts_as_votable', '~> 0.5.0'
+
+#pagination
+gem 'will_paginate', '~> 3.0'
 
 #enable bootstraps
 gem 'bootstrap-sass'

@@ -3,74 +3,18 @@
 <aside id ='festival-submit'>
   <%= link_to "Don't see a festival on our list? Submit Here", new_festival_path, :class=>'festival-submit-link' %>
 </aside>
-<div class='festival-list'>
-<table class="table">
-  <thead>
-    <tr>
-      <th><h3><%= sortable 'name' %></h3></th>
-      <th><h3><%= sortable 'city' %></h3></th>
-      <th><h3><%= sortable 'state' %></h3></th>
-      <th><h3><%= sortable 'date' %></h3></th>
-      <th><h3><%= sortable 'type' %></h3></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<% @festivals.each do |festival| %>
 
-  
-  <tr onclick="document.location = '/festivals/<%=festival.id%>';"class='fest-list-item'>
-  <%if false%>
-    <tr class='fest-list-item' href="#<%=festival.id%>" data-toggle="modal">
-  <%end%>
+<%= form_tag festivals_path, :method => 'get', :id =>'festivals_search' do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
-    <td>
-      <%unless festival.img_url=='-'%>
-        <%=image_tag(festival.img_url[0..-13], alt:festival.name+" Facebook Image") %>
-      <%end%><%= festival.name %></td>
-    <td><%= festival.city %></td>
-    <td><%= festival.state %></td>
-    <td><% unless festival.start_date == nil%>
-        <%= l festival.start_date, format: :full %>
-      <%end%>
-    </td>
-    <td><%= festival.festivaltype %></td>
-    <td>
+<%= render 'festivals' %>
 
-    <% if user_signed_in? %>
-      <%if current_user.festivals.empty? %>
-        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, class: "btn", method: :post %>
-      <%end%>
-      <% i=0 %>
-      <% current_user.festivals.each do |x| %>
-        <% if x.id == festival.id %>
-           <a class="btn disabled lineup-deactivated">Already Added</a>
-           <%break%>
-        <%else%>
-          <% i=i+1 %>
-        <%end%>
-        <%if current_user.festivals.count == i %>
-        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
-        <%end%>
-      <% end%>
-    <%else%>
-      <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
-    <%end%>
-    </td>
-    <td><%= link_to 'Show', festival %></td>
-    <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
-    <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-  <%if false%>
-  <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
-  <%end%>
-<%end%>
-
-
-  </tbody>
-</table>
 <%= link_to 'New Festival', new_festival_path %>
 
 

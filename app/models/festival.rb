@@ -12,6 +12,15 @@ class Festival < ActiveRecord::Base
   end
   has_many :users, through: :lineups
 
+  self.per_page = 12
+
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

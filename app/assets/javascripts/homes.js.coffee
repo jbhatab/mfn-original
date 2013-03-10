@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-$(document).ready ->
+$ ->
   $('.dropdown-menu').hover \
     (-> $(this).parent('li').addClass('active')), \
     (-> $(this).parent('li').removeClass('active'))
