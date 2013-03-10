@@ -5,6 +5,7 @@
   <meta name="description=" content="Our goal is to make the music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
 
   <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "fonts/stereofidelic/stylesheet.css", :media => "all" %>
   <%= stylesheet_link_tag "application", :media => "all" %>
   
   <%= csrf_meta_tags %>
@@ -12,97 +13,6 @@
   <script type="text/javascript"
 src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SLuj1hMfM&sensor=true">
     </script>
-    <% if false%>
-    <script type="text/javascript">
-      var map;
-
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(-40, 150),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-        google.maps.event.addListener(map, 'click', function(event) {
-          placeMarker(event.latLng);
-        });
-
-      }
-      function placeMarker(location) {
-        var marker = new google.maps.Marker({
-          position: location, 
-          map: map
-        });
-        map.setCenter(location);
-        }
-        
-    </script>
-    <% end %>
-    <%if false%>
-    <script type="text/javascript">
-    var map;
-    function initialize() {
-    var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-    var mapOptions = {
-      center: myLatlng,
-      zoom: 4,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-    var contentString = '<div id="content">'+'<%=User%>'+ 
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h2 id="firstHeading" class="firstHeading">Uluru</h2>'+
-        '<div id="bodyContent">'+
-        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-        'sandstone rock formation in the southern part of the '+
-        'Northern Territory, central Australia. It lies 335 km (208 mi) '+
-        'south west of the nearest large town, Alice Springs; 450 km '+
-        '(280 mi) by road. Kata Tjuta and Uluru are the two major '+
-        'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-        'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-        'Aboriginal people of the area. It has many springs, waterholes, '+
-        'rock caves and ancient paintings. Uluru is listed as a World '+
-        'Heritage Site.</p>'+
-        '<p>Attribution: Uluru, <a href="http://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-        'http://en.wikipedia.org/w/index.php?title=Uluru</a> (last visited June 22, 2009).</p>'+
-        '</div>'+
-        '</div>';
-
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-    
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title:"Uluru (Ayers Rock)"
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-    google.maps.event.addListener(map, 'click', function(event) {
-          placeMarker(event.latLng);
-        });
-
-      }
-
-      function placeMarker(location) {
-        marker = new google.maps.Marker({
-          position: location, 
-          map: map
-        });
-        map.setCenter(location);
-
-        }
-        
-    </script>
-    <% end%>
 
 
 <!--[if lt IE 9]>
@@ -133,7 +43,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
     <aside>
       <div class="row">
         <div id="logo" class="span12">
-          <%=image_tag("MFN_invert.jpg", alt:"MFN banner") %>
+
         </div>
       </div>
     </aside>

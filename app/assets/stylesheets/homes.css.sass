@@ -64,7 +64,7 @@ $brown: #5d3c1d
   margin-left: 2%
   float: left
   padding: 1%
-  background-color: rgb(241,241,241)
+  background-color: rgba(241,241,241, .5)
   @include border-radius(10px)
 
   
@@ -78,9 +78,8 @@ $brown: #5d3c1d
 
 #logo
   width: 100%
-  img
-    height: 200px
-    width: 100%
+  margin: 0px
+  height: 200px
 
 .sidebar
   float: right
@@ -89,12 +88,14 @@ $brown: #5d3c1d
 
 #main-nav-span
   height: 45px
+  margin: 0px
   width: 100%
 
 #main-page-nav
 
 
 .navbar#main-nav
+  font-family: 'StereofidelicRegular', sans-serif, Georgia
   position: relative
   @include box-shadow(3px 3px 5px #000)
   div.navbar-inner
@@ -116,10 +117,10 @@ $brown: #5d3c1d
           text-align: center
           margin: 0 auto
           height: 45px
-          font-family: impact
+          font-family: 'StereofidelicRegular', impact, sans-serif
           font-weight: bold
           color: #000000
-          font-size: 2em
+          font-size: 2.5em
           @include transition(all .15s ease-in-out)
           color: #FFF
           background: rgba(0,0,0,0.0)
@@ -127,7 +128,7 @@ $brown: #5d3c1d
           border: none
         a.dropdown-toggle:hover
           color: $darkorange
-          font-size: 2.4em
+          font-size: 3em
         a.dropdown-toggle:focus
           outline: none
       .main-nav-li:hover
@@ -136,7 +137,7 @@ $brown: #5d3c1d
       .main-nav-li.active
         a.dropdown-toggle
           color: $darkorange
-          font-size: 2.4em
+          font-size: 3em
 
 //hovering menu vs click
 //.dropdown-menu
@@ -150,7 +151,7 @@ $brown: #5d3c1d
   margin-top: -25px !important
   margin-left: 5px !important
   .dropdown-li
-    font-size: 1.4em
+    font-size: 2em
 
 
 #myCarousel
