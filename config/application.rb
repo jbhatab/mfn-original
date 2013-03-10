@@ -43,11 +43,16 @@ module Mfn
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
+    
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    #font-face configuration
+    config.assets.precompile += %w( .svg .eot .woff .ttf ) 
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
