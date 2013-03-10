@@ -1,9 +1,9 @@
 class Festival < ActiveRecord::Base
   acts_as_commentable
+  has_event_calendar :start_at_field  => 'start_date', :end_at_field => 'end_date'
   acts_as_gmappable :process_geocoding => false
   attr_accessible :zip, :address, :city, :start_date, :end_date, :festivaltype, :latitude, :longitude, :name, :state, :website, :facebook, :region, :img_url, :lg_img_url
   has_many :lineups, :dependent => :destroy
-  has_one :events
   has_many :rides, :dependent => :destroy
   accepts_nested_attributes_for :rides
 

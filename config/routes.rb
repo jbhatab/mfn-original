@@ -29,11 +29,9 @@ Mfn::Application.routes.draw do
     resources :rides, :only => [:index, :show]
   end
 
-  #calender routes
-  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-  match '/calendar/new', :to => 'calendar#new'
+  #calender routes  match '/calendar/new', :to => 'calendar#new'
   match '/events', :to => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   #match '/auth/:provider/callback', :to => 'sessions#omni'  
 
   resources :events
