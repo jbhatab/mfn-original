@@ -24,13 +24,13 @@ Mfn::Application.routes.draw do
   end
 
   resources :festivals do
-    collection {post :import}
+    collection {post :import} 
     resources :comments
     resources :rides, :only => [:index, :show]
   end
 
   #calender routes  match '/calendar/new', :to => 'calendar#new'
-  match '/events', :to => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+  
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   #match '/auth/:provider/callback', :to => 'sessions#omni'  
 
@@ -40,6 +40,7 @@ Mfn::Application.routes.draw do
 
   match '/my-comments', :to => 'users#my-comments'
   
+  get '/festivals/:action' => 'festivals#filter'
   post '/festivals/:id/:action' => 'users#line'
   post '/festivals/:id/:action' => 'users#remove_line'
   put '/comments/:id/:action' => 'comments#upvote'

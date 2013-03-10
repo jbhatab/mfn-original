@@ -9,6 +9,10 @@ class FestivalsController < ApplicationController
     redirect_to root_url, notice: "festivals imported"
   end
   
+  def filter
+    flash[:notice] = "Filtered Mother Fucker"
+  end
+
   def index
     @festivals = Festival.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     respond_to do |format|

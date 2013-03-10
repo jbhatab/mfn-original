@@ -6,8 +6,8 @@
   <thead>
     <tr>
       <th><h3><%= sortable 'name' %></h3></th>
-      <th><h3><%= sortable 'city' %></h3></th>
-      <th><h3><%= sortable 'state' %></h3></th>
+      <th><h3><%= sortable 'state', 'Location' %></h3></th>
+      <th><h3><%= sortable 'region' %></h3></th>
       <th><h3><%= sortable 'date' %></h3></th>
       <th><h3><%= sortable 'type' %></h3></th>
       <th></th>
@@ -28,8 +28,8 @@
       <%unless festival.img_url=='-'%>
         <%=image_tag(festival.img_url[0..-13], alt:festival.name+" Facebook Image") %>
       <%end%><%= festival.name %></td>
-    <td><%= festival.city %></td>
-    <td><%= festival.state %></td>
+    <td><%= festival.city %>, <%= festival.state %></td>
+    <td><%= festival.region %></td>
     <td><% unless festival.start_date == nil%>
         <%= l festival.start_date, format: :full %>
       <%end%>
