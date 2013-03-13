@@ -1,0 +1,3 @@
+apps:
+  production: musicfestivalnation
+  staging: musicfestivalnation-staging
