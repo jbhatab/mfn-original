@@ -1,0 +1,15 @@
+<div class="ride-infowindow">
+  <h4> <%= link_to ride.festival.name, ride.festival %> </h4>
+  <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => ride.festival_id}, :class => 'btn btn-mini', method: :post %>
+  <% if ride.giving_ride %>
+    <h5> I got your ride right here</h5>
+  <%else%>
+    <h6> Can I snag a ride? </h6>
+  <%end%>
+  <p> Message: <%=ride.message %> </p>
+  <p>Address: <%= ride.address %></p>
+  <p>City: <%= ride.city %></p>
+  <p>State: <%= ride.state %></p>
+  <p>zip: <%= ride.zip %></p>
+  
+</div>

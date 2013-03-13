@@ -223,7 +223,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :twitter, "fnIeXD02SZkL04MyNSMxwg", "orhkbBhr5jOcGoWZROr6FTr71Q6lXbyGRRZXriX2So"
-  config.omniauth :facebook, "478770695502624", "d1366793a80713eaa098eec8148b9a07"
+  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
   config.authentication_keys = [ :login ]
 
 

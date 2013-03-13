@@ -1,4 +1,11 @@
- 
+  <aside class="todays-festivals-container">
+    <h3>Festivals Going On Right Now </h3>
+    <% @festivals.each do |festival| %>
+      <div class="todays-festival">
+        <%=link_to festival.name, festival%>
+      </div>
+    <%end%>
+  </aside>
   <div role="main" class="main-page-container">
     <section id="carousel">
       <div id="myCarousel" class="carousel slide">

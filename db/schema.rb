@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310191942) do
+ActiveRecord::Schema.define(:version => 20130311230348) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20130310191942) do
     t.boolean  "gmaps"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "message"
+    t.integer  "zip"
   end
 
   add_index "rides", ["festival_id"], :name => "index_rides_on_festival_id"

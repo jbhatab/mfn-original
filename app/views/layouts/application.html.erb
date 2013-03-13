@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Music Festival Nation - Info, Maps, and More</title>
-  <meta name="description=" content="Our goal is to make the music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
+  <meta name="description=" content="Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
 
   <%= javascript_include_tag "application" %>
 
@@ -10,9 +10,7 @@
   
   <%= csrf_meta_tags %>
 
-  <script type="text/javascript"
-src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SLuj1hMfM&sensor=true">
-    </script>
+
 
 
 <!--[if lt IE 9]>
@@ -43,7 +41,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
     <aside>
       <div class="row">
         <div id="logo" class="span12">
-
+       
         </div>
       </div>
     </aside>
@@ -57,23 +55,19 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                   <%= link_to 'Home', root_path, :class => 'dropdown-toggle' %>
                 </li>
                 <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festivals') or current_page?('/calendar') or
-                  current_page?('/festival-map') or
-                  current_page?('/rideshare') %>">
+                  current_page?('/festival-map') %>">
                   <a class="dropdown-toggle" data-target="#" href="#" >
                     Festivals
                   </a>
                   <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
-                      <%= link_to 'Name', festivals_path %>
+                      <%= link_to 'US Festivals', festivals_path %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Calendar', '/calendar' %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Map', '/festival-map' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'Ride Share', '/rideshare' %>
                     </li>
                   </ul> 
                 </li>   
@@ -93,8 +87,8 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                     </li>
                   </ul> 
                 </li>      
-                <li class="main-nav-li dropdown dropdown-helper">
-                  <a class="dropdown-toggle"  href="#" role="button">
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/rideshare') %>">
+                  <a class="dropdown-toggle"  href='/rideshare' role="button">
                     Ride Share
                   </a>
                   <ul class="dropdown-menu" role="menu" >
@@ -105,7 +99,7 @@ src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB6oYSzKPIZamxDrIOd8LRq11SL
                       <a href="#">Offers</a>
                     </li>
                     <li class="dropdown-li">
-                      <a href="#">Map</a>
+                      <%= link_to 'Ride Share', '/rideshare' %>
                     </li>
                   </ul> 
                 </li>  

@@ -1,6 +1,7 @@
 class FestivalsController < ApplicationController
   # GET /festivals
   # GET /festivals.json
+  respond_to :json, :html
   helper_method :sort_column, :sort_direction
   http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD'],
                                only: [:new, :edit, :destroy]
@@ -31,15 +32,35 @@ class FestivalsController < ApplicationController
 
 
   def map
+    @festivals = Festival.find(:all, :conditions => 'longitude!=0')
+    @json = @festivals.to_gmaps4rails do |festival, marker|
+      marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
+      marker.title "#{festival.name}"
+      marker.json({ :id => festival.id, :festivaltype => festival.festivaltype})
+    end
+    respond_with @json
   end
 
   def rideshare
+    @ride = Ride.new
     @festivals = Festival.find(:all, :conditions => 'longitude!=0')
     @json = @festivals.to_gmaps4rails do |festival, marker|
-    marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
+      marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
+      marker.picture({
+                'picture' => view_context.image_path("red-dot.png"),
+                'width'   => 20,
+                'height'  => 20
+               })
       marker.title "#{festival.name}"
-      marker.json({ :festivaltype => festival.festivaltype,:start_date => festival.start_date })
+      if festival.start_date == nil
+        marker.json({ :id => festival.id, :festivaltype => festival.festivaltype})
+      else
+        marker.json({ :start_date =>festival.start_date.month, :id => festival.id, :festivaltype => festival.festivaltype})
+      end
     end
+
+
+    respond_with @json
   end
   # GET /festivals/1
   # GET /festivals/1.json

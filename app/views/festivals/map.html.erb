@@ -1,3 +1,90 @@
+
+<div class="row">
+  <div class="filter-buttons span12">
+    <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "None Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
+    <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
+  </div>
+</div>
 <section id="festival-map">
-  <p><iframe src="http://batchgeo.com/map/25795000eda7be0251c4142484b65038" frameborder="0" width="100%" height="550" style="border:1px solid #aaa;border-radius:10px;"></iframe></p><p><small>View <a href="http://batchgeo.com/map/25795000eda7be0251c4142484b65038">US Festivals Map</a> in a full screen map</small></p>
+  <%= gmaps("markers" => {"data" => @json, "options" => { "do_clustering" => true, 'randomize'=>true, 'max_random_distance'=>10  } } ) %> 
 </section>
+
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    
+    Gmaps.map.callback = function() {
+
+    
+      <%if false%>
+       var DateFilter = {
+        min: 1,
+        max: 12,
+      };
+
+      $( "#filtered-pop" ).val( (DateFilter.min)+ " - " + (DateFilter.max))
+      $("#date-range").slider({
+        range: true,
+        min: DateFilter.min,
+        max: DateFilter.max,
+        values: [ DateFilter.min, DateFilter.max ],
+        slide: function(event, ui) {
+          $( "#filtered-pop" ).val( (ui.values[ 0 ])+ " - " + (ui.values[ 1 ]))
+          DateFilter.min = ui.values[ 0 ]
+          DateFilter.max = ui.values[ 1 ]
+          applyFilters()
+        }
+      });
+
+      var VisibleMarkers = function() {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          return marker.start_date < DateFilter.min || marker.start_date > DateFilter.max;
+        });
+        return filtered
+       }
+
+      var applyFilters = function() {
+        _.each(Gmaps.map.markers, function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        _.each(VisibleMarkers(), function(marker) {
+          Gmaps.map.showMarker(marker)
+        })
+      };
+      <%end%>
+
+      $(".filter-button").click(function() {
+        var type = $(this).attr('id');
+        if(type=='no-camping') {
+          type='no camping'
+        } 
+        buttonFilters(type)
+      });
+
+      $("#all").click(function() {
+        $.getJSON('/festival-map', function(data){
+          Gmaps.map.replaceMarkers(data);
+        });
+      });
+
+      var VisibleType = function(data, type) {
+      var filtered = _.reject(data, function(marker) {
+          return marker.festivaltype != type;
+          
+        });
+        return filtered
+       }
+
+      var buttonFilters = function(type) {
+        
+        $.getJSON('/festival-map', function(data){
+          
+          Gmaps.map.replaceMarkers(VisibleType(data,type));
+        });
+
+      };
+    }
+  </script>
+<%end%>

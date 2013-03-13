@@ -15,6 +15,8 @@ end
 gem 'roo'
 
 
+
+
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
 gem 'acts_as_votable', '~> 0.5.0'
@@ -28,8 +30,12 @@ gem 'bootstrap-sass'
 #google maps for rails
 gem 'gmaps4rails'
 
+#handles assets for heroku
+group :assets do
+  gem 'asset_sync'
+end
+
 #storage and picture uploads
-gem "paperclip", "~> 3.1"
 gem 'aws-s3'
 
 # Gems used only for assets and not required

@@ -14,34 +14,38 @@
     <%= f.label :festival_id %><br />
     <%= f.collection_select :festival_id, Festival.all, :id, :name %>
   </div>
-  <div class="field">
+  <div class="ride-date field">
     <%= f.label :leave_date %><br />
     <%= f.date_select :leave_date %>
   </div>
-  <div class="field">
+  <div class="ride-date field">
     <%= f.label :return_date %><br />
     <%= f.date_select :return_date %>
   </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+  <div class="field inline-field">
+    <%= f.label :address %>
+    <%= f.text_field :address, placeholder: "420 Make Believe Lane" %>
   </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
+  <div class="field inline-field">
+    <%= f.label :city %>
+    <%= f.text_field :city, placeholder: "Minneapolis" %>
   </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
+  <div class="field inline-field">
+    <%= f.label :state %>
+    <%= f.text_field :state, placeholder: "MN" %>
   </div>
   
-  <div class="field">
-    <%= f.label :cost %><br />
-    <%= f.number_field :cost %>
+  <div class="field inline-field">
+    <%= f.label :cost %>
+    <%= f.number_field :cost, placeholder: "$10.00" %>
   </div>
-  <div class="field">
-    <%= label_tag(:giving_ride, "I'm giving a ride") %>
-    <%= check_box_tag(:giving_ride) %>
+  <div class="field inline-checkbox">
+    <%= f.label(:giving_ride, "I'm giving a ride") %>
+    <%= f.check_box(:giving_ride) %>
+  </div>
+  <div class="field inline-field">
+    <%= f.label :message %>
+    <%= f.text_area :message, placeholder: "Put your message here!", :rows =>3 %>
   </div>
   <div class="actions">
     <%= f.submit 'Create' %>

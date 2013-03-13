@@ -1,9 +1,34 @@
 class RidesController < ApplicationController
-  before_filter :load_rideable
-  before_filter :authenticate_user!, :except => :index
+  respond_to :json, :html
+  before_filter :load_rideable, :except => :rides_gmap
+  before_filter :authenticate_user!, :except => [:index, :rides_gmap]
 
+  
   def index
     @rides = @rideable.rides
+  end
+
+  def rides_gmap
+    @rides = Ride.all
+    @json = @rides.to_gmaps4rails do |ride, marker|
+      marker.infowindow render_to_string(:partial => "/rides/infowindow", :locals => { :ride => ride})
+      if ride.giving_ride
+        marker.picture({
+                'picture' => view_context.image_path("orange-dot.png"),
+                'width'   => 20,
+                'height'  => 20
+               })
+      else
+        marker.picture({
+                'picture' => view_context.image_path("yellow-dot.png"),
+                'width'   => 20,
+                'height'  => 20
+               })
+      end
+      marker.title "#{ride.address}"
+      marker.json({:ride_id => ride.id, :festival_id => ride.festival_id })
+    end
+    respond_with @json
   end
 
   def show

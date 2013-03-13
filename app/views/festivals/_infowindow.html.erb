@@ -1,8 +1,10 @@
 <div class="festival-infowindow">
   <h3><%=link_to festival.name, festival %></h3>
+  <% if false%>
   <% unless festival.img_url == nil or festival.img_url == '-' or festival.img_url == ''%>
     <%= image_tag(festival.img_url, alt:festival.name+"'s Facebook Image")%>
   <% end%>
+  <%end%>
   <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn btn-mini', method: :post %>
   <p>Type: <%= festival.festivaltype %></p>
   <p>Location: <%= festival.city %>, <%= festival.state %>, <%= festival.region %></p>
