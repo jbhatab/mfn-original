@@ -10,9 +10,6 @@ Mfn::Application.configure do
 
   #s3 and fog
   config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
-
-  #serving fonts
-  config.font_assets.origin = 'http://musicfestivalnation-staging.herokuapp.com'
   
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false

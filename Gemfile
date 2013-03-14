@@ -14,9 +14,6 @@ end
 #importing csv files for festivals
 gem 'roo'
 
-
-gem "font_assets", "~> 0.1.6"
-
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
 gem 'acts_as_votable', '~> 0.5.0'
