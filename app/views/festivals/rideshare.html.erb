@@ -27,7 +27,13 @@
 
 
 <section class="rideshare-form">
-  <%= render 'rides/form' %>
+
+  <ul>
+    <% @list.each do |festival| %>
+      <li><%=link_to festival.name, '#', class: 'rideshare-link fest_'+festival.id.to_s%></li>
+    <%end%>
+  </ul>
+  <%= will_paginate @list%>
 </section>
 
 
@@ -46,18 +52,6 @@
           Gmaps.map.addMarkers(data);
         });
       
-      $('#replace_festivals').click(function(){
-        $.getJSON('/rideshare', function(data){
-          Gmaps.map.replaceMarkers(data);
-        });
-      });
-
-      $('#add_rides').click(function(){
-        $.getJSON('/rides_gmap', function(data){
-          Gmaps.map.addMarkers(data);
-        });
-      });
-
 
       var activeFilter=false;
       var activeFilterType;
@@ -117,7 +111,7 @@
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
           if( marker.id >0){
           return marker.start_date >= DateFilter.min && marker.start_date <= DateFilter.max;
-        }else{return marker}
+        }else{return marker.ride_festival_date >= DateFilter.min && marker.ride_festival_date <= DateFilter.max;}
         });
         return filtered
        }
@@ -138,6 +132,7 @@
 
         
       };
+
       
 
       
@@ -146,8 +141,9 @@
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
           if( marker.id >0){
             return marker.festivaltype == type;
-          }else{return marker}
+          }else{return marker.ride_festivaltype ==type;}
         });
+
         return filtered
        };
 
@@ -158,9 +154,8 @@
 
       };
       var buttonFilters = function(type) {
-        if(!activeDate){
         AllMarkers();
-        }else{
+        if(activeDate){
           AllMarkers();
           _.each(HiddenDates(), function(marker) {
           Gmaps.map.hideMarker(marker)
@@ -168,6 +163,7 @@
         }
 
         _.each(HiddenType(type), function(marker) {
+
           Gmaps.map.hideMarker(marker)
         })
     

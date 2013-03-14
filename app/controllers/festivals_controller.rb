@@ -58,6 +58,7 @@ class FestivalsController < ApplicationController
         marker.json({ :start_date =>festival.start_date.month, :id => festival.id, :festivaltype => festival.festivaltype})
       end
     end
+    @list = Festival.paginate(:page => params[:page]).find(:all, :conditions => 'longitude!=0')
 
 
     respond_with @json

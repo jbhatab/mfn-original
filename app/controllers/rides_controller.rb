@@ -26,7 +26,11 @@ class RidesController < ApplicationController
                })
       end
       marker.title "#{ride.address}"
-      marker.json({:ride_id => ride.id, :festival_id => ride.festival_id })
+      if ride.festival.start_date == nil
+        marker.json({:ride_id => ride.id, :ride_festivaltype => ride.festival.festivaltype })
+      else
+        marker.json({:ride_id => ride.id, :ride_festivaltype => ride.festival.festivaltype, :ride_festival_date => ride.festival.start_date.month })
+      end
     end
     respond_with @json
   end
