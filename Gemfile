@@ -15,7 +15,7 @@ end
 gem 'roo'
 
 
-
+gem "font_assets", "~> 0.1.6"
 
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
@@ -25,7 +25,7 @@ gem 'acts_as_votable', '~> 0.5.0'
 gem 'will_paginate', '~> 3.0'
 
 #enable bootstraps
-gem 'bootstrap-sass'
+
 
 #google maps for rails
 gem 'gmaps4rails'
@@ -43,6 +43,7 @@ gem 'aws-s3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'bootstrap-sass'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

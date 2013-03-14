@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.ui.slider
 //= require gmaps4rails/gmaps4rails.base.js
