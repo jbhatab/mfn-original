@@ -9,7 +9,7 @@ Mfn::Application.configure do
   config.action_controller.perform_caching = true
 
   #s3 and fog
-  config.action_controller.asset_host = "//s3.amazonaws.com/#{ENV['FOG_DIRECTORY']}"
+  config.action_controller.asset_host = "//s3.amazonaws.com/mfn-staging"
   
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false

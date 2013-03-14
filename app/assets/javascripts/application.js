@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.slider
+//= require jquery.ui.autocomplete
 //= require gmaps4rails/gmaps4rails.base.js
 //= require gmaps4rails/gmaps4rails.googlemaps.js
 //= require bootstrap
