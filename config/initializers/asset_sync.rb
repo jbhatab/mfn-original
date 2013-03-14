@@ -1,5 +1,3 @@
-# Since this gem is only loaded with the assets group, we have to check to 
-# see if it's defined before configuring it.
 if defined?(AssetSync)
   AssetSync.configure do |config|
     config.fog_provider = 'AWS'
