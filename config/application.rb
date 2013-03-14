@@ -51,7 +51,7 @@ module Mfn
 
     #font-face configuration
     #config.assets.precompile += %w( .svg .eot .woff .ttf ) 
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    #config.assets.paths << "#{Rails.root}/app/assets/fonts"
     
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
