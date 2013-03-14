@@ -7,7 +7,6 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 require "csv"
-require 'bootstrap-sass'
 # require "rails/test_unit/railtie"
 
 if defined?(Bundler)
@@ -46,13 +45,13 @@ module Mfn
 
     config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
     # Heroku requires this to be false
-    config.assets.initialize_on_precompile=false
+    config.assets.initialize_on_precompile=true
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
     #font-face configuration
-    config.assets.precompile += %w( .svg .eot .woff .ttf ) 
-    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    #config.assets.precompile += %w( .svg .eot .woff .ttf ) 
+    #config.assets.paths << "#{Rails.root}/app/assets/fonts"
     
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
