@@ -50,7 +50,7 @@ module Mfn
     config.filter_parameters += [:password]
 
     #font-face configuration
-    config.assets.precompile += %w( .svg .eot .woff .ttf ) 
+    #config.assets.precompile += %w( .svg .eot .woff .ttf ) 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     
     # Enable escaping HTML in JSON.
