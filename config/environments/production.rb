@@ -9,13 +9,10 @@ Mfn::Application.configure do
   config.action_controller.perform_caching = true
 
   #s3 and fog
-  config.action_controller.asset_host = Proc.new do |source, request|
-    scheme = request.ssl? ? "https" : "http"
-    "#{scheme}://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
-  end
+  config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
