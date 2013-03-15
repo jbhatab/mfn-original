@@ -2,30 +2,30 @@
   <h2> My Summer Lineup</h2>
   <% if user_signed_in? %>
 
-    <% current_user.festivals.order('start_date ASC').each do |festival| %>
+    <% current_user.events.order('start_date ASC').each do |event| %>
 
       <div class="lineup-box">
-        <a href="festivals/<%=festival.id%>">
+        <a href="festivals/<%=event.festival_year.festival.id%>">
           <span class="lineup-span">
             <div class="lineup-date">
-              <% unless festival.start_date == nil%>
-              <%= l festival.start_date, format: :full %>
+              <% unless event.start_at == nil%>
+              <%= l event.start_at, format: :full %>
               <%end%>
 
             </div>
 
-              <%unless festival.img_url=='-'%>
-                <%=image_tag(festival.lg_img_url, alt:festival.name+" Facebook Image") %>
+              <%unless event.festival_year.festival.img_url=='-'%>
+                <%=image_tag(event.festival_year.festival.img_url+'?width=200&height=200', alt:event.festival_year.festival.name+" Facebook Image") %>
               <%end%>
               
-              <%= festival.name %> 
+              <%= event.festival_year.festival.name %> 
 
               
             
 
           </span>
         </a>
-        <%= link_to "Remove From Lineup", {:controller =>"users", :action => "remove_line", :id => festival.id}, :class => 'btn remove-button btn-danger', method: :post %>
+        <%= link_to "Remove From Lineup", {:controller =>"users", :action => "remove_from_festival_lineup", :id => event.id}, :class => 'btn remove-button btn-danger', method: :post %>
       </div>
 
     <%end%>

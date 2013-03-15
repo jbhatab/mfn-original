@@ -19,9 +19,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
-      t.string :first
-      t.string :last
+      t.string :full_name
       t.string :username
+
+      t.boolean :admin, :default => false
+      
+
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -46,5 +49,19 @@ class DeviseCreateUsers < ActiveRecord::Migration
     # add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
     # add_index :users, :authentication_token, :unique => true
+    create_table(:authentications) do |t|
+      t.string :provider
+      t.string :uid
+      t.string :token
+      t.string :token_secret
+
+      t.references :user
+
+      t.timestamps
+    end
+
+    add_index :authentications, :user_id
   end
+
+
 end

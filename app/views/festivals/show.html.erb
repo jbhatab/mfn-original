@@ -6,11 +6,11 @@
       </h2>
       
       <%unless @festival.img_url=='-'%>
-        <%=image_tag(@festival.lg_img_url, alt:@festival.name+" Facebook Image") %>
+        <%=image_tag(@festival.img_url+'?width=200&height=200', alt:@festival.name+" Facebook Image") %>
       <%end%></br>
       <% if user_signed_in? %>
-        <%if current_user.festivals.empty? %>
-          <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => @festival.id}, class: "btn", method: :post %>
+        <%if current_user.events.empty? %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => @festival.id}, class: "btn", method: :post %>
         <%end%>
         <% i=0 %>
         <% current_user.festivals.each do |x| %>

@@ -3,6 +3,3 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-$ ->
-  $('#festivals_search')
-    source: '/search_suggestion'

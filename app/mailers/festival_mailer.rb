@@ -9,18 +9,21 @@ class FestivalMailer < ActionMailer::Base
   def submit_festival(festival)
     @festival = festival
     @name = @festival.name
-    @city = @festival.city
-    @state = @festival.state
-    @lat = @festival.lat
-    @long = @festival.long
-    @start_date = @festival.start_date
     @website = @festival.website
     @facebook = @festival.facebook
-    @region = @festival.region
-    @festivaltype = @festival.festivaltype
-    @end_date = @festival.end_date
-    @address = @festival.address
-    @zip = @festival.zip
+
+    @city = @festival.event.city
+    @state = @festival.event.state
+    @lat = @festival.event.latitude
+    @long = @festival.event.longitude
+    @region = @festival.event.region
+    @festivaltype = @festival.event.festivaltype
+    @address = @festival.event.address
+    @zip = @festival.event.zip
+
+    @start_date = @festival.event.eventdates.select('start')
+    @end_date = @festival.event.end_date
+    
 
 
     mail to: "jbhatab@gmail.com", subject: 'festival submision'

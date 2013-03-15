@@ -3,45 +3,50 @@ Mfn::Application.routes.draw do
 
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-                     controllers: {omniauth_callbacks: "omniauth_callbacks"}
+                     controllers: {omniauth_callbacks: "authentications"}
                      
-
-  #facebook login routes
-  #match 'auth/facebook/callback', to: 'sessions#create'
-  #match 'auth/failure', to: redirect('/')
-  #match 'signout', to: 'sessions#destroy', as: 'signout'
-
 
 
   #for sessions and logging in
   #get "log_out" => "sessions#destroy", :as => "log_out"
   #get "log_in" => "sessions#new", :as => "log_in"
   #resources :sessions
-
+  resources :authentications
+  match '/auth/:provider/callback' => 'authentications#create'
+  #show all the users rides and comments, this is good
   resources :users do
     resources :comments, :except => :new
-    resources :rides
+    resources :rides do
+      resource :address
+    end
   end
 
   resources :festivals do
     collection {post :import} 
     resources :comments
+  end
+
+  resources :festival_years
+
+  match '/festivals-year/:festival_year', :to => 'festival_years#index'
+
+  resources :events do
     resources :rides, :only => [:index, :show]
+    resource :address
   end
 
   #calender routes  match '/calendar/new', :to => 'calendar#new'
   
+
+  #calendar route
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-  #match '/auth/:provider/callback', :to => 'sessions#omni'  
 
-
-  match '/lineup', :to => 'users#lineup'
+  match '/festival-lineup', :to => 'users#lineup'
 
   match '/my-comments', :to => 'users#my-comments'
   
-  get '/festivals/:action' => 'festivals#filter'
-  post '/festivals/:id/:action' => 'users#line'
-  post '/festivals/:id/:action' => 'users#remove_line'
+  post '/events/:id/:action' => 'users#add_to_festival_lineup'
+  post '/events/:id/:action' => 'users#remove_from_festival_lineup'
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'
 
@@ -49,7 +54,7 @@ Mfn::Application.routes.draw do
 
   resources :homes
 
-  match '/rideshare', :to => 'festivals#rideshare'
+  match '/rideshare', :to => 'events#rideshare'
   match '/festival-map', :to => 'festivals#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'

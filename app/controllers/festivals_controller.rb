@@ -3,16 +3,12 @@ class FestivalsController < ApplicationController
   # GET /festivals.json
   respond_to :json, :html
   helper_method :sort_column, :sort_direction
-  http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD'],
-                               only: [:new, :edit, :destroy]
+  
   def import
     Festival.import(params[:file])
     redirect_to root_url, notice: "festivals imported"
   end
   
-  def filter
-    flash[:notice] = "Filtered Mother Fucker"
-  end
 
   def index
     @festivals = Festival.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
@@ -30,39 +26,7 @@ class FestivalsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-
-  def map
-    @festivals = Festival.find(:all, :conditions => 'longitude!=0')
-    @json = @festivals.to_gmaps4rails do |festival, marker|
-      marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
-      marker.title "#{festival.name}"
-      marker.json({ :id => festival.id, :festivaltype => festival.festivaltype})
-    end
-    respond_with @json
-  end
-
-  def rideshare
-    @ride = Ride.new
-    @festivals = Festival.find(:all, :conditions => 'longitude!=0')
-    @json = @festivals.to_gmaps4rails do |festival, marker|
-      marker.infowindow render_to_string(:partial => "/festivals/infowindow", :locals => { :festival => festival})
-      marker.picture({
-                'picture' => view_context.image_path("red-dot.png"),
-                'width'   => 20,
-                'height'  => 20
-               })
-      marker.title "#{festival.name}"
-      if festival.start_date == nil
-        marker.json({ :id => festival.id, :festivaltype => festival.festivaltype})
-      else
-        marker.json({ :start_date =>festival.start_date.month, :id => festival.id, :festivaltype => festival.festivaltype})
-      end
-    end
-    @list = Festival.paginate(:page => params[:page]).find(:all, :conditions => 'longitude!=0')
-
-
-    respond_with @json
-  end
+  
   # GET /festivals/1
   # GET /festivals/1.json
   def show

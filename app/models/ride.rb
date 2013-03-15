@@ -1,14 +1,9 @@
 class Ride < ActiveRecord::Base
-  acts_as_gmappable :validation => true
-  attr_accessible :address, :city, :cost, :festival_id, :giving_ride, :gmaps, :latitude, :leave_date, :longitude, :return_date, :state, :user_id, :zip, :message
-  belongs_to :festival
+  has_one :address, :as => :addressable
+  attr_accessible :cost, :event_id, :giving_ride, :leave_date, :return_date, :user_id, :message
+  belongs_to :event
   belongs_to :user
 
-  validates_presence_of :user_id, :festival_id
-  
-  def gmaps4rails_address
-    "#{self.address}, #{self.city}, #{self.state}" 
-  end
-
+  validates_presence_of :user_id, :event_id
 
 end

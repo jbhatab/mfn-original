@@ -7,20 +7,23 @@ class User < ActiveRecord::Base
          :validatable, :omniauthable
   attr_accessor :login
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :first, :last, :password, :provider, :uid
+  attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :full_name
   # attr_accessible :title, :body
   
+  has_many :comments
   acts_as_voter
-  has_many :lineups, :dependent => :destroy
 
-  #has many through
-  has_many :festivals, through: :lineups
+  has_many :authentications
+  
+  
+  #allows users to have events (festival lineup)
+  has_many :event_users, :dependent => :destroy
+  has_many :events, through: :event_users
 
   has_many :rides, :dependent => :destroy
   accepts_nested_attributes_for :rides
 
   #login instead of email replacement that is necessary
-  
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -33,7 +36,6 @@ class User < ActiveRecord::Base
 ### This is the correct method you override with the code above
 ###  def self.find_for_database_authentication(warden_conditions)
 ###  end 
-
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       if auth.provider == 'facebook'
@@ -81,7 +83,7 @@ class User < ActiveRecord::Base
   #validates_format_of :email, :with => /^.+@.+$/, :allow_blank => true
   #validates_uniqueness_of :festivals
 
-  has_many :comments
+  
 
 
 end

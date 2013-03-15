@@ -1,6 +1,7 @@
 class HomesController < ApplicationController
   def index
-    @festivals = Festival.find(:all, :conditions => ["start_date <= ? AND end_date >= ? ", Date.today, Date.today])
+    festival_year = FestivalYear.where("festival_year = ?", Time.now.year)
+    @events = festival_year.events.find(:all, :conditions => ["start_at <= ? AND end_at >= ? ", Date.today, Date.today])
   end
 
   def about

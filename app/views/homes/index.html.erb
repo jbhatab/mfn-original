@@ -1,8 +1,8 @@
   <aside class="todays-festivals-container">
     <h3>Festivals Going On Right Now </h3>
-    <% @festivals.each do |festival| %>
+    <% @events.each do |event| %>
       <div class="todays-festival">
-        <%=link_to festival.name, festival%>
+        <%=link_to event.festival_year.festival.name, event.festival_year.festival%>
       </div>
     <%end%>
   </aside>

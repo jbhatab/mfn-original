@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   before_filter :authenticate_user!
-  http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD'],
-                               only: [:index, :edit, :update, :destroy ]
 
   def index
     @users = User.all
@@ -14,32 +12,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def line
-    current_user.festivals << Festival.find(params[:id])
-    redirect_to '/lineup'
+  def add_to_festival_lineup
+    current_user.events << Event.find(params[:id])
+    redirect_to '/festival-lineup'
   end
 
-  def remove_line
-    @festival = current_user.festivals.find(params[:id])
-    current_user.festivals.destroy(@festival.id)
-    redirect_to '/lineup'
+  def remove_from_festival_lineup
+    @event = current_user.events.find(params[:id])
+    current_user.events.destroy(@event.id)
+    redirect_to '/festival-lineup'
   end
 
-  # GET /users/1
-  # GET /users/1.json
-
-  # GET /users/new
-  # GET /users/new.json
-
-
-  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
 
-
-  # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 
