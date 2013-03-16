@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, 
-         :recoverable, :rememberable, :trackable, 
-         :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :omniauthable
   attr_accessor :login
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :full_name
-  # attr_accessible :title, :body
+
+  validates :password, :presence => true, :if => :password_required?
   
   has_many :comments
   acts_as_voter
@@ -27,28 +27,31 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      return where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     else
-      where(conditions).first
+      return from_omniauth(warden_conditions)
     end
   end
 
-### This is the correct method you override with the code above
-###  def self.find_for_database_authentication(warden_conditions)
-###  end 
-  def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      if auth.provider == 'facebook'
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.email = auth.info.email
-        user.username = auth.info.first_name+' '+auth.info.last_name
-      elsif auth.provider == 'twitter'
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.username = auth.info.nickname
+  ### This is the correct method you override with the code above
+  ###  def self.find_for_database_authentication(warden_conditions)
+  ###  end 
+  def self.from_omniauth(auth_hash)
+    authentication = Authentication.find_by_provider_and_uid auth_hash[:provider], auth_hash[:uid]
+
+    return authentication.user unless authentication.nil?
+
+    user = User.create! do |user|
+      user.authentications.build(:uid => auth_hash.uid, :provider => auth_hash.provider)
+      if auth_hash.provider == 'facebook'
+        user.email = auth_hash.info.email
+        user.username = auth_hash.info.first_name+' '+auth_hash.info.last_name
+      elsif auth_hash.provider == 'twitter'
+        user.username = auth_hash.info.nickname
       end
     end
+
+    return user
   end
 
   def self.new_with_session(params, session)
@@ -63,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    super && provider.blank?
+    !authentications.any?
   end
 
   def update_with_password(params, *options)
@@ -82,7 +85,6 @@ class User < ActiveRecord::Base
   #validates_uniqueness_of :username
   #validates_format_of :email, :with => /^.+@.+$/, :allow_blank => true
   #validates_uniqueness_of :festivals
-
   
 
 

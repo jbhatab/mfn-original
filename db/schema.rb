@@ -11,7 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311230348) do
+ActiveRecord::Schema.define(:version => 20130315033114) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "region"
+    t.string   "country"
+    t.string   "full_name"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.boolean  "gmaps"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
+  add_index "addresses", ["addressable_type"], :name => "index_addresses_on_addressable_type"
+
+  create_table "authentications", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "token_secret"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -27,63 +60,64 @@ ActiveRecord::Schema.define(:version => 20130311230348) do
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "events", :force => true do |t|
+    t.integer  "festival_year_id"
+    t.string   "event_type"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "events", ["festival_year_id"], :name => "index_events_on_festival_year_id"
+
+  create_table "events_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "events_users", ["event_id"], :name => "index_events_users_on_event_id"
+  add_index "events_users", ["user_id"], :name => "index_events_users_on_user_id"
+
+  create_table "festival_years", :force => true do |t|
+    t.integer  "festival_id"
+    t.integer  "festival_year"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "festival_years", ["festival_id"], :name => "index_festival_years_on_festival_id"
+
   create_table "festivals", :force => true do |t|
     t.string   "name"
-    t.string   "city"
-    t.string   "state"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.date     "start_date"
     t.string   "website"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
     t.string   "facebook"
-    t.string   "region"
-    t.string   "festivaltype"
     t.string   "img_url"
-    t.string   "lg_img_url"
-    t.date     "end_date"
-    t.integer  "zip"
-    t.string   "address"
     t.string   "twitter"
-    t.boolean  "gmaps"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  create_table "lineups", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "festival_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "lineups", ["festival_id"], :name => "index_lineups_on_festival_id"
-  add_index "lineups", ["user_id"], :name => "index_lineups_on_user_id"
 
   create_table "rides", :force => true do |t|
-    t.integer  "festival_id"
+    t.integer  "event_id"
     t.integer  "user_id"
     t.date     "leave_date"
     t.date     "return_date"
     t.boolean  "giving_ride"
     t.decimal  "cost"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.boolean  "gmaps"
+    t.text     "message"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.text     "message"
-    t.integer  "zip"
   end
 
-  add_index "rides", ["festival_id"], :name => "index_rides_on_festival_id"
+  add_index "rides", ["event_id"], :name => "index_rides_on_event_id"
   add_index "rides", ["user_id"], :name => "index_rides_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -92,13 +126,11 @@ ActiveRecord::Schema.define(:version => 20130311230348) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "first"
-    t.string   "last"
+    t.string   "full_name"
     t.string   "username"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "provider"
-    t.string   "uid"
+    t.boolean  "admin",                  :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

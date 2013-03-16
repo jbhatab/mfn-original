@@ -13,6 +13,7 @@
 
 
 
+
 <!--[if lt IE 9]>
 <script src="dist/html5shiv.js"></script>
 <![endif]-->
@@ -32,9 +33,10 @@
         <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
         <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
       <% else %>
-      <%= link_to "Sign in with Facebook",user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary' %> 
-      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => 'btn btn-mini btn-primary' %> 
-      <%= link_to "Sign In", new_user_session_path, :class => 'sign-in-btn btn btn-mini btn-primary' %>
+        <%= link_to "Sign in with Facebook",user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary' %> 
+        <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => 'btn btn-mini btn-primary' %> 
+        <%= link_to "Sign In", new_user_session_path, :class => 'sign-in-btn btn btn-mini btn-primary' %>
+
         <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-mini btn-primary' %>  
       <% end %>
     </aside>
