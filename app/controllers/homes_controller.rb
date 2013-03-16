@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   def index
-    @events = Event.find(:all, :conditions => ["start_at <= ? AND end_at >= ? ", Date.today, Date.today])
+    @events = Event.where(:all, :conditions => ["start_at <= ? AND end_at >= ? ", Date.today, Date.today])
   end
 
   def about

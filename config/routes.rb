@@ -1,9 +1,9 @@
 Mfn::Application.routes.draw do
 
 
+  match '/users/auth/:provider/callback' => 'authentications#create'
 
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-                     controllers: {omniauth_callbacks: "authentications"}
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
                      
   match '/festivals/:year', :to => 'festivals#index'
   match '/festivals/:id/:year', :to => 'festivals#show'
@@ -13,7 +13,8 @@ Mfn::Application.routes.draw do
   #get "log_in" => "sessions#new", :as => "log_in"
   #resources :sessions
   resources :authentications
-  match '/auth/:provider/callback' => 'authentications#create'
+
+
   #show all the users rides and comments, this is good
   resources :users do
     resources :comments, :except => :new
