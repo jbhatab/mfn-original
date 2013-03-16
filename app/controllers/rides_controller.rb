@@ -13,8 +13,8 @@ class RidesController < ApplicationController
       addresses << ride.address
     end  
     @json = addresses.to_gmaps4rails do |address, marker|
-      marker.infowindow render_to_string(:partial => "/rides/infowindow", :locals => { :ride => address.ride})
-      if address.ride.giving_ride
+      marker.infowindow render_to_string(:partial => "/rides/infowindow", :locals => { :ride => address.addressable})
+      if address.addressable.giving_ride
         marker.picture({
                 'picture' => view_context.image_path("orange-dot.png"),
                 'width'   => 20,
@@ -27,11 +27,11 @@ class RidesController < ApplicationController
                 'height'  => 20
                })
       end
-      marker.title "#{address.ride.user.username}"
-      if address.ride.event.start_at == nil
-        marker.json({:ride_id => address.ride.id, :ride_event_type => address.ride.event.event_type })
+      marker.title "#{address.addressable.user.username}"
+      if address.addressable.event.start_at == nil
+        marker.json({:ride_id => address.addressable.id, :ride_event_type => address.addressable.event.event_type })
       else
-        marker.json({:ride_id => address.ride.id, :ride_event_type => address.ride.event.event_type, :ride_event_date => address.ride.event.start_at.month })
+        marker.json({:ride_id => address.addressable.id, :ride_event_type => address.addressable.event.event_type, :ride_event_date => address.addressable.event.start_at.month })
       end
     end
     respond_with @json

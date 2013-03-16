@@ -20,14 +20,12 @@
 
   
   <tr onclick="document.location = '/festivals/<%=festival.id%>';"class='fest-list-item'>
-  <%if false%>
-    <tr class='fest-list-item' href="#<%=festival.id%>" data-toggle="modal">
-  <%end%>
 
     <td>
       <%unless festival.img_url=='-'%>
-        <%=image_tag(festival.img_url[0..-13], alt:festival.name+" Facebook Image") %>
+        <%=image_tag(festival.img_url, alt:festival.name+" Facebook Image") %>
       <%end%><%= festival.name %></td>
+      <% if false%>
     <td><%= festival.city %>, <%= festival.state %></td>
     <td><%= festival.region %></td>
     <td><% unless festival.start_date == nil%>
@@ -60,10 +58,9 @@
     <td><%= link_to 'Show', festival %></td>
     <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
     <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%end%>
   </tr>
-  <%if false%>
-  <%= render :partial => "festivals/modal", :locals => {:festival => festival} %>
-  <%end%>
+  
 <%end%>
 
 

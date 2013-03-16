@@ -9,6 +9,7 @@ class AddressesController < ApplicationController
 
   # POST /addresses
   # POST /addresses.json
+
   def create
     @address = @addressable.address.new(params[:address])
   end

@@ -21,7 +21,8 @@ gem 'acts_as_votable', '~> 0.5.0'
 #pagination
 gem 'will_paginate', '~> 3.0'
 
-#enable bootstraps
+#easy form format
+gem 'simple_form'
 
 
 #google maps for rails

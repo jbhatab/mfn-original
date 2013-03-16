@@ -5,7 +5,8 @@ Mfn::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
                      controllers: {omniauth_callbacks: "authentications"}
                      
-
+  match '/festivals/:year', :to => 'festivals#index'
+  match '/festivals/:id/:year', :to => 'festivals#show'
 
   #for sessions and logging in
   #get "log_out" => "sessions#destroy", :as => "log_out"
@@ -28,8 +29,6 @@ Mfn::Application.routes.draw do
 
   resources :festival_years
 
-  match '/festivals-year/:festival_year', :to => 'festival_years#index'
-
   resources :events do
     resources :rides, :only => [:index, :show]
     resource :address
@@ -37,13 +36,15 @@ Mfn::Application.routes.draw do
 
   #calender routes  match '/calendar/new', :to => 'calendar#new'
   
-
+  
   #calendar route
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
   match '/festival-lineup', :to => 'users#lineup'
 
   match '/my-comments', :to => 'users#my-comments'
+
+
   
   post '/events/:id/:action' => 'users#add_to_festival_lineup'
   post '/events/:id/:action' => 'users#remove_from_festival_lineup'

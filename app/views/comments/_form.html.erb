@@ -1,4 +1,10 @@
 <div class="comment-form">
+  <%= simple_form_for commentable.comments.build, remote: true  do |f| %>
+    <%= f.input :title, :placeholder=>"Title" %>
+    <%= f.input :comment, :placeholder=>"Add comment here...", :rows=> 3 %>
+    <%= f.button :submit %>
+  <% end %>
+  <% if false%>
   <%= form_for([commentable, commentable.comments.build], remote: :true) do |f| %>
     <div class="field form-horizontal">
       <%= f.label :title %><br />
@@ -13,4 +19,5 @@
       <%= f.submit %>
     </div>
   <% end %>
+  <%end%>
 </div>

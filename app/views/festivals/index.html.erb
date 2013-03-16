@@ -13,10 +13,6 @@
   </p>
 <% end %>
 
-<%= form_tag festivals_path, :method => 'get', :class =>'festivals_filter' do %>
-  <%= select_tag(:festival, options_for_select(Festival.all.map {|festival| [festival.name, festival.id]})) %>
-  <%= submit_tag "Submit", :controller => 'festivals', :action => 'filter' %>
-<% end %>
 
 <%= render 'festivals' %>
 
