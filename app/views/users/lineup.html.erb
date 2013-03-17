@@ -2,7 +2,7 @@
   <h2> My Summer Lineup</h2>
   <% if user_signed_in? %>
 
-    <% current_user.events.order('start_date ASC').each do |event| %>
+    <% current_user.events.order('start_at ASC').each do |event| %>
 
       <div class="lineup-box">
         <a href="festivals/<%=event.festival_year.festival.id%>">

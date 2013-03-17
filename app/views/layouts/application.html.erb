@@ -58,12 +58,10 @@
                 </li>
                 <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festivals') or current_page?('/calendar') or
                   current_page?('/festival-map') %>">
-                  <a class="dropdown-toggle" data-target="#" href="#" >
-                    Festivals
-                  </a>
+                  <%= link_to 'Festivals', '/festivals/US/2013', class: "dropdown-toggle"%>
                   <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
-                      <%= link_to 'US Festivals', festivals_path(:year => 2013) %>
+                      <%= link_to 'US Festivals', '/festivals/US/2013' %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Calendar', '/calendar' %>

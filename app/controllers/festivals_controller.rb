@@ -11,7 +11,7 @@ class FestivalsController < ApplicationController
   
 
   def index
-    @festivals = Festival.search(params[:search]).joins(:festival_years => {:events => :address}).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    @festivals = Festival.search(params[:search]).includes(:festival_years => {:events => :address}).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @festivals }

@@ -3,8 +3,8 @@ class Event < ActiveRecord::Base
 
   
   
-  has_many :event_users, :dependent => :destroy
-  has_many :users, through: :event_users
+  has_many :events_users, :dependent => :destroy
+  has_many :users, through: :events_users
 
   attr_accessible :start_at, :end_at, :event_type, :festival_year_id
   

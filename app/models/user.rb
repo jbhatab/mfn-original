@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   
   
   #allows users to have events (festival lineup)
-  has_many :event_users, :dependent => :destroy
-  has_many :events, through: :event_users
+  has_many :events_users, :dependent => :destroy
+  has_many :events, through: :events_users
 
   has_many :rides, :dependent => :destroy
   accepts_nested_attributes_for :rides
