@@ -5,7 +5,7 @@ Mfn::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
                      
-  match '/festivals/:year', :to => 'festivals#index'
+  match '/festivals/:country/:year', :to => 'festivals#index'
   match '/festivals/:id/:year', :to => 'festivals#show'
 
   #for sessions and logging in

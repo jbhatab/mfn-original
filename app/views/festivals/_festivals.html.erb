@@ -1,71 +1,72 @@
 <div class='festival-list'>
   <div class="paginate-container">
-  <%= will_paginate @festivals,previous_label: h("<"), next_label: h(">")  %>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th><h3><%= sortable 'name' %></h3></th>
-      <th><h3><%= sortable 'state', 'Location' %></h3></th>
-      <th><h3><%= sortable 'region' %></h3></th>
-      <th><h3><%= sortable 'date' %></h3></th>
-      <th><h3><%= sortable 'type' %></h3></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<% @festivals.each do |festival| %>
+    <%= will_paginate @festivals,previous_label: h("<"), next_label: h(">")  %>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><h3><%= sortable 'name' %></h3></th>
+        <th><h3><%= sortable 'state', 'Location' %></h3></th>
+        <th><h3><%= sortable 'region' %></h3></th>
+        <th><h3><%= sortable 'date' %></h3></th>
+        <th><h3><%= sortable 'type' %></h3></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <% @festivals.each do |festival| %>
 
-  
-  <tr onclick="document.location = '/festivals/<%=festival.id%>';"class='fest-list-item'>
+    
+    <tr onclick="document.location = '/festivals/<%=festival.id%>';"class='fest-list-item'>
 
-    <td>
-      <%unless festival.img_url=='-'%>
-        <%=image_tag(festival.img_url, alt:festival.name+" Facebook Image") %>
-      <%end%><%= festival.name %></td>
-      <% if false%>
-    <td><%= festival.city %>, <%= festival.state %></td>
-    <td><%= festival.region %></td>
-    <td><% unless festival.start_date == nil%>
-        <%= l festival.start_date, format: :full %>
-      <%end%>
-    </td>
-    <td><%= festival.festivaltype %></td>
-    <td>
-
-    <% if user_signed_in? %>
-      <%if current_user.festivals.empty? %>
-        <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, class: "btn", method: :post %>
-      <%end%>
-      <% i=0 %>
-      <% current_user.festivals.each do |x| %>
-        <% if x.id == festival.id %>
-           <a class="btn disabled lineup-deactivated">Already Added</a>
-           <%break%>
-        <%else%>
-          <% i=i+1 %>
+      <td>
+        <%unless festival.img_url=='-'%>
+          <%=image_tag(festival.img_url, alt:festival.name+" Facebook Image") %>
+        <%end%><%= festival.name %></td>
+        <% if false%>
+      <td><%= festival.city %>, <%= festival.state %></td>
+      <td><%= festival.region %></td>
+      <td><% unless festival.start_date == nil%>
+          <%= l festival.start_date, format: :full %>
         <%end%>
-        <%if current_user.festivals.count == i %>
+      </td>
+      <td><%= festival.festivaltype %></td>
+      <td>
+
+      <% if user_signed_in? %>
+        <%if current_user.festivals.empty? %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, class: "btn", method: :post %>
+        <%end%>
+        <% i=0 %>
+        <% current_user.festivals.each do |x| %>
+          <% if x.id == festival.id %>
+             <a class="btn disabled lineup-deactivated">Already Added</a>
+             <%break%>
+          <%else%>
+            <% i=i+1 %>
+          <%end%>
+          <%if current_user.festivals.count == i %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
+          <%end%>
+        <% end%>
+      <%else%>
         <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
-        <%end%>
-      <% end%>
-    <%else%>
-      <%= link_to "Add To Lineup", {:controller =>"users", :action => "line", :id => festival.id}, :class => 'btn', method: :post %>
-    <%end%>
-    </td>
-    <td><%= link_to 'Show', festival %></td>
-    <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
-    <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <%end%>
-  </tr>
-  
-<%end%>
+      <%end%>
+      </td>
+      <td><%= link_to 'Show', festival %></td>
+      <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
+      <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <%end%>
+    </tr>
+    
+  <%end%>
 
 
-  </tbody>
-</table>
-<div class="paginate-container">
-  <%= will_paginate @festivals,previous_label: h("<"), next_label: h(">")  %>
+    </tbody>
+  </table>
+  <div class="paginate-container">
+    <%= will_paginate @festivals,previous_label: h("<"), next_label: h(">")  %>
+  </div>
 </div>
