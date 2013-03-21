@@ -5,8 +5,8 @@ Mfn::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
                      
-  match '/festivals/:country/:year', :to => 'festivals#index'
-  match '/festivals/:id/:year', :to => 'festivals#show'
+  match '/festival-list/:country/:year', :to => 'events#index'
+
 
   #for sessions and logging in
   #get "log_out" => "sessions#destroy", :as => "log_out"
@@ -18,9 +18,7 @@ Mfn::Application.routes.draw do
   #show all the users rides and comments, this is good
   resources :users do
     resources :comments, :except => :new
-    resources :rides do
-      resource :address
-    end
+    resources :rides
   end
 
   resources :festivals do
@@ -32,7 +30,6 @@ Mfn::Application.routes.draw do
 
   resources :events do
     resources :rides, :only => [:index, :show]
-    resource :address
   end
 
   #calender routes  match '/calendar/new', :to => 'calendar#new'
@@ -56,8 +53,9 @@ Mfn::Application.routes.draw do
 
   resources :homes
 
+  match '/my-rides', :to => 'users#my-rides'
   match '/rideshare', :to => 'events#rideshare'
-  match '/festival-map', :to => 'festivals#map'
+  match '/festival-map', :to => 'events#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'
   match '/rides_gmap', :to => 'rides#rides_gmap'

@@ -1,0 +1,125 @@
+<header>
+    <aside id="social-links">
+        <%= link_to image_tag('facebook.png'), 'http://www.facebook.com/MusicFestivalNation', :target=>'_blank' %>
+        <%= link_to image_tag('twitter.png'), 'http://www.twitter.com/MusicFestNation', :target=>'_blank' %>
+    </aside>
+    <aside id="user_nav">
+      <% if user_signed_in? %>
+        Signed in as <%= current_user.username %>. Not you?
+        <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
+      <% else %>
+        <%= link_to "Sign in with Facebook",user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary' %> 
+        <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => 'btn btn-mini btn-primary' %> 
+        <%= link_to "Sign In", new_user_session_path, :class => 'sign-in-btn btn btn-mini btn-primary' %>
+
+        <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-mini btn-primary' %>  
+      <% end %>
+    </aside>
+    <aside>
+      <div class="row">
+        <div id="logo" class="span12">
+          <%= link_to image_tag('MFN_Banner.png'), root_path %>
+        </div>
+      </div>
+    </aside>
+    <nav id="main-page-nav">
+      <div class="row">
+        <div id="main-nav-span" class="span12">
+          <div id="main-nav" class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav" role="navigation">
+                <li class="main-nav-li dropdown <%='active' if current_page?(root_path)%>">
+                  <%= link_to 'Home', root_path, :class => 'dropdown-toggle' %>
+                </li>
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festivals') or current_page?('/calendar') or
+                  current_page?('/festival-map') %>">
+                  <%= link_to 'US Festivals', '/festival-list/US/2013', class: "dropdown-toggle"%>
+                  <ul class="dropdown-menu" role="menu" >
+                    <li class="dropdown-li">
+                      <%= link_to 'List', '/festival-list/US/2013' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Calendar', '/calendar' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Map', '/festival-map' %>
+                    </li>
+                  </ul> 
+                </li>   
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/lineup') %>">
+                  <a class="dropdown-toggle"  href="#" role="button">
+                    My Profile
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-li">
+                      <%= link_to 'My Comments', '/my-comments' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'My Summer Line Up', '/festival-lineup' %>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'My Rides', '/my-rides' %>
+                    </li>
+                  </ul> 
+                </li>      
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/rideshare') %>">
+                  <a class="dropdown-toggle"  href='/rideshare' role="button">
+                    Ride Share
+                  </a>
+                  <ul class="dropdown-menu" role="menu" >
+                    <li class="dropdown-li">
+                      <a href="#">Requests</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Offers</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <%= link_to 'Ride Share', '/rideshare' %>
+                    </li>
+                  </ul> 
+                </li>  
+                <li class="main-nav-li <%='active' if current_page?('/about')%>">
+                  <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
+                </li> 
+                <li class="main-nav-li <%='active' if current_page?('/contact')%>">
+                  <%= link_to 'Contact', '/contact', :class => 'dropdown-toggle' %>
+                </li> 
+                <li class="main-nav-li dropdown dropdown-helper">
+                  <a class="dropdown-toggle" href="#" role="button">
+                    Merchandise
+                  </a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-li">
+                      <a href="#">Hats</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">T-shirts</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Sunglasses</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Ponchos</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Water Bottles</a>
+                    </li>
+                    <li class="dropdown-li">
+                      <a href="#">Beer Packs</a>
+                    </li>
+                  </ul> 
+                </li> 
+                
+                  </ul> 
+                </li>  
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>

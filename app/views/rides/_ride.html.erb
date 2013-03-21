@@ -1,0 +1,27 @@
+<%if ride.giving_ride %>
+  <div class="ride-container giving">
+    <h4> Looking for a ride - <%=ride.event.festival_year.festival.name%></h4>
+<%else%>
+  <div class="ride-container need">
+    <h4> Giving a ride - <%=ride.event.festival_year.festival.name%></h4>
+<%end%>
+  <div class='row'>
+    <div class='ride-dates span3'>
+      <b>Festival Start:</b> <%= l ride.event.start_at, :format => :full%></br>
+      <b>Festival End:</b> <%= l ride.event.end_at, :format => :full%>
+    </div>
+    <div class='ride-dates span3'>
+      <b>Leave:</b> <%= l ride.leave_date, :format => :full%></br>
+      <b>Return:</b> <%= l ride.return_date, :format => :full%>
+    </div>
+
+    <div class='ride-cost span2'>
+      <%= ride.cost%>
+    </div>
+    <div class='ride-message span4'>
+      <%= ride.message%>
+    </div>
+  </div>
+</div>
+  
+

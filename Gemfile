@@ -23,6 +23,7 @@ gem 'will_paginate', '~> 3.0'
 
 #easy form format
 gem 'simple_form'
+gem 'country_select'
 
 
 #google maps for rails

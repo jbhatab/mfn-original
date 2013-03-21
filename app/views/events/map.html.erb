@@ -1,18 +1,13 @@
 <div class="row">
-  <div class="filter-bar">
+  <div class="filter-bar-map">
     <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
     <%= link_to "None Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
     <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
     <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
-    <%if user_signed_in?%>
-      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary' %>
-    <%else%>
-      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', 'users/login', class: 'btn btn-primary' %>
-    <%end%>
   </div>
-  <div class="slider-box">
-    <div id='date-range' style="width: 300px"></div>
-    <input type="text" id="filtered-pop" style="width: 80px"/>
+  <div class="slider-box-map">
+    <div id='date-range' style="width: 400px"></div>
+    <input type="text" id="filtered-pop-map" style="width: 80px"/>
   </div>
 </div>
 
@@ -20,32 +15,25 @@
 
 
 
-
+<section id ="events-map">
 <%= gmaps("markers" => {"data" => @json, "options" => { 'randomize'=>true, 'max_random_distance'=>10  } } ) %> 
 
-
-
-
-<section class="rideshare-form">
-
-  <ul>
-    <% @list.each do |event| %>
-      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link fest_'+event.festival_year.festival.id.to_s%></li>
-    <%end%>
-  </ul>
-  <%= will_paginate @list%>
 </section>
-
 
 <% content_for :scripts do %>
   <script type="text/javascript">
     
     Gmaps.map.callback = function() {
 
+      for (var i = 0; i <  this.markers.length; ++i) {
+          
+          this.markers[i];
+          
+        };   
+
       $.getJSON('/rides_gmap', function(data){
           Gmaps.map.addMarkers(data);
         });
-
       
 
       var activeFilter=false;

@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @commentable.comments.new(params[:comment])
+    @comment = @commentable.comments.build(params[:comment])
 
     #@comment = @commentables.Comment.new
     if user_signed_in?
@@ -30,7 +30,6 @@ class CommentsController < ApplicationController
     @comment.save
     respond_to do |format|
       format.html { redirect_to(@commentable) }
-      format.js 
     end
     
   end

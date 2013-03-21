@@ -9,8 +9,11 @@ class RidesController < ApplicationController
   end
 
   def rides_gmap
+    addresses = []
     Ride.all.each do |ride|
-      addresses << ride.address
+      if ride.address.gmaps
+        addresses << ride.address
+      end
     end  
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/rides/infowindow", :locals => { :ride => address.addressable})
@@ -34,6 +37,7 @@ class RidesController < ApplicationController
         marker.json({:ride_id => address.addressable.id, :ride_event_type => address.addressable.event.event_type, :ride_event_date => address.addressable.event.start_at.month })
       end
     end
+    
     respond_with @json
   end
 
@@ -50,7 +54,7 @@ class RidesController < ApplicationController
 
     respond_to do |format|
       if @ride.save
-        format.html { redirect_to [current_user,@ride], notice: 'Ride was successfully created.' }
+        format.html { redirect_to '/my-rides', notice: 'Ride was successfully created.' }
         format.json { render json: @ride, 
                              status: :created, 
                              location: [current_user,@ride] }

@@ -16,4 +16,14 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :address
   
 
+  self.per_page = 15
+
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
+
 end
