@@ -6,6 +6,7 @@
     <aside id="user_nav">
       <% if user_signed_in? %>
         Signed in as <%= current_user.username %>. Not you?
+        <%= link_to "Messages", '/my-messages', :class => 'btn btn-mini'%>
         <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
         <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
       <% else %>
@@ -48,9 +49,7 @@
                   </ul> 
                 </li>   
                 <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/lineup') %>">
-                  <a class="dropdown-toggle"  href="#" role="button">
-                    My Profile
-                  </a>
+                  <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
                       <%= link_to 'My Comments', '/my-comments' %>
@@ -69,10 +68,7 @@
                   </a>
                   <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
-                      <a href="#">Requests</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">Offers</a>
+                      <%= link_to 'Post A Ride', '/rideshare' %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Ride Share', '/rideshare' %>

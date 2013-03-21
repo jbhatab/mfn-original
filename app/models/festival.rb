@@ -6,6 +6,7 @@ class Festival < ActiveRecord::Base
   has_many :festival_years
   accepts_nested_attributes_for :festival_years
   
+  has_many :reviews
   
   self.per_page = 12
 

@@ -1,8 +1,17 @@
 @import 'bootstrap'
 
-$brown: #5d3c1d
+.review-form
+  input
+    width: 100%
+    margin-bottom: 0px
+  textarea
+    width: 100%
+    margin-bottom: 0px
+  select
+    width: 100%
+    margin-bottom: 0px
 
-.comment-container
+.review-container
   background-color: rgba(220, 220, 220, 0.8)
   @include border-radius(5px)
   padding: 5px
@@ -20,11 +29,3 @@ $brown: #5d3c1d
     margin-left: 5px
     .comment-header
       border-bottom: 1px solid #000
-
-.comment-form
-  background-color: rgba(190, 190, 190, 0.2)
-  @include border-radius(5px)
-  padding: 5px 5px 0px 5px
-  border: 1px solid #000
-  line-height: 0px
-

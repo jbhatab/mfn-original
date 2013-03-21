@@ -1,0 +1,45 @@
+<div id='review_<%=review.id%>' class="review-container">
+  <div class="vote-area">
+    <% if user_signed_in? %>
+      <%if current_user.voted_up_on? review%>
+        <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini btn-success upvote', method: :put %></br>
+      <%else%>
+        <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+      <%end%>
+    <% else%>
+    <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+    <%end%>
+    <% if user_signed_in? %>
+      <% if current_user.voted_down_on? review%>
+        <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini btn-inverse downvote', method: :put %>
+      <%else%>
+        <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini downvote', method: :put %>
+      <%end%>
+
+    <% else%>
+    <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini downvote', method: :put %>
+    <%end%>
+  </div>
+  <div class="review-area">
+    <header class="review-header">
+      <%= review.upvotes.size-review.downvotes.size%>
+      <%= review.title %> <i>by</i>
+      <% if review.user_id == nil %>
+        Anonymous
+      <% else%>
+        <%= User.find(review.user_id).username %>
+      <%end%>
+    </header>
+    <%=review.content%></br>
+    <% if user_signed_in? %>
+      <% if current_user.id == review.user_id %>
+        <%= link_to 'Delete review', [@festival, review],
+                 :method => :delete,
+                 remote: true %>
+      <%end%>
+    <%end%>
+  </div>
+</div>
+
+  
+

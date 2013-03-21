@@ -1,0 +1,17 @@
+<div class="review-form">
+  <%= simple_form_for([festival, festival.reviews.build])  do |f| %>
+    <%= f.input :rating%>
+    <%= f.input :security%>
+    <%= f.input :title, :placeholder=>"Title" %>
+    <%= f.input :year, label_method: :year, collection: festival.festival_years %>
+    <%= f.input :content, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 4 }%>
+    <%= f.input :atmosphere, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+    <%= f.input :music, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+    <%= f.input :staging, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+    <%= f.input :vendors, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+    <%= f.input :vip, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+    <%= f.input :parking, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 } %>
+
+    <%= f.button :submit %>
+  <% end %>
+</div>

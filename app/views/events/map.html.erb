@@ -24,16 +24,6 @@
   <script type="text/javascript">
     
     Gmaps.map.callback = function() {
-
-      for (var i = 0; i <  this.markers.length; ++i) {
-          
-          this.markers[i];
-          
-        };   
-
-      $.getJSON('/rides_gmap', function(data){
-          Gmaps.map.addMarkers(data);
-        });
       
 
       var activeFilter=false;
@@ -46,7 +36,7 @@
         max: 12,
       };
 
-      $( "#filtered-pop" ).val( (DateFilter.min)+ " - " + (DateFilter.max))
+      $( "#filtered-pop-map" ).val( (DateFilter.min)+ " - " + (DateFilter.max))
       $("#date-range").slider({
         range: true,
         min: DateFilter.min,
@@ -92,9 +82,7 @@
 
       var HiddenDates = function() {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
-          if( marker.id >0){
           return marker.start_at >= DateFilter.min && marker.start_at <= DateFilter.max;
-        }else{return marker.ride_event_date >= DateFilter.min && marker.ride_event_date <= DateFilter.max;}
         });
         return filtered
        }
@@ -122,9 +110,8 @@
 
       var HiddenType = function(type) {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
-          if( marker.id >0){
             return marker.event_type == type;
-          }else{return marker.ride_event_type ==type;}
+          
         });
 
         return filtered

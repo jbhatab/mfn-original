@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me, :full_name
 
+  has_mailbox
   validates :password, :presence => true, :if => :password_required?
   
+  has_many :reviews
   has_many :comments
   acts_as_voter
 
@@ -21,7 +23,6 @@ class User < ActiveRecord::Base
   has_many :events, through: :events_users
 
   has_many :rides, :dependent => :destroy
-  accepts_nested_attributes_for :rides
 
   #login instead of email replacement that is necessary
   def self.find_first_by_auth_conditions(warden_conditions)

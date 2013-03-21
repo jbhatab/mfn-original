@@ -1,0 +1,10 @@
+<%= simple_form_for([current_user,@ride]) do |f| %>
+
+  <%= f.input :leave_date %>
+  <%= f.input :return_date %>
+  <%= f.input :cost %>
+  <%= f.input :giving_ride %>
+
+  <%= f.input :message, :input_html => { :cols => 50, :rows => 3 } %>
+  <%= f.button :submit %>
+<% end %>

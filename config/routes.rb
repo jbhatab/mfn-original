@@ -24,6 +24,7 @@ Mfn::Application.routes.draw do
   resources :festivals do
     collection {post :import} 
     resources :comments
+    resources :reviews
   end
 
   resources :festival_years
@@ -43,17 +44,20 @@ Mfn::Application.routes.draw do
   match '/my-comments', :to => 'users#my-comments'
 
 
-  
   post '/events/:id/:action' => 'users#add_to_festival_lineup'
   post '/events/:id/:action' => 'users#remove_from_festival_lineup'
   put '/comments/:id/:action' => 'comments#upvote'
   put '/comments/:id/:action' => 'comments#downvote'
+  put '/reviews/:id/:action' => 'reviews#upvote'
+  put '/reviews/:id/:action' => 'reviews#downvote'
 
 
 
   resources :homes
 
+  match '/my-messages', :to => 'users#my-messages'
   match '/my-rides', :to => 'users#my-rides'
+  match '/my-profile', :to => 'users#my-profile'
   match '/rideshare', :to => 'events#rideshare'
   match '/festival-map', :to => 'events#map'
   match '/about', :to => 'homes#about'

@@ -14,6 +14,9 @@ end
 #importing csv files for festivals
 gem 'roo'
 
+#user messages and such
+gem "has_mailbox"
+
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'
 gem 'acts_as_votable', '~> 0.5.0'

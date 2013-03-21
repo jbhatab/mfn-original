@@ -5,6 +5,7 @@
 $lavender: #CE7898
 $gold: #CDAD00
 $grey: #696969
+$unopened: rgba(233, 86, 36, .6)
 
 
 
@@ -77,3 +78,53 @@ body
   top: 0px
   left: 0px
   color: #000
+
+
+.profile-row
+  font-family: 'StereofidelicRegular', sans-serif, Georgia
+  text-align: center
+  h1
+    font-size: 60px
+  .profile-box
+    height: 150px
+    @include border-radius(15px)
+    border: 2px solid #000
+    @include background-size(cover)
+    h3
+      margin-top: 35px
+      font-size: 40px
+      color: #000
+    h3:hover
+      text-decoration: none
+  #festival-lineup
+    background-image: url('lineup.png')
+  #my-comments
+    background-image: url('my-comments.png')
+  #my-rides
+    background-image: url('my-rides.png')
+
+
+
+.profile-span
+  position: relative
+  margin: 0px
+  z-index: 100
+  width: 100%
+  height: 100%
+  top: 0px
+  left: 0px
+  @include border-radius(15px)
+
+.profile-span:hover
+  background-color: rgba(205,173,0, .7)
+
+
+#message-container
+  font-size: 1.2em
+  #inbox
+  #outbox
+    a
+      float: right
+
+.icon-trash
+  float: right
