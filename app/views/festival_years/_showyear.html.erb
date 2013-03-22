@@ -41,9 +41,10 @@
       <p>
         <b>Festival Type: </b><%=event.event_type%>
       </p>
+      <%= link_to 'Rides for this event!', event_rides_path(event)%>
 
       <%end%>
-      
+
     </div>
   <%end%>
 </div>

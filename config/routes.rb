@@ -17,14 +17,16 @@ Mfn::Application.routes.draw do
 
   #show all the users rides and comments, this is good
   resources :users do
-    resources :comments, :except => :new
     resources :rides
   end
 
+  #need this to be able to comment on rides, fix later
   resources :rides do
     resources :comments
   end
 
+  #need both nested so you can create the reviews
+  #and comments in the festival show
   resources :festivals do
     collection {post :import} 
     resources :comments

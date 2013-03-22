@@ -15,6 +15,8 @@
     <h3> Payment For Ride </h3>
     <%= @ride.cost %>
   <%end%>
+  <h3> Location </h3>
+    <%= @ride.address.line1%>, <%= @ride.address.city%>, <%= @ride.address.state%>, <%= @ride.address.zip%>
   <h3>Message</h3>
   <%= @ride.message%>
 

@@ -5,8 +5,9 @@
   <%else%>
     <h5><%=link_to 'Can I snag a ride?', [ride.user,ride]%> </h5>
   <%end%>
-  <p><b>State:</b> <%= ride.address.state %></p>
-  <p><b>zip:</b> <%= ride.address.zip %></p>
+  <p><b>Festival Dates:</b> <%= ride.event.start_at %>,<%= ride.event.end_at %></p>
+  <p><b>Ride Dates:</b> <%= ride.leave_date %>,<%= ride.return_date %></p>
+  <p><b>Location:</b> <%= ride.address.city %>,<%= ride.address.state %></p>
   <p> <b>Message:</b> <%=ride.message %> </p>
   
 </div>

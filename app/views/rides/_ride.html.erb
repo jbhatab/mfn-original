@@ -1,9 +1,9 @@
 <%if ride.giving_ride %>
   <div class="ride-container giving">
-    <h4> Looking for a ride - <%=ride.event.festival_year.festival.name%></h4>
+    <h4> Looking for a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'ride_'+ride.id.to_s+'comment-link'%></h4>
 <%else%>
   <div class="ride-container need">
-    <h4> Giving a ride - <%=ride.event.festival_year.festival.name%></h4>
+    <h4> Giving a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'ride_'+ride.id.to_s+' comment-link'%></h4>
 <%end%>
   <div class='row'>
     <div class='ride-dates span3'>
@@ -14,6 +14,9 @@
       <b>Leave:</b> <%= l ride.leave_date, :format => :full%></br>
       <b>Return:</b> <%= l ride.return_date, :format => :full%>
     </div>
+    <div class='ride-dates span2'>
+      <b>Location:</b> <%= ride.address.line1%>, <%= ride.address.city%>, <%= ride.address.state%>
+    </div>
 
     <div class='ride-cost span2'>
       <b>Cost: </b><%= ride.cost%>
@@ -22,6 +25,9 @@
       <b>Message: </b><%= ride.message%>
     </div>
   </div>
+  <aside class='ride_<%=ride.id%> ride-comments'>
+    <%= render ride.comments %>
+  </aside>
 </div>
 
   
