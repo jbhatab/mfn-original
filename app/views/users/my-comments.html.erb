@@ -7,7 +7,11 @@ My Comments
         <%= comment.title %> 
       </header>
       <%= comment.comment %> </br>
-      <%= link_to comment.commentable.name, comment.commentable %>,
+      <% if comment.commentable_type == "Ride"%>
+        <%= link_to comment.commentable.user.username+'s Ride', [comment.commentable.user,comment.commentable] %>,
+      <%else%>
+        <%= link_to comment.commentable.name, comment.commentable %>,
+      <%end%>
       <%= link_to 'Delete Comment', [comment.commentable, comment],
                confirm: 'Are you sure?',
                method: :delete

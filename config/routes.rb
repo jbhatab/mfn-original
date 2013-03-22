@@ -21,6 +21,10 @@ Mfn::Application.routes.draw do
     resources :rides
   end
 
+  resources :rides do
+    resources :comments
+  end
+
   resources :festivals do
     collection {post :import} 
     resources :comments

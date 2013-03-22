@@ -11,13 +11,21 @@ class CommentsController < ApplicationController
 
   def upvote
     @comment.upvote_from current_user
-    redirect_to(@comment.commentable)
+    if @comment.commentable_type == 'Ride'
+      redirect_to [@comment.commentable.user,@comment.commentable]
+    else
+      redirect_to(@comment.commentable)
+    end
     
   end
 
   def downvote
     @comment.downvote_from current_user
-    redirect_to(@comment.commentable)
+    if @comment.commentable_type == 'Ride'
+      redirect_to [@comment.commentable.user,@comment.commentable]
+    else
+      redirect_to(@comment.commentable)
+    end
   end
 
   def create
@@ -28,8 +36,14 @@ class CommentsController < ApplicationController
       @comment.user_id = current_user.id
     end
     @comment.save
-    respond_to do |format|
-      format.html { redirect_to(@commentable) }
+    if @comment.commentable_type == 'Ride'
+      respond_to do |format|
+        format.html { redirect_to([@comment.commentable.user,@commentable]) }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to(@commentable) }
+      end
     end
     
   end
@@ -56,7 +70,11 @@ private
     @comment = Comment.find(params[:id])
     if current_user.id == @comment.user_id
       flash[:notice] = "You can't vote on your own comment"
-      redirect_to(@comment.commentable)
+      if @comment.commentable_type == 'Ride'
+        redirect_to [current_user,@comment.commentable]
+      else
+        redirect_to(@comment.commentable)
+      end
     end
   end
 

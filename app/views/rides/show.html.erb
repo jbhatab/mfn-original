@@ -1,11 +1,24 @@
-<h3> Username </h3>
-<%= @ride.user.username %></br>
-<h3> Festival </h3>
-<%= @ride.festival.name %></br>
-<h3> Leave and Return Dates </h3>
-<% unless @ride.leave_date == nil and @ride.return_date == nil or @ride.leave_date == nil or @ride.return_date == nil %>
-<%= l @ride.leave_date, format: :full %> - <%= l @ride.return_date, format: :full %></br>
-<%end%>
-<h3> Cost or Payment </h3>
-<%= @ride.cost %>
+<div class='ride-show-container'>
+  <% if @ride.giving_ride %>
+  <h3> <%= @ride.user.username %>'s' Ride To <%= @ride.event.festival_year.festival.name %></h3>
+  <%else%>
+    <h3><%= @ride.user.username %> Is Looking For A Ride To <%= @ride.event.festival_year.festival.name %></h3>
+  <%end%>
+  <% unless @ride.leave_date == nil and @ride.return_date == nil or @ride.leave_date == nil or @ride.return_date == nil %>
+  <b>Desired Leave Date:</b> <%= l @ride.leave_date, format: :full %></br>
+  <b>Desired Return Date:</b> <%= l @ride.return_date, format: :full %></br>
+  <%end%>
+  <% if @ride.giving_ride %>
+    <h3> Cost For Ride </h3>
+    <%= @ride.cost %>
+  <%else%>
+    <h3> Payment For Ride </h3>
+    <%= @ride.cost %>
+  <%end%>
+  <h3>Message</h3>
+  <%= @ride.message%>
 
+  <%= render @ride.comments%>
+  <%= render :partial => 'comments/form', :locals => {:commentable => @ride} %>
+
+</div>
