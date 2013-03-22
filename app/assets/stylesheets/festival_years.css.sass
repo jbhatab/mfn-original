@@ -1,0 +1,24 @@
+@import 'bootstrap'
+
+$clear-gold: rgba(205,173,0, .7)
+
+.festival-year-tab
+  border-bottom: 1px solid #000 !important
+  li:hover
+    background-color: $clear-gold 
+    @include border-radius(5px) 
+    a
+      font-size: 2em
+  .active
+    a
+      font-size: 2em
+      background-color: rgba(0,0,0,0) !important
+      cursor: url
+      border: none !important
+
+.festival-tabs
+  .tab-pane
+    .btn
+      margin-bottom: 5px
+    .ride-event-link
+      font-size: 2em

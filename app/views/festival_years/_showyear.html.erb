@@ -1,10 +1,10 @@
-<ul class="nav nav-tabs" id="yearTab">
+<ul class="nav festival-year-tab nav-tabs" id="yearTab">
   <% @festival.festival_years.each do |year| %>
   <li><a href="#<%=year.id%>"><%=year.year%></a></li>
   <%end%>
 </ul>
  
-<div class="tab-content">
+<div class="festival-tabs tab-content">
   <% @festival.festival_years.each do |year| %>
     <div class="tab-pane" id="<%=year.id%>">
       <% year.events.each do |event| %>
@@ -41,7 +41,7 @@
       <p>
         <b>Festival Type: </b><%=event.event_type%>
       </p>
-      <%= link_to 'Rides for this event!', event_rides_path(event)%>
+      <%= link_to 'Rides for this event!', event_rides_path(event), class: 'ride-event-link'%>
 
       <%end%>
 
