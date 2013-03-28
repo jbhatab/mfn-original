@@ -17,9 +17,6 @@
       </p>
       <%= render @festival.reviews %>
       <%= render :partial => 'reviews/form', :locals => {:festival => @festival} %>
-
-      <%= link_to 'Edit', edit_festival_path(@festival) %> |
-      <%= link_to 'Back', festivals_path %>
     </article>
     
     <article class="span3 festival-show">

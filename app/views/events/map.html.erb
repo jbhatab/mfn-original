@@ -7,7 +7,7 @@
   </div>
   <div class="slider-box-map">
     <div id='date-range' style="width: 400px"></div>
-    <input type="text" id="filtered-pop-map" style="width: 80px"/>
+    <input type="text" id="filtered-pop-map" style="width: 160px"/>
   </div>
 </div>
 
@@ -36,14 +36,30 @@
         max: 12,
       };
 
-      $( "#filtered-pop-map" ).val( (DateFilter.min)+ " - " + (DateFilter.max))
+      var monthes = {
+          1: 'January',
+          2: 'February',
+          3: 'March',
+          4: 'April',
+          5: 'May',
+          6: 'June',
+          7: 'July',
+          8: 'August',
+          9: 'September',
+          10: 'October',
+          11: 'November',
+          12: 'December'
+      }
+
+
+      $( "#filtered-pop-map" ).val( (monthes[DateFilter.min])+ " - " + (monthes[DateFilter.max]))
       $("#date-range").slider({
         range: true,
         min: DateFilter.min,
         max: DateFilter.max,
         values: [ DateFilter.min, DateFilter.max ],
         slide: function(event, ui) {
-          $( "#filtered-pop" ).val( (ui.values[ 0 ])+ " - " + (ui.values[ 1 ]))
+          $( "#filtered-pop-map" ).val( (monthes[ui.values[ 0 ]])+ " - " + (monthes[ui.values[ 1 ]]))
           DateFilter.min = ui.values[ 0 ]
           DateFilter.max = ui.values[ 1 ]
           activeDate=true;

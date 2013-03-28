@@ -12,7 +12,7 @@
   </div>
   <div class="slider-box">
     <div id='date-range' style="width: 300px"></div>
-    <input type="text" id="filtered-pop" style="width: 80px"/>
+    <input type="text" id="filtered-pop" style="width: 160px"/>
   </div>
 </div>
 
@@ -27,12 +27,12 @@
 
 
 <section class="rideshare-sidebar">
-  <%= form_tag '/rideshare', :method => :get do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-  <% end %>
+  <%= form_tag events_path, :method => 'get', :id =>'rideshare_search' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
   <ul>
     <% @list.each do |event| %>
@@ -72,14 +72,29 @@
         max: 12,
       };
 
-      $( "#filtered-pop" ).val( (DateFilter.min)+ " - " + (DateFilter.max))
+      var monthes = {
+          1: 'January',
+          2: 'February',
+          3: 'March',
+          4: 'April',
+          5: 'May',
+          6: 'June',
+          7: 'July',
+          8: 'August',
+          9: 'September',
+          10: 'October',
+          11: 'November',
+          12: 'December'
+      }
+
+      $( "#filtered-pop" ).val( (monthes[DateFilter.min])+ " - " + (monthes[DateFilter.max]))
       $("#date-range").slider({
         range: true,
         min: DateFilter.min,
         max: DateFilter.max,
         values: [ DateFilter.min, DateFilter.max ],
         slide: function(event, ui) {
-          $( "#filtered-pop" ).val( (ui.values[ 0 ])+ " - " + (ui.values[ 1 ]))
+          $( "#filtered-pop" ).val( (monthes[ui.values[ 0 ]])+ " - " + (monthes[ui.values[ 1 ]]))
           DateFilter.min = ui.values[ 0 ]
           DateFilter.max = ui.values[ 1 ]
           activeDate=true;
