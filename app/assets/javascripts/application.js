@@ -14,10 +14,22 @@
 //= require jquery_ujs
 //= require jquery.ui.accordion
 //= require jquery.ui.slider
+//= require underscore-min
 //= require gmaps4rails/gmaps4rails.base.js
 //= require gmaps4rails/gmaps4rails.googlemaps.js
 //= require bootstrap
-//= require_tree .
+//= require homes
+//= require authentications
+//= require comments
+//= require event_calendar
+//= require events
+//= require festival_years
+//= require festivals
+//= require omniauth_callbacks
+//= require reviews
+//= require rides
+//= require users
+
 
 
 

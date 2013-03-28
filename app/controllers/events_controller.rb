@@ -70,7 +70,7 @@ class EventsController < ApplicationController
 
 
   def rideshare
-    @events = Event.search(params[:search])
+    @events = Event.search(params[:search]).includes(:festival_year => :festival)
     addresses = []
     list = []
     @events.each do |event|
