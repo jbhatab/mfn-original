@@ -32,9 +32,9 @@ class RidesController < ApplicationController
       end
       marker.title "#{address.addressable.user.username}"
       if address.addressable.event.start_at == nil
-        marker.json({:ride_id => address.addressable.id, :ride_event_type => address.addressable.event.event_type })
+        marker.json({:ride_id => address.addressable.id, :event_id => address.addressable.event.id, :ride_event_type => address.addressable.event.event_type })
       else
-        marker.json({:ride_id => address.addressable.id, :ride_event_type => address.addressable.event.event_type, :ride_event_date => address.addressable.event.start_at.month })
+        marker.json({:ride_id => address.addressable.id, :event_id => address.addressable.event.id, :ride_event_type => address.addressable.event.event_type, :ride_event_date => address.addressable.event.start_at.month })
       end
     end
     

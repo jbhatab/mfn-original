@@ -70,7 +70,7 @@ class EventsController < ApplicationController
 
 
   def rideshare
-    @events = Event.all
+    @events = Event.search(params[:search])
     addresses = []
     list = []
     @events.each do |event|

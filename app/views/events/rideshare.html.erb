@@ -26,11 +26,17 @@
 
 
 
-<section class="rideshare-form">
+<section class="rideshare-sidebar">
+  <%= form_tag events_path, :method => 'get', :id =>'rideshare_search' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
   <ul>
     <% @list.each do |event| %>
-      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link fest_'+event.festival_year.festival.id.to_s%></li>
+      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link', id:'fest_'+event.id.to_s%></li>
     <%end%>
   </ul>
   <%= will_paginate @list%>
@@ -51,6 +57,14 @@
       var activeFilter=false;
       var activeFilterType;
       var activeDate=false;
+
+      $(".rideshare-link").click(function(e) {
+        e.preventDefault();
+
+        fest = $(this).attr('id');
+        console.log(fest);
+        festivalFilters(fest);
+      });
     
       
        var DateFilter = {
@@ -142,12 +156,33 @@
         return filtered
        };
 
+      var HiddenFestival = function(fest) {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          if( marker.id >0){
+            return 'fest_'+marker.id == fest;
+          }else{return 'fest_'+marker.event_id ==fest;}
+        });
+
+        return filtered
+       };
+
       var AllMarkers = function() {
         _.each(Gmaps.map.markers, function(marker) {
           Gmaps.map.showMarker(marker)
         })
 
       };
+
+      var festivalFilters = function(fest) {
+        AllMarkers();
+        console.log(fest)
+
+        _.each(HiddenFestival(fest), function(marker) {
+
+          Gmaps.map.hideMarker(marker)
+        })
+      }
+
       var buttonFilters = function(type) {
         AllMarkers();
         if(activeDate){
