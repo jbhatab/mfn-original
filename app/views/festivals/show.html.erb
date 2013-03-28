@@ -1,6 +1,6 @@
 <div class="festival-show-container">
   <section class="row-fluid">
-    <article class="span4 festival-show festival-left">
+    <article class="span5 festival-show festival-left">
       <h2>
         <%= @festival.name %>
       </h2>
@@ -22,12 +22,13 @@
       <%= link_to 'Back', festivals_path %>
     </article>
     
-    <article class="span4 festival-show">
+    <article class="span3 festival-show">
       <h3>Comments</h3>
       <div id="comments">
         <%= render @festival.comments %>
       </div>
       <%= render :partial => 'comments/form', :locals => {:commentable => @festival} %>
+
 
       
     </article>

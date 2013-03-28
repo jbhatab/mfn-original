@@ -98,7 +98,7 @@ class FestivalsController < ApplicationController
     end
   end
 
-  private
+private
 
   def submit_festival_email
     FestivalMailer.submit_festival(self).deliver

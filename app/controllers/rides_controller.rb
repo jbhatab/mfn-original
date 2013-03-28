@@ -51,7 +51,6 @@ class RidesController < ApplicationController
 
   def create
     @ride = current_user.rides.new(params[:ride])
-
     respond_to do |format|
       if @ride.save
         format.html { redirect_to '/my-rides', notice: 'Ride was successfully created.' }
@@ -63,6 +62,16 @@ class RidesController < ApplicationController
         format.json { render json: @ride.errors, 
                              status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @ride = Ride.find(params[:id])
+    @ride.destroy
+
+    respond_to do |format|
+      format.html { redirect_to '/my-rides' }
+      format.json { head :no_content }
     end
   end
 

@@ -3,7 +3,7 @@ class Festival < ActiveRecord::Base
 
   attr_accessible :name, :website, :facebook, :img_url, :twitter
   
-  has_many :festival_years
+  has_many :festival_years, :dependent => :destroy
   accepts_nested_attributes_for :festival_years
   
   has_many :reviews

@@ -4,7 +4,7 @@
   <%= f.input :leave_date %>
   <%= f.input :return_date %>
   <%= f.input :cost %>
-  <%= f.input :giving_ride %>
+  <%= f.collection_radio_buttons :giving_ride, [[true, 'Giving A Ride'] ,[false, 'Looking For A Ride']],  :first, :last%>
   <%= f.simple_fields_for :address_attributes do |d| %>
     <%= d.input :line1 %>
     <%= d.input :line2 %>

@@ -11,10 +11,13 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.all
 //= require jquery_ujs
+//= require jquery.ui.accordion
+//= require jquery.ui.slider
 //= require gmaps4rails/gmaps4rails.base.js
 //= require gmaps4rails/gmaps4rails.googlemaps.js
 //= require bootstrap
 //= require_tree .
+
+
 

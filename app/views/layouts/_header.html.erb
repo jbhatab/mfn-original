@@ -6,7 +6,7 @@
     <aside id="user_nav">
       <% if user_signed_in? %>
         Signed in as <%= current_user.username %>. Not you?
-        <%= link_to "Messages", '/my-messages', :class => 'btn btn-mini'%>
+        <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini'%>
         <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
         <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
       <% else %>
@@ -71,7 +71,11 @@
                   </a>
                   <ul class="dropdown-menu" role="menu" >
                     <li class="dropdown-li">
-                      <%= link_to 'Post A Ride', '/rideshare' %>
+                      <%if user_signed_in?%>
+                      <%= link_to 'Post A Ride', new_user_ride_path(current_user) %>
+                      <%else%>
+                      <%= link_to 'Post A Ride', '/users/login' %>
+                      <%end%>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'Ride Share', '/rideshare' %>

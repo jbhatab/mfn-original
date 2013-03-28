@@ -2,7 +2,7 @@
   <div class="row">
     <section id='inbox' class='span7'>
       <% current_user.inbox.each do |message|%>
-        <%= content_tag 'header', :class => message.opened ? "message-header" : "message-header unopened" do%> <b>Subject:</b> <%= message.subject%> <b>From:</b> <%=User.find(message.sender_id).username%>,  <%=link_to 'Reply', '#'%>     <%end%>
+        <%= content_tag 'header', :class => message.opened ? "message-header" : "message-header unopened" do%> <b>Subject:</b> <%= message.subject%> <b>From:</b> <%=User.find(message.sender_id).username%>,  <%=link_to 'Reply', '#', class: 'btn btn-mini'%>     <%end%>
         <div class="message">
            <%= message.body%>
          

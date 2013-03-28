@@ -4,7 +4,8 @@ Mfn::Application.routes.draw do
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
-                     
+              
+  mailboxes_for :users, :user_object_name => "current_user", :user_attribute_name => "username", :user_display_attribute => "username"       
   match '/festival-list/:country/:year', :to => 'events#index'
 
 
@@ -62,6 +63,7 @@ Mfn::Application.routes.draw do
   resources :homes
 
   match '/my-messages', :to => 'users#my-messages'
+  match '/new_message', :to => 'users#new_message'
   match '/my-rides', :to => 'users#my-rides'
   match '/my-profile', :to => 'users#my-profile'
   match '/rideshare', :to => 'events#rideshare'

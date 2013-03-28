@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   # GET /users.json
   before_filter :authenticate_user!
 
+  def new_message
+    @message = current_user.messages.build
+  end
+
   def index
     @users = User.all
 
