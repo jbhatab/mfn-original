@@ -6,7 +6,12 @@
     <aside id="user_nav">
       <% if user_signed_in? %>
         Signed in as <%= current_user.username %>. Not you?
-        <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini'%>
+        <%if current_user.inbox.exists?(:opened => false)%>
+        <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini btn-danger' %>
+        <%else%>
+          <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini' %>
+        <%end%>
+
         <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
         <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
       <% else %>

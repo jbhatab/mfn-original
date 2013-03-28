@@ -18,7 +18,10 @@ gem 'roo'
 gem "has_mailbox"
 
 #searching
-
+gem 'sunspot_rails'
+group :development do
+  gem 'sunspot_solr'
+end
 
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'

@@ -21,14 +21,13 @@ class EventsController < ApplicationController
   def sort_by_name
     Event.search(params[:search]).joins(:address,  :festival_year).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).paginate(:page => params[:page],
                                                                                                                                                                                          :include => {:festival_year =>:festival},
-                                                                                                                                                                                         :order => "festivals.#{params[:sort]} #{params[:direction]}")
+                                                                                                                                                                                         :order => "festivals.#{params[:sort]} " + sort_direction)
   end
 
   def sort_by_location
     Event.search(params[:search]).joins(:address,  :festival_year).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).paginate(:page => params[:page],
                                                                                                                                                                                          :include => :address,
                                                                                                                                                                                          :order => "addresses.#{params[:sort]} #{sort_direction}")
-
   end
 
   def sort_column
@@ -36,7 +35,7 @@ class EventsController < ApplicationController
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def edit

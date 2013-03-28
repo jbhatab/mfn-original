@@ -1,5 +1,5 @@
 class FestivalMailer < ActionMailer::Base
-  default from: "jbhatab@gmail.com"
+  default from: ENV['EMAIL_USERNAME']
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -29,6 +29,6 @@ class FestivalMailer < ActionMailer::Base
     
 
 
-    mail to: "jbhatab@gmail.com", subject: 'festival submision'
+    mail to: ENV['EMAIL_USERNAME'], subject: 'festival submision'
   end
 end

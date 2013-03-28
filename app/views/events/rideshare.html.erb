@@ -27,12 +27,12 @@
 
 
 <section class="rideshare-sidebar">
-  <%= form_tag events_path, :method => 'get', :id =>'rideshare_search' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+  <%= form_tag '/rideshare', :method => :get do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
 
   <ul>
     <% @list.each do |event| %>

@@ -1,6 +1,9 @@
 class Event < ActiveRecord::Base
   has_event_calendar
 
+  searchable do
+    text :event_type
+  end
   
   
   has_many :events_users, :dependent => :destroy
