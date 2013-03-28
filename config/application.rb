@@ -51,8 +51,7 @@ module Mfn
 
     #font-face configuration
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
-    config.assets.precompile += %w( .svg .eot .woff .ttf ) 
-    config.assets.precompile += ['mailboxes.css', 'token-input-facebook.css', 'mailboxes.js', 'jquery.tokeninput.js']
+    
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
