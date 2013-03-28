@@ -94,7 +94,7 @@ class EventsController < ApplicationController
       end
     end
     
-    @list = list.paginate(:page => params[:page])
+    @list = list.paginate(:page => params[:page], :per_page => 13)
     respond_with @json
   end
 
