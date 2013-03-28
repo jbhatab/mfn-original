@@ -5,7 +5,7 @@
         <%= @festival.name %>
       </h2>
       
-      <%unless @festival.img_url=='-'%>
+      <%unless @festival.img_url=='-' or @festival.img_url == nil%>
         <%=image_tag(@festival.img_url+'?width=200&height=200', alt:@festival.name+" Facebook Image") %>
       <%end%>
     

@@ -1,23 +1,15 @@
 class Festival < ActiveRecord::Base
   acts_as_commentable
 
-  attr_accessible :name, :website, :facebook, :img_url, :twitter
+  attr_accessible :festival_years_attributes, :name, :website, :facebook, :img_url, :twitter
   
   has_many :festival_years, :dependent => :destroy
-  accepts_nested_attributes_for :festival_years
+  accepts_nested_attributes_for :festival_years, :allow_destroy => true
   
   has_many :reviews
-  
-  self.per_page = 12
 
+  validates_presence_of :name
 
-  def self.search(search)
-    if search
-      where('name LIKE ?', "%#{search}%")
-    else
-      scoped
-    end
-  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

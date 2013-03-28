@@ -41,6 +41,11 @@ class FestivalsController < ApplicationController
   # GET /festivals/new.json
   def new
     @festival = Festival.new
+    if false
+      fy = @festival.festival_years.build
+      e = fy.events.build
+      a = e.build_address
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,11 +62,10 @@ class FestivalsController < ApplicationController
   # POST /festivals.json
   def create
     @festival = Festival.new(params[:festival])
-
     respond_to do |format|
       if @festival.save
         FestivalMailer.submit_festival(@festival).deliver
-        format.html { redirect_to @festival, notice: 'Festival was successfully created.' }
+        format.html { redirect_to '/festival-list/US/2013', notice: 'Festival was successfully submitted.' }
         format.json { render json: @festival, status: :created, location: @festival }
       else
         format.html { render action: "new" }

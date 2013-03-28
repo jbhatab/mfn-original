@@ -4,11 +4,11 @@
   <%= f.input :website %>
   <%= f.input :facebook %>
   <%= f.input :twitter %>
-
+<%if false%>
   <h3>Have An Event Coming Up?</h3>
-  <%= f.simple_fields_for :festival_year do |y| %>
+  <%= f.simple_fields_for :festival_years do |y| %>
     <%= y.input :year %>
-    <%= y.simple_fields_for :event do |e| %>
+    <%= y.simple_fields_for :events do |e| %>
       <%= e.input :start_at %>
       <%= e.input :end_at %>
       <%= e.input :event_type, collection: ['camping','no camping', 'cruise'] %>
@@ -23,6 +23,7 @@
       <%end%>
     <%end%>
   <%end%>
+<%end%>
   <%= f.button :submit %>
 <% end %>
   
