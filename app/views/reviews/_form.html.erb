@@ -1,18 +1,16 @@
 <div class="review-form">
   <%= simple_form_for([festival, festival.reviews.build])  do |f| %>
+    <%= f.hidden_field :rating%>
     <div class='overall_rating'>  
-      Rate: Raiders of the Lost Ark  
       <div id="r1" class="rate_widget">  
-        <div class="star_1 ratings_stars"></div>
-        <div class="star_2 ratings_stars"></div>
-        <div class="star_3 ratings_stars"></div>
-        <div class="star_4 ratings_stars"></div>
-        <div class="star_5 ratings_stars"></div>
+        <div id="star_1" class="rating_star"></div>
+        <div id="star_2" class="rating_star"></div>
+        <div id="star_3" class="rating_star"></div>
+        <div id="star_4" class="rating_star"></div>
+        <div id="star_5" class="rating_star"></div>
         <div class="total_votes">vote data</div>
       </div>  
     </div>  
-
-    <%= f.input :rating%>
     <%= f.input :security%>
     <%= f.input :title, :placeholder=>"Title" %>
     <%= f.input :year, label_method: :year, collection: festival.festival_years %>
