@@ -37,9 +37,21 @@ class ReviewsController < ApplicationController
     @review.destroy
 
     respond_to do |format|
-      format.html {redirect_to('/my-comments')}
+      format.html {redirect_to(@festival)}
       format.json { head :no_content }
       format.js
+    end
+  end
+
+  def update
+
+    @review = @festival.reviews.find(params[:id])
+
+     respond_to do |format|
+      if @review.update_attributes(params[:review])
+        format.html { redirect_to @festival, notice: 'Review was successfully updated.' }
+        format.json { head :no_content }
+      end
     end
   end
 

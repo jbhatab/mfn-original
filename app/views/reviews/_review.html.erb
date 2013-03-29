@@ -23,6 +23,7 @@
   <div class="review-area">
     <header class="review-header">
       <%= review.upvotes.size-review.downvotes.size%>
+      
       <%= review.title %> <i>by</i>
       <% if review.user_id == nil %>
         Anonymous
@@ -31,6 +32,8 @@
       <%end%>
     </header>
     <%=review.content%></br>
+    <%= review.rating %></br>
+    <%= review.security %>
     <% if user_signed_in? %>
       <% if current_user.id == review.user_id %>
         <%= link_to 'Delete review', [@festival, review],

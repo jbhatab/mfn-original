@@ -10,9 +10,9 @@ $ ->
       star = $(this)
       form_id = star.attr('data-form-id')
       stars = star.attr('data-stars')
-      console.log(stars)
+      $("#"+form_id+"_rating").val(stars);
       $.ajax
-        type: "post"
+        type: "POST"
         url: $("#"+form_id).attr("action")
         data: $("#"+form_id).serialize()
       
@@ -26,5 +26,13 @@ $ ->
     $(this).parent(".security_rating").removeClass(meter_id)  if meter_toggle
   ).on "click", ->
     meter_toggle = (if meter_toggle then false else true)
-
+    if !meter_toggle
+      meter = $(this)
+      form_id = meter.attr('data-form-id')
+      meters = meter.attr('data-meters')
+      $("#"+form_id+"_security").val(meters);
+      $.ajax
+        type: "POST"
+        url: $("#"+form_id).attr("action")
+        data: $("#"+form_id).serialize()
 

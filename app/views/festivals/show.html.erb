@@ -16,7 +16,7 @@
         <%= link_to @festival.name+"'s Facebook", @festival.facebook %>
       </p>
       <%= render @festival.reviews %>
-      <%= render :partial => 'reviews/form', :locals => {:festival => @festival} %>
+      <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>
     </article>
     
     <article class="span3 festival-show">

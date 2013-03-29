@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :if => :password_required?
   
   has_many :reviews
+  accepts_nested_attributes_for :reviews
   has_many :comments
   acts_as_voter
 

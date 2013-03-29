@@ -1,24 +1,32 @@
 <div class="review-form">
   <% form_id = 'review_'+festival.id.to_s+'_rating'%>
-  <%= simple_form_for([festival, festival.reviews.build], :html => {:id => form_id}) do |f| %>
-    <%= f.hidden_field :rating, :id => '#{form_id}_stars'%>
-    <%= f.hidden_field :security, :id => '#{form_id}_security'%>
+  <% 
+  if user_review == nil
+    durp = nil
+  else
+    durp =[festival, user_review] 
+  end
+    %>
+  <%= simple_form_for durp || [festival, festival.reviews.build], :html => {:id => form_id} do |f| %>
+
+    <%= f.hidden_field :rating, :id => form_id+'_rating'%>
+    <%= f.hidden_field :security, :id => form_id+'_security'%>
     <section class='rating-meters'>
       <div class='overall_rating'>    
-        <div id="<%=form_id%>_1" data-form-id= "<%=form_id%>" data-stars= "1" class="rating_star"></div>
-        <div id="<%=form_id%>_2" data-form-id= "<%=form_id%>" data-stars= "2" class="rating_star"></div>
-        <div id="<%=form_id%>_3" data-form-id= "<%=form_id%>" data-stars= "3" class="rating_star"></div>
-        <div id="<%=form_id%>_4" data-form-id= "<%=form_id%>" data-stars= "4" class="rating_star"></div>
-        <div id="<%=form_id%>_5" data-form-id= "<%=form_id%>" data-stars= "5" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "1" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "2" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "3" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "4" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "5" class="rating_star"></div>
       </div>
 
       
       <div class='security_rating'> 
-        <div id="meter_1" class="rating_meter"></div>
-        <div id="meter_2" class="rating_meter"></div>
-        <div id="meter_3" class="rating_meter"></div>
-        <div id="meter_4" class="rating_meter"></div>
-        <div id="meter_5" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "5" id="meter_1" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "4" id="meter_2" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "3" id="meter_3" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "2" id="meter_4" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "1" id="meter_5" class="rating_meter"></div>
       </div>  
     </section>  
 

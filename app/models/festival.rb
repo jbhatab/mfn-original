@@ -1,12 +1,13 @@
 class Festival < ActiveRecord::Base
   acts_as_commentable
 
-  attr_accessible :festival_years_attributes, :name, :website, :facebook, :img_url, :twitter
+  attr_accessible :festival_years_attributes, :reviews_attributes, :name, :website, :facebook, :img_url, :twitter
   
   has_many :festival_years, :dependent => :destroy
   accepts_nested_attributes_for :festival_years, :allow_destroy => true
   
   has_many :reviews
+  accepts_nested_attributes_for :reviews
 
   validates_presence_of :name
 

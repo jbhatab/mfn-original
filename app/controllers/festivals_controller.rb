@@ -31,6 +31,15 @@ class FestivalsController < ApplicationController
   # GET /festivals/1.json
   def show
     @festival = Festival.find(params[:id])
+    if user_signed_in? 
+      if @festival.reviews.where("user_id = ?", current_user.id) != []
+        @user_review = @festival.reviews.where("user_id = ?", current_user.id).first
+      else
+        @user_review = nil
+      end
+    else
+      @user_review = nil
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @festival }
