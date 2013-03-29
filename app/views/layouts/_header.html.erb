@@ -57,7 +57,12 @@
                   <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
-                      <%= link_to 'My Messages', '/my-messages' %>
+                      <%if user_signed_in? %>
+                        <%= link_to 'My Messages', '/mailboxes' %>
+                      <% else%>
+                        <%= link_to 'My Messages', '/users/login' %>
+                      <%end%>
+
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'My Comments', '/my-comments' %>
