@@ -70,7 +70,6 @@ class EventsController < ApplicationController
         marker.json({ :start_at =>address.addressable.start_at.month, :id => address.addressable.id, :event_type => address.addressable.event_type})
       end
     end
-    
     @list = list.paginate(:page => params[:page], :per_page => 13)
     respond_with @json
   end

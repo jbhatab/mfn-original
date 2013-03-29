@@ -50,7 +50,7 @@
     Gmaps.map.callback = function() {
 
 
-      $.getJSON('/rides_gmap/', function(data){
+      $.getJSON('/rides_gmap', function(data){
           Gmaps.map.addMarkers(data);
         });
 

@@ -6,13 +6,14 @@
   <%= f.input :cost %>
   <%= f.collection_radio_buttons :giving_ride, [[true, 'Giving A Ride'] ,[false, 'Looking For A Ride']],  :first, :last%>
   <%= f.simple_fields_for :address_attributes do |d| %>
-    <%= d.input :line1 %>
-    <%= d.input :line2 %>
+    <%= d.input :line1, label_html: { class: 'unrequired' } %>
+    <%= d.input :line2, label_html: { class: 'unrequired' } %>
     <%= d.input :city %>
     <%= d.input :state %>
     <%= d.input :country, priority: [ "United States" ] %>
-    <%= d.input :zip %>
+    <%= d.input :zip, label_html: { class: 'unrequired' } %>
+    <%= d.hidden_field :gmaps, :value => true %>
   <%end%>
-  <%= f.input :message, :input_html => { :cols => 50, :rows => 3 } %>
+  <%= f.input :message, label_html: { class: 'unrequired' }, :input_html => { :cols => 50, :rows => 3 } %>
   <%= f.button :submit %>
 <% end %>
