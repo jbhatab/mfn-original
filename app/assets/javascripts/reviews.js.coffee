@@ -36,3 +36,8 @@ $ ->
         url: $("#"+form_id).attr("action")
         data: $("#"+form_id).serialize()
 
+  $('#adv-form-toggle').click (e) ->
+    e.preventDefault()
+    $(this).siblings('.adv-form-container').slideToggle 200
+    
+

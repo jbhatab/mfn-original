@@ -9,6 +9,7 @@
     <% else%>
     <%= link_to "Cool", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn btn-mini upvote', method: :put %></br>
     <%end%>
+    <%= comment.upvotes.size-comment.downvotes.size%>
     <% if user_signed_in? %>
       <% if current_user.voted_down_on? comment%>
         <%= link_to "Lame", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn btn-mini btn-inverse downvote', method: :put %>
@@ -22,7 +23,7 @@
   </div>
   <div class="comment-area">
     <header class="comment-header">
-      <%= comment.upvotes.size-comment.downvotes.size%>
+      
       <%= comment.title %> <i>by</i>
       <% if comment.user_id == nil %>
         Anonymous
