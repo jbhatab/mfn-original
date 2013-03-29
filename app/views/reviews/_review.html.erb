@@ -37,7 +37,7 @@
       <%end%>
       
     </header>
-    <%=review.content%></br>
+    <b>Review: </b><%=review.content%></br>
     <% [ :atmosphere, :music, :staging, :vendors, :amenities, :vip, :parking ].each do |a|  %>
       <% unless review[a] == '' or review[a] ==nil%>
       <span >
@@ -47,10 +47,21 @@
     <%end%>
     <% if user_signed_in? %>
       <% if current_user.id == review.user_id %>
-        <%= link_to 'Delete review', [@festival, review],
+      <span class="review-link">
+        <%= link_to 'Delete review', [review.festival, review],
                  :method => :delete,
-                 remote: true %>
+                 remote: true %> 
+      </span>    
+      <% if current_page?('/my-reviews')%>
+        <span class="review-link"><%= link_to review.festival.name+"'s page (Edit your review here)", review.festival
+                 %></span>
+      <% else%>
+      <span class="review-link"><%= link_to "Your Reviews", '/my-reviews'
+                 %></span>
       <%end%>
+
+    <%end%>
+        
     <%end%>
   </div>
   <div class="meter-area">

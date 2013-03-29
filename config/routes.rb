@@ -62,6 +62,7 @@ Mfn::Application.routes.draw do
 
   resources :homes
 
+  match '/my-reviews', :to => 'users#my-reviews'
   match '/my-messages', :to => 'users#my-messages'
   match '/new_message', :to => 'users#new_message'
   match '/my-rides', :to => 'users#my-rides'

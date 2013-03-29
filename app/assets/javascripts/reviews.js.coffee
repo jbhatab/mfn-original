@@ -13,7 +13,6 @@ $ ->
       $("#"+form_id+"_rating").val(stars);
       $.ajax
         type: "POST"
-        url: $("#"+form_id).attr("action")
         data: $("#"+form_id).serialize()
       
 
@@ -33,7 +32,6 @@ $ ->
       $("#"+form_id+"_security").val(meters);
       $.ajax
         type: "POST"
-        url: $("#"+form_id).attr("action")
         data: $("#"+form_id).serialize()
 
   $('#adv-form-toggle').click (e) ->

@@ -9,8 +9,9 @@ class RidesController < ApplicationController
   end
 
   def rides_gmap
+    @rides = Ride.includes(:event => {:festival_year => :festival}).search(params[:search])
     addresses = []
-    Ride.all.each do |ride|
+    @rides.each do |ride|
       if ride.address.gmaps
         addresses << ride.address
       end

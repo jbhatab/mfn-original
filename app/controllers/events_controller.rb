@@ -4,49 +4,24 @@ class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    if params[:sort] == "name" 
-      @events = sort_by_name
-    elsif params[:sort] == "state" or params[:sort] == "region"
-      @events = sort_by_location
-    else
-      @events = sort
-    end
+    @events = Event.includes(:address,  :festival_year, :festival_year =>:festival)
+                   .search(params[:search])
+                   .where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year])
+                   .order('festivals.name ASC')
+                   .paginate(:page => params[:page])
     
   end
 
-  def sort
-    Event.search(params[:search]).joins(:address,  :festival_year).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
-  end
-
-  def sort_by_name
-    Event.search(params[:search]).joins(:address,  :festival_year).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).paginate(:page => params[:page],
-                                                                                                                                                                                         :include => {:festival_year =>:festival},
-                                                                                                                                                                                         :order => "festivals.#{params[:sort]} " + sort_direction)
-  end
-
-  def sort_by_location
-    Event.search(params[:search]).joins(:address,  :festival_year).where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year]).paginate(:page => params[:page],
-                                                                                                                                                                                         :include => :address,
-                                                                                                                                                                                         :order => "addresses.#{params[:sort]} #{sort_direction}")
-  end
-
-  def sort_column
-    Event.column_names.include?(params[:sort]) ? params[:sort] : "start_at"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
-  end
-
-  def edit
-  end
 
   def new
     @event = Event.new
   end
 
   def map
-    @events = Event.all
+    if params[:commit].eql?('Reset')
+      redirect_to '/festival-map'
+    end
+    @events = Event.includes(:festival_year => :festival).search(params[:search])
     addresses = []
     @events.each do |event|
       unless event.address.longitude == 0
@@ -69,7 +44,10 @@ class EventsController < ApplicationController
 
 
   def rideshare
-    @events = Event.search(params[:search]).includes(:festival_year => :festival)
+    if params[:commit].eql?('Reset')
+      redirect_to '/rideshare'
+    end
+    @events = Event.includes(:festival_year => :festival).search(params[:search])
     addresses = []
     list = []
     @events.each do |event|

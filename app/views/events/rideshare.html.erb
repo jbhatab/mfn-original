@@ -27,10 +27,11 @@
 
 
 <section class="rideshare-sidebar">
-  <%= form_tag events_path, :method => 'get', :id =>'rideshare_search' do %>
+  <%= form_tag '/rideshare/', :method => 'get', :id =>'rideshare_search' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
+    <%= submit_tag 'Reset' %>
   </p>
 <% end %>
 
@@ -48,7 +49,8 @@
     
     Gmaps.map.callback = function() {
 
-      $.getJSON('/rides_gmap', function(data){
+
+      $.getJSON('/rides_gmap/', function(data){
           Gmaps.map.addMarkers(data);
         });
 
@@ -157,10 +159,6 @@
         
       };
 
-      
-
-      
-
       var HiddenType = function(type) {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
           if( marker.id >0){
@@ -190,7 +188,7 @@
 
       var festivalFilters = function(fest) {
         AllMarkers();
-        console.log(fest)
+
 
         _.each(HiddenFestival(fest), function(marker) {
 

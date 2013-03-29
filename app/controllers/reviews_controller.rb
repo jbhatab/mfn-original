@@ -10,14 +10,15 @@ class ReviewsController < ApplicationController
 
 
   def upvote
+
     @review.upvote_from current_user
-    redirect_to(@festival)
+    redirect_to request.referrer
     
   end
 
   def downvote
     @review.downvote_from current_user
-    redirect_to(@festival)
+    redirect_to request.referrer
   end
 
   def create
@@ -66,7 +67,7 @@ private
     @review = Review.find(params[:id])
     if current_user.id == @review.user_id
       flash[:notice] = "You can't vote on your own comment"
-      redirect_to(@review.festival)
+      redirect_to request.referrer
     end
   end
 
