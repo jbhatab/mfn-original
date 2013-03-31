@@ -6,6 +6,9 @@
 	
     <div id="tabs-messages" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
     	<%= form_tag create_mailboxes_path, :method => :post do %>
+    	<h5>
+    		We are experiencing a glitch with capital leters, when typing in a users name avoid capital letters. For example, type usic or est for MusicFestNation, sorry for the inconvenience. 
+    	</h5>
 			<p>
 			  	<%= label_tag :user_tokens, "User :" %><br />
 			  	<%= text_field_tag :user_tokens, "", :class => "text small" %>

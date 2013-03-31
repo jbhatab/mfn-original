@@ -14,10 +14,10 @@ class Festival < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      f =Festival.new(:name=>row[0], :website =>row[1], :facebook =>row[2], :img_url =>row[3])
-      fy = f.festival_years.build(:year =>row[4])
-      e = fy.events.build(:start_at =>row[5], :end_at =>row[6], :event_type =>row[7])
-      a = e.build_address(:city =>row[8], :state =>row[9], :region =>row[10], :country =>row[11], :latitude =>row[12], :longitude =>row[13])
+      f =Festival.new(:name=>row[0], :website =>row[1], :facebook =>row[2], :twitter =>row[3], :img_url =>row[4])
+      fy = f.festival_years.build(:year =>row[5])
+      e = fy.events.build(:start_at =>row[6], :end_at =>row[7], :event_type =>row[8])
+      a = e.build_address(:city =>row[9], :state =>row[10], :region =>row[11], :country =>row[12], :latitude =>row[13], :longitude =>row[14])
       f.save!
     end
   end

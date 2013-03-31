@@ -50,6 +50,7 @@
     Gmaps.map.callback = function() {
 
 
+
       $.getJSON('/rides_gmap', function(data){
           Gmaps.map.addMarkers(data);
         });
@@ -64,7 +65,6 @@
         e.preventDefault();
 
         fest = $(this).attr('id');
-        console.log(fest);
         festivalFilters(fest);
       });
     

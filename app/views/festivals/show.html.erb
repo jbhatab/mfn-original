@@ -4,7 +4,7 @@
       <h2>
         <%= @festival.name %>
       </h2>
-      
+
       <%unless @festival.img_url=='-' or @festival.img_url == nil%>
         <%=image_tag(@festival.img_url+'?width=200&height=200', alt:@festival.name+" Facebook Image") %>
       <%end%>
@@ -15,11 +15,14 @@
       <p>
         <%= link_to @festival.name+"'s Facebook", @festival.facebook %>
       </p>
+      <p>
+        <%= link_to @festival.name+"'s Twitter", @festival.twitter %>
+      </p>
       <%= render @festival.reviews %>
       <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>
     </article>
     
-    <article class="span3 festival-show">
+    <article class="span3 festival-show festival-show-comments">
       <h3>Comments</h3>
       <div id="comments">
         <%= render @festival.comments %>

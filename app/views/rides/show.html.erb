@@ -2,7 +2,7 @@
   <% if @ride.giving_ride %>
   <h3> <%= @ride.user.username %>'s' Ride To <%= @ride.event.festival_year.festival.name %></h3>
   <%else%>
-    <h3><%= link_to @ride.user.username, new_mailboxes_path(:user_tokens => @ride.user.username) %> Is Looking For A Ride To <%= link_to @ride.event.festival_year.festival.name, @ride.event.festival_year.festival %></h3>
+    <h3><%= @ride.user.username %> Is Looking For A Ride To <%= link_to @ride.event.festival_year.festival.name, @ride.event.festival_year.festival %>, <%=link_to 'Send Message', new_mailboxes_path%></h3>
   <%end%>
   <h4><%=link_to @ride.event.festival_year.festival.name+"'s other rides", '/events/'+@ride.event.id.to_s+'/rides' %></h4>
   <% unless @ride.leave_date == nil and @ride.return_date == nil or @ride.leave_date == nil or @ride.return_date == nil %>
