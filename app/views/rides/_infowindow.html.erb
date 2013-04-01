@@ -1,7 +1,7 @@
 <div class="ride-infowindow">
   <h4> <%= link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> </h4>
   <% if ride.giving_ride %>
-    <h5><%=link_to 'I got your ride right here, see more...', [ride.user,ride]%></h5>
+    <h5><%=link_to 'I got your ride right here', [ride.user,ride]%></h5>
   <%else%>
     <h5><%=link_to 'Can I snag a ride? see more..', [ride.user,ride]%> </h5>
   <%end%>

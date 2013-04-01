@@ -101,31 +101,10 @@
                 <li class="main-nav-li <%='active' if current_page?('/contact')%>">
                   <%= link_to 'Contact', '/contact', :class => 'dropdown-toggle' %>
                 </li> 
-                <li class="main-nav-li dropdown dropdown-helper">
-                  <a class="dropdown-toggle" href="#" role="button">
-                    Merchandise
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-li">
-                      <a href="#">Hats</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">T-shirts</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">Sunglasses</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">Ponchos</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">Water Bottles</a>
-                    </li>
-                    <li class="dropdown-li">
-                      <a href="#">Beer Packs</a>
-                    </li>
-                  </ul> 
+                <li class="main-nav-li <%='active' if current_page?('/survivalguide')%>">
+                  <%= link_to 'Survival Guide', '/survivalguide', :class => 'dropdown-toggle' %>
                 </li> 
+                
                 
                   </ul> 
                 </li>  

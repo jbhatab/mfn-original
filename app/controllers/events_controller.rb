@@ -50,10 +50,14 @@ class EventsController < ApplicationController
     @events = Event.includes(:festival_year => :festival).search(params[:search])
     addresses = []
     list = []
-    @events.each do |event|
+    @events.all.each do |event|
+      unless event.address.longitude == 0
+        list << event
+      end
+    end  
+    Event.all.each do |event|
       unless event.address.longitude == 0
         addresses << event.address
-        list << event
       end
     end  
     @json = addresses.to_gmaps4rails do |address, marker|

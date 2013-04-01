@@ -1,7 +1,7 @@
 <div class="row">
   <div class="filter-bar">
     <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
-    <%= link_to "None Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Non Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
     <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
     <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
     <%if user_signed_in?%>
@@ -28,19 +28,17 @@
 
 <section class="rideshare-sidebar">
   <%= form_tag '/rideshare/', :method => 'get', :id =>'rideshare_search' do %>
-  <p>
+
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
+    <% if false%>
     <%= submit_tag 'Reset' %>
-  </p>
-<% end %>
 
-  <ul>
-    <% @list.each do |event| %>
-      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link', id:'fest_'+event.id.to_s%></li>
     <%end%>
-  </ul>
-  <%= will_paginate @list%>
+<% end %>
+  <div id="rideshare-event-list">
+    <%= render :partial => 'ridesharelist'%>
+  </div>
 </section>
 
 

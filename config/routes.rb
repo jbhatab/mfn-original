@@ -42,7 +42,6 @@ Mfn::Application.routes.draw do
 
   #calender routes  match '/calendar/new', :to => 'calendar#new'
   
-  
   #calendar route
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
@@ -71,6 +70,7 @@ Mfn::Application.routes.draw do
   match '/festival-map', :to => 'events#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'
+  match '/survivalguide', :to => 'homes#survivalguide'
   match '/rides_gmap', :to => 'rides#rides_gmap'
 
   root :to => 'homes#index'
