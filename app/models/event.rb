@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('festivals.name LIKE ?', "%#{search}%")
+      where('lower(festivals.name) LIKE ?', "%#{search}%".downcase)
     else
       scoped
     end
