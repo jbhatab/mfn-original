@@ -5,14 +5,12 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
-    flash[:notice] = "Authentication successful."
-    redirect_to authentications_url
-  end
-
-  def create
     omniauth = request.env["omniauth.auth"]
+    if current_user
+      authentication = current_user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid'])
+      redirect_to edit_user_registration_path, :notice => 'Added authentication method'
+      return
+    end
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       flash[:notice] = "Signed in successfully."
