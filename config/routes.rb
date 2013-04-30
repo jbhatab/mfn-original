@@ -15,6 +15,8 @@ Mfn::Application.routes.draw do
   #resources :sessions
   resources :authentications
 
+  #for robot.txt files, action is in homes controller
+  get '/robots.txt' => 'homes#robots'
 
   #show all the users rides and comments, this is good
   resources :users do

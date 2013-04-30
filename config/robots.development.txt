@@ -1,0 +1,6 @@
+
+# Allow no bots on the site
+
+User-agent: *
+
+Disallow: /
