@@ -1,0 +1,78 @@
+<div id='review_<%=review.id%>' class="review-container">
+  <div class="vote-area">
+    <% if user_signed_in? %>
+      <%if current_user.voted_up_on? review%>
+        <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini btn-success upvote', method: :put %></br>
+      <%else%>
+        <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+      <%end%>
+    <% else%>
+    <%= link_to "Cool", {:controller =>"reviews", :action => "upvote", :id => review.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+    <%end%>
+    <%= review.upvotes.size-review.downvotes.size%>
+    <% if user_signed_in? %>
+      <% if current_user.voted_down_on? review%>
+        <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini btn-inverse downvote', method: :put %>
+      <%else%>
+        <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini downvote', method: :put %>
+      <%end%>
+
+    <% else%>
+    <%= link_to "Lame", {:controller =>"reviews", :action => "downvote", :id => review.id}, :class => 'btn btn-mini downvote', method: :put %>
+    <%end%>
+  </div>
+  <div class="review-area">
+    <header class="review-header">
+      
+      <% unless review.rating == nil %>
+      <% (1..5).each do |i| %>
+        <li class="header-stars <%= review.rating>=i ? "active-header-star" : "" %>"></li>
+      <% end %>
+    <%end%></br>
+      <%= review.title %> <i>by</i>
+      <% if review.user_id == nil %>
+        Anonymous
+      <% else%>
+        <%= User.find(review.user_id).username %>
+      <%end%>
+      
+    </header>
+    <b>Review: </b><%=review.content%></br>
+    <% [ :atmosphere, :music, :staging, :vendors, :amenities, :vip, :parking ].each do |a|  %>
+      <% unless review[a] == '' or review[a] ==nil%>
+      <span >
+         <b><%=a%>:</b> <%=review[a] %>
+      </span></br>
+    <% end %>
+    <%end%>
+    <% if user_signed_in? %>
+      <% if current_user.id == review.user_id %>
+      <span class="review-link">
+        <%= link_to 'Delete review', [review.festival, review],
+                 :method => :delete,
+                 remote: true %> 
+      </span>    
+      <% if current_page?('/my-reviews')%>
+        <span class="review-link"><%= link_to review.festival.name+"'s page (Edit your review here)", review.festival
+                 %></span>
+      <% else%>
+      <span class="review-link"><%= link_to "Your Reviews", '/my-reviews'
+                 %></span>
+      <%end%>
+
+    <%end%>
+        
+    <%end%>
+  </div>
+  <div class="meter-area">
+    
+    <% unless review.security== nil %>
+    <%=image_tag('meter'+review.security.to_s+'.png') %>
+    <%end%>
+
+
+  </div>
+</div>
+
+  
+

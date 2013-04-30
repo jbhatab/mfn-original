@@ -1,0 +1,53 @@
+<%unless user_signed_in?%>
+<h3><%=link_to 'Sign In', '/users/login'%> So You Can Review/Rate!</h3>
+<%end%>
+<div class="review-form">
+  <% form_id = 'review_'+festival.id.to_s+'_rating'%>
+  <% 
+  if user_review == nil
+    durp = nil
+  else
+    durp =[festival, user_review] 
+  end
+    %>
+  <%= simple_form_for durp || [festival, festival.reviews.build], :html => {:id => form_id} do |f| %>
+
+    <%= f.hidden_field :rating, :id => form_id+'_rating'%>
+    <%= f.hidden_field :security, :id => form_id+'_security'%>
+    <section class='rating-meters'>
+      <div class='overall_rating'>    
+        <div data-form-id= "<%=form_id%>" data-stars= "1" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "2" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "3" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "4" class="rating_star"></div>
+        <div data-form-id= "<%=form_id%>" data-stars= "5" class="rating_star"></div>
+      </div>
+
+      
+      <div class='security_rating'> 
+        <div data-form-id= "<%=form_id%>" data-meters= "5" id="meter_5" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "4" id="meter_4" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "3" id="meter_3" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "2" id="meter_2" class="rating_meter"></div>
+        <div data-form-id= "<%=form_id%>" data-meters= "1" id="meter_1" class="rating_meter"></div>
+      </div>  
+    </section>  
+
+    
+    <%= f.input :title, :placeholder=>"Title" %>
+    <%= f.input :content, :placeholder=>"Describe the festival in any way you see fit. NO RULES!!! WOOOOO!!!", :input_html => { :cols => 50, :rows => 4 }%>
+    <%= link_to 'Click For More Review Options!', '#', id: 'adv-form-toggle'%>
+    <div class ="adv-form-container">
+      <%= f.input :year, label_method: :year, collection: festival.festival_years %>
+      <%= f.input :atmosphere, :placeholder=>"Discuss the vibe of the festival...", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :music, :placeholder=>"How was the music? What kind of music was played the most? Or just discuss the music any way you want...", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :staging, :placeholder=>"Talk about the staging that the festivals had set up. Did they provide for a great experience when you went to the shows?", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :vendors, :placeholder=>"Tell us how chill the vendors were, give shout outs to your favorites!", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :vip, :placeholder=>"Was there a vip experience and how did it stack up compared to the rest?", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :amenities, :placeholder=>"How were the services they provided? Did the make the festival even better?!?! Hard to imagine.", :input_html => { :cols => 50, :rows => 3 } %>
+      <%= f.input :parking, :placeholder=>"If there was parking, discuess the pros and cons. Sometimes this can make your life easy or miserable.", :input_html => { :cols => 50, :rows => 3 } %>
+    </div>
+
+    <%= f.button :submit %>
+  <% end %>
+</div>

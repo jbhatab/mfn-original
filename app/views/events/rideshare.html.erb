@@ -1,0 +1,217 @@
+<div class="row">
+  <div class="filter-bar">
+    <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Non Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
+    <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
+    <%if user_signed_in?%>
+      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary' %>
+    <%else%>
+      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', 'users/login', class: 'btn btn-primary' %>
+    <%end%>
+  </div>
+  <div class="slider-box">
+    <div id='date-range' style="width: 300px"></div>
+    <input type="text" id="filtered-pop" style="width: 160px"/>
+  </div>
+</div>
+
+
+
+
+
+
+<%= gmaps("markers" => {"data" => @json, "options" => { 'randomize'=>true, 'max_random_distance'=>10  } } ) %> 
+
+
+
+
+<section class="rideshare-sidebar">
+  <%= form_tag '/rideshare/', :method => 'get', :id =>'rideshare_search' do %>
+
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+    <% if false%>
+    <%= submit_tag 'Reset' %>
+
+    <%end%>
+<% end %>
+  <div id="rideshare-event-list">
+    <%= render :partial => 'ridesharelist'%>
+  </div>
+</section>
+
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    
+    Gmaps.map.callback = function() {
+
+
+
+      $.getJSON('/rides_gmap', function(data){
+          Gmaps.map.addMarkers(data);
+        });
+
+      
+
+      var activeFilter=false;
+      var activeFilterType;
+      var activeDate=false;
+
+      $(".rideshare-link").click(function(e) {
+        e.preventDefault();
+
+        fest = $(this).attr('id');
+        festivalFilters(fest);
+      });
+    
+      
+       var DateFilter = {
+        min: 1,
+        max: 12,
+      };
+
+      var monthes = {
+          1: 'January',
+          2: 'February',
+          3: 'March',
+          4: 'April',
+          5: 'May',
+          6: 'June',
+          7: 'July',
+          8: 'August',
+          9: 'September',
+          10: 'October',
+          11: 'November',
+          12: 'December'
+      }
+
+      $( "#filtered-pop" ).val( (monthes[DateFilter.min])+ " - " + (monthes[DateFilter.max]))
+      $("#date-range").slider({
+        range: true,
+        min: DateFilter.min,
+        max: DateFilter.max,
+        values: [ DateFilter.min, DateFilter.max ],
+        slide: function(event, ui) {
+          $( "#filtered-pop" ).val( (monthes[ui.values[ 0 ]])+ " - " + (monthes[ui.values[ 1 ]]))
+          DateFilter.min = ui.values[ 0 ]
+          DateFilter.max = ui.values[ 1 ]
+          activeDate=true;
+          DateFilter()
+        }
+      });
+
+      $(".filter-button").click(function(e) {
+        e.preventDefault();
+        $(".filter-bar").children('.btn').removeClass('active')
+        $(this).addClass('active')
+        var type = $(this).attr('id');
+        if(type=='no-camping') {
+          type='no camping'
+        } 
+        activeFilter = true;
+        activeFilterType = type;
+        
+        buttonFilters(type)
+      });
+
+      $("#all").click(function(e) {
+        e.preventDefault();
+        $(".filter-bar").children('.btn').removeClass('active')
+        activeFilter = false;
+        $(this).addClass('active')
+        if(!activeDate){
+        AllMarkers();
+        }else{
+          AllMarkers();
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+      });
+
+      var HiddenDates = function() {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          if( marker.id >0){
+          return marker.start_at >= DateFilter.min && marker.start_at <= DateFilter.max;
+        }else{return marker.ride_event_date >= DateFilter.min && marker.ride_event_date <= DateFilter.max;}
+        });
+        return filtered
+       }
+
+      var DateFilter = function() {
+        if (!activeFilter){
+          AllMarkers();
+        }else{
+          AllMarkers();
+          _.each(HiddenType(activeFilterType), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+
+        }
+        _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+
+        
+      };
+
+      var HiddenType = function(type) {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          if( marker.id >0){
+            return marker.event_type == type;
+          }else{return marker.ride_event_type ==type;}
+        });
+
+        return filtered
+       };
+
+      var HiddenFestival = function(fest) {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          if( marker.id >0){
+            return 'fest_'+marker.id == fest;
+          }else{return 'fest_'+marker.event_id ==fest;}
+        });
+
+        return filtered
+       };
+
+      var AllMarkers = function() {
+        _.each(Gmaps.map.markers, function(marker) {
+          Gmaps.map.showMarker(marker)
+        })
+
+      };
+
+      var festivalFilters = function(fest) {
+        AllMarkers();
+
+
+        _.each(HiddenFestival(fest), function(marker) {
+
+          Gmaps.map.hideMarker(marker)
+        })
+      }
+
+      var buttonFilters = function(type) {
+        AllMarkers();
+        if(activeDate){
+          AllMarkers();
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+
+        _.each(HiddenType(type), function(marker) {
+
+          Gmaps.map.hideMarker(marker)
+        })
+    
+        
+
+        
+      };
+    }
+  </script>
+<%end%>

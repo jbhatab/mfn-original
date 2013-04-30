@@ -1,0 +1,39 @@
+<%if ride.giving_ride %>
+  <div class="ride-container giving">
+    <h4> Giving a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'ride_'+ride.id.to_s+' comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if ride.user.id == current_user.id%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></h4>
+<%else%>
+  <div class="ride-container need">
+    <h4> Looking for a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'ride_'+ride.id.to_s+' comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if ride.user.id == current_user.id%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></h4>
+<%end%>
+  <div class='row'>
+    <div class='ride-dates span3'>
+      <% unless ride.event.start_at == nil or ride.event.end_at == nil %>
+      <b>Festival Start:</b> <%= l ride.event.start_at, :format => :full%></br>
+      <b>Festival End:</b> <%= l ride.event.end_at, :format => :full%>
+      <%end%>
+    </div>
+    <div class='ride-dates span3'>
+      <b>Leave:</b> <%= l ride.leave_date, :format => :full%></br>
+      <b>Return:</b> <%= l ride.return_date, :format => :full%>
+    </div>
+    <div class='ride-dates span2'>
+      <b>Location:</b> <%= ride.address.line1%>, <%= ride.address.city%>, <%= ride.address.state%>
+    </div>
+
+    <div class='ride-cost span2'>
+      <b>Cost: </b><%= ride.cost%>
+    </div>
+    <div class='ride-message span4'>
+      <b>Message: </b><%= ride.message%>
+    </div>
+  </div>
+  <aside class='ride_<%=ride.id%> ride-comments'>
+    <%= render ride.comments %>
+    <% if ride.comments.length==0 %>
+      <i> No Comments </i>
+    <%end%>
+  </aside>
+</div>
+
+  
+

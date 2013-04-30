@@ -1,0 +1,99 @@
+@import 'bootstrap'
+
+$brown: #5d3c1d
+$orange: rgb(233, 86, 36)
+
+.review-form
+  #adv-form-toggle
+    font-size: 18px
+    color: $brown
+  #adv-form-toggle:hover
+    color: $orange
+  .adv-form-container
+    display: none
+  input
+    width: 100%
+    margin-bottom: 0px
+  textarea
+    width: 100%
+    margin-bottom: 0px
+  select
+    width: 100%
+    margin-bottom: 0px
+  .rating-meters
+    height: auto
+    width: auto
+    .overall_rating
+      display: inline-block
+      vertical-align: top
+      padding-top: 30px
+      .rating_star
+        width: 50px
+        height: 48px
+        display: inline-block
+        background-image: url('white-star.png')
+      .active-star
+        background-image: url('gold-star.png')
+    .security_rating
+      display: inline-block
+      height: 125px
+      width: 125px
+      background-image: url('meter1.png')
+      .rating_meter
+        height: 20px
+        width: 100%
+      #meter_1
+        margin-bottom: 20px
+    .meter_1
+      background-image: url('meter1.png')
+    .meter_2
+      background-image: url('meter2.png')
+    .meter_3
+      background-image: url('meter3.png')
+    .meter_4
+      background-image: url('meter4.png')
+    .meter_5
+      background-image: url('meter5.png')
+
+
+.review-container
+  background-color: rgba(255, 255, 255, 0.8)
+  @include border-radius(5px)
+  padding: 5px
+  border: 1px solid #000
+  margin-bottom: 5px
+  height: auto
+  .vote-area
+    float: left
+    width: 40px
+    display: inline-block
+    margin-top: 20px
+    text-align: center
+    .btn
+      width: 25px
+  .review-area
+    display: inline-block
+    width: 60%
+    margin-left: 5px
+    .review-header
+      border-bottom: 1px solid #000
+      .header-stars
+        width: 30px
+        height: 29px
+        display: inline-block
+        background-image: url('white-star-sm.png')
+      .active-header-star
+        background-image: url('gold-star-sm.png')
+    .review-link
+      font-size: 13px
+      margin-right: 20px
+  .meter-area
+    min-width: 70px
+    width: 25%
+    display: inline-block
+    vertical-align: top
+    img
+      width: 100%
+      height: auto
+      float: right
+

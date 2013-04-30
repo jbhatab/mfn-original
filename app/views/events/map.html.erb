@@ -1,0 +1,171 @@
+<div class="filter-map-row row">
+  <div class="filter-bar-map">
+    <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Non Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
+    <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
+    <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
+  </div>
+  <div class="slider-box-map">
+    <div id='date-range' style="width: 300px"></div>
+    <input type="text" id="filtered-pop-map" style="width: 160px"/>
+  </div>
+  <div class='map-search'>
+    <%= form_tag '/festival-map/', :method => 'get', :id =>'rideshare_search' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+      <%= submit_tag 'Reset' %>
+    </p>
+  <% end %>
+  </div>
+</div>
+
+
+
+
+
+<section id ="events-map">
+<%= gmaps("markers" => {"data" => @json, "options" => { 'randomize'=>true, 'max_random_distance'=>10  } } ) %> 
+
+</section>
+
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    
+    Gmaps.map.callback = function() {
+      
+
+      var activeFilter=false;
+      var activeFilterType;
+      var activeDate=false;
+    
+      
+       var DateFilter = {
+        min: 1,
+        max: 12,
+      };
+
+      var monthes = {
+          1: 'January',
+          2: 'February',
+          3: 'March',
+          4: 'April',
+          5: 'May',
+          6: 'June',
+          7: 'July',
+          8: 'August',
+          9: 'September',
+          10: 'October',
+          11: 'November',
+          12: 'December'
+      }
+
+
+      $( "#filtered-pop-map" ).val( (monthes[DateFilter.min])+ " - " + (monthes[DateFilter.max]))
+      $("#date-range").slider({
+        range: true,
+        min: DateFilter.min,
+        max: DateFilter.max,
+        values: [ DateFilter.min, DateFilter.max ],
+        slide: function(event, ui) {
+          $( "#filtered-pop-map" ).val( (monthes[ui.values[ 0 ]])+ " - " + (monthes[ui.values[ 1 ]]))
+          DateFilter.min = ui.values[ 0 ]
+          DateFilter.max = ui.values[ 1 ]
+          activeDate=true;
+          DateFilter()
+        }
+      });
+
+      $(".filter-button").click(function(e) {
+        e.preventDefault();
+        $(".filter-bar").children('.btn').removeClass('active')
+        $(this).addClass('active')
+        var type = $(this).attr('id');
+        if(type=='no-camping') {
+          type='no camping'
+        } 
+        activeFilter = true;
+        activeFilterType = type;
+        
+        buttonFilters(type)
+      });
+
+      $("#all").click(function(e) {
+        e.preventDefault();
+        $(".filter-bar").children('.btn').removeClass('active')
+        activeFilter = false;
+        $(this).addClass('active')
+        if(!activeDate){
+        AllMarkers();
+        }else{
+          AllMarkers();
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+      });
+
+      var HiddenDates = function() {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          return marker.start_at >= DateFilter.min && marker.start_at <= DateFilter.max;
+        });
+        return filtered
+       }
+
+      var DateFilter = function() {
+        if (!activeFilter){
+          AllMarkers();
+        }else{
+          AllMarkers();
+          _.each(HiddenType(activeFilterType), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+
+        }
+        _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+
+        
+      };
+
+      
+
+      
+
+      var HiddenType = function(type) {
+      var filtered = _.reject(Gmaps.map.markers, function(marker) {
+            return marker.event_type == type;
+          
+        });
+
+        return filtered
+       };
+
+      var AllMarkers = function() {
+        _.each(Gmaps.map.markers, function(marker) {
+          Gmaps.map.showMarker(marker)
+        })
+
+      };
+      var buttonFilters = function(type) {
+        AllMarkers();
+        if(activeDate){
+          AllMarkers();
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+
+        _.each(HiddenType(type), function(marker) {
+
+          Gmaps.map.hideMarker(marker)
+        })
+    
+        
+
+        
+      };
+    }
+  </script>
+<%end%>

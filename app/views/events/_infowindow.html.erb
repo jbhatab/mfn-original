@@ -1,0 +1,22 @@
+<div class="event-infowindow">
+  
+  <h3><%=link_to event.festival_year.festival.name, event.festival_year.festival %></h3>
+  <div class= 'top-left-ride'>
+  <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn btn-mini', method: :post %>
+  <p>Type: <%= event.event_type %></p>
+
+  <p>Location: <%= event.address.city %>, <%= event.address.state %>, <%= event.address.region %></p>
+  <% unless event.start_at ==nil or event.end_at == nil %>
+  <p>Date: <%= l event.start_at, format: :full  %> - 
+  <%= l event.end_at, format: :full %></p>
+  <%end%>
+</div>
+  <div class = 'top-right-ride'>
+    <% unless event.festival_year.festival.img_url == '-' or event.festival_year.festival.img_url == nil %>
+    <%= image_tag event.festival_year.festival.img_url+'?width=60&height=60', alt: event.festival_year.festival.name+"'s event infowindow picture"%>
+    <%end%>
+  </div>
+
+  <p>Facebook: <%=link_to event.festival_year.festival.facebook %></p>
+  <p>Website: <%= link_to event.festival_year.festival.website %></p>
+</div>

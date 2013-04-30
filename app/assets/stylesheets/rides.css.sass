@@ -1,0 +1,67 @@
+@import 'bootstrap'
+
+$green: #3fad49
+$orange: rgb(233, 86, 36)
+$brown: #5d3c1d
+
+.ride-container
+  font-size: 1.5em
+  margin-bottom: 5px
+  .row
+    div
+      overflow: hidden
+      @include border-radius(5px)
+      padding: 5px
+      border: 1px solid #000
+      height: 60px
+  .ride-comments
+    margin-top: 5px
+    display: none
+
+
+.giving
+  .row
+    div
+      background-color: $green
+      
+
+.need
+  .row
+    div
+      background-color: $orange
+
+
+.ride-infowindow
+  h4
+    line-height: 16px
+    margin-top: 0px
+    margin-bottom: 4px
+    a
+      color: $brown
+      text-decoration: none
+    a:hover
+      color: $orange
+  h5
+    line-height: 0px
+  img
+    margin-bottom: 5px
+  p
+    margin: 0px
+    line-height: 15px
+    font-size: 13px
+
+.ride-show-container
+  position: relative
+  margin-top: 40px
+  padding: 20px
+  width: 94%
+  height: auto
+  margin-left: 2%
+  font-size: 1.6em
+  float: left
+  background-color: rgba(241,241,241, .75)
+  @include border-radius(10px)
+
+.unrequired
+  abbr
+    display: none

@@ -1,0 +1,40 @@
+<div class="festival-show-container">
+  <section class="row-fluid">
+    <article class="span5 festival-show festival-left">
+      <h2>
+        <%= @festival.name %>
+      </h2>
+
+      <%unless @festival.img_url=='-' or @festival.img_url == nil%>
+        <%=image_tag(@festival.img_url+'?width=200&height=200', alt:@festival.name+" Facebook Image") %>
+      <%end%>
+    
+      <p>
+        <%= link_to @festival.name+"'s Website", @festival.website %>
+      </p>
+      <p>
+        <%= link_to @festival.name+"'s Facebook", @festival.facebook %>
+      </p>
+      <p>
+        <%= link_to @festival.name+"'s Twitter", @festival.twitter %>
+      </p>
+      <%= render @festival.reviews %>
+      <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>
+    </article>
+    
+    <article class="span3 festival-show festival-show-comments">
+      <h3>Comments</h3>
+      <div id="comments">
+        <%= render @festival.comments %>
+      </div>
+      <%= render :partial => 'comments/form', :locals => {:commentable => @festival} %>
+
+
+      
+    </article>
+    <article class="span4 festival-show festival-right">
+      <%= render 'festival_years/showyear' %>
+    </article>
+  </section>
+</div>
+

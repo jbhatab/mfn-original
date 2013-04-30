@@ -1,0 +1,72 @@
+<div class='festival-list'>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><h3>Name</h3></th>
+        <th><h3>Location</h3></th>
+        <th><h3>Region</h3></th>
+        <th><h3>Date</h3></th>
+        <th><h3>Type</h3></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  <% @events.each do |event| %>
+
+    
+    <tr onclick="document.location = '/festivals/<%=event.festival_year.festival.id%>';"class='fest-list-item'>
+
+      <td>
+        <%unless event.festival_year.festival.img_url=='-'%>
+          <%=image_tag(event.festival_year.festival.img_url, alt:event.festival_year.festival.name+" Facebook Image") %>
+        <%end%><%= event.festival_year.festival.name %></td>
+        
+      <td><%= event.address.city %>, <%= event.address.state %></td>
+      
+      <td><%= event.address.region %></td>
+      
+      <td>
+        <% unless event.start_at ==nil or event.end_at ==nil %>
+          <%= l event.start_at, :format => :full %>-<%= l event.end_at, :format => :full%>
+        <%end%>
+      </td>
+      
+      
+      <td><%= event.event_type %>
+      </td>
+      
+      <td>
+
+      <% if user_signed_in? %>
+        <%if current_user.events.empty? %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, class: "btn", method: :post %>
+        <%end%>
+        <% i=0 %>
+        <% current_user.events.each do |x| %>
+          <% if x.id == event.id %>
+             <a class="btn disabled lineup-deactivated">Already Added</a>
+             <%break%>
+          <%else%>
+            <% i=i+1 %>
+          <%end%>
+          <%if current_user.events.count == i %>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
+          <%end%>
+        <% end%>
+      <%else%>
+        <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
+      <%end%>
+      </td>
+    </tr>
+    
+  <%end%>
+
+
+    </tbody>
+  </table>
+  <div class="paginate-container">
+    <%= will_paginate @events,previous_label: h("<"), next_label: h(">")  %>
+  </div>
+</div>

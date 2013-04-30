@@ -1,0 +1,27 @@
+<div class='ride-show-container'>
+  <% if @ride.giving_ride %>
+  <h3> <%= @ride.user.username %>'s' Ride To <%= @ride.event.festival_year.festival.name %></h3>
+  <%else%>
+    <h3><%= @ride.user.username %> Is Looking For A Ride To <%= link_to @ride.event.festival_year.festival.name, @ride.event.festival_year.festival %>, <%=link_to 'Send Message', new_mailboxes_path%></h3>
+  <%end%>
+  <h4><%=link_to @ride.event.festival_year.festival.name+"'s other rides", '/events/'+@ride.event.id.to_s+'/rides' %></h4>
+  <% unless @ride.leave_date == nil and @ride.return_date == nil or @ride.leave_date == nil or @ride.return_date == nil %>
+  <b>Desired Leave Date:</b> <%= l @ride.leave_date, format: :full %></br>
+  <b>Desired Return Date:</b> <%= l @ride.return_date, format: :full %></br>
+  <%end%>
+  <% if @ride.giving_ride %>
+    <h3> Cost For Ride </h3>
+    <%= @ride.cost %>
+  <%else%>
+    <h3> Payment For Ride </h3>
+    <%= @ride.cost %>
+  <%end%>
+  <h3> Location </h3>
+    <%= @ride.address.line1%>, <%= @ride.address.city%>, <%= @ride.address.state%>, <%= @ride.address.zip%>
+  <h3>Message</h3>
+  <%= @ride.message%>
+
+  <%= render @ride.comments%>
+  <%= render :partial => 'comments/form', :locals => {:commentable => @ride} %>
+
+</div>

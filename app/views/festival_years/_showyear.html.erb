@@ -1,0 +1,54 @@
+<ul class="nav festival-year-tab nav-tabs" id="yearTab">
+  <% @festival.festival_years.each do |year| %>
+  <li><a href="#<%=year.id%>"><%=year.year%></a></li>
+  <%end%>
+</ul>
+ 
+<div class="festival-tabs tab-content">
+  <% @festival.festival_years.each do |year| %>
+    <div class="tab-pane" id="<%=year.id%>">
+      <% year.events.each do |event| %>
+        <% if user_signed_in? %>
+          <%if current_user.events.empty? %>
+              <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, class: "btn", method: :post %>
+          <%end%>
+          <% i=0 %>
+          <% current_user.events.each do |x| %>
+            <% if x.id == event.id %>
+               <a class="btn disabled lineup-deactivated">Already Added</a>
+               <%break%>
+            <%else%>
+              <% i=i+1 %>
+            <%end%>
+            <%if current_user.events.count == i %>
+            <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
+            <%end%>
+          <%end%>
+        
+        <%else%>
+          <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
+        <%end%>
+        <p>
+        <%unless event.start_at ==nil%>
+        <b>Dates: </b> <%= l event.start_at, :format => :full %> - <%= l event.end_at, :format => :full %>
+        <%else%>
+        <b>Dates: </b> TBD
+        <%end%>
+      </p>
+      <p>
+        <b>Location: </b><%=event.address.city%>, <%=event.address.state%>
+      </p>
+      <p>
+        <b>Festival Type: </b><%=event.event_type%>
+      </p>
+      <%= link_to 'Rides for this event!', event_rides_path(event), class: 'ride-event-link'%>
+
+      <%end%>
+
+    </div>
+  <%end%>
+</div>
+  
+
+
+

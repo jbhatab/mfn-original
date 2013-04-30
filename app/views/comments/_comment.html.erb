@@ -1,0 +1,46 @@
+<div id='comment_<%=comment.id%>' class="comment-container">
+  <div class="vote-area">
+    <% if user_signed_in? %>
+      <%if current_user.voted_up_on? comment%>
+        <%= link_to "Cool", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn btn-mini btn-success upvote', method: :put %></br>
+      <%else%>
+        <%= link_to "Cool", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+      <%end%>
+    <% else%>
+    <%= link_to "Cool", {:controller =>"comments", :action => "upvote", :id => comment.id}, :class => 'btn btn-mini upvote', method: :put %></br>
+    <%end%>
+    <%= comment.upvotes.size-comment.downvotes.size%>
+    <% if user_signed_in? %>
+      <% if current_user.voted_down_on? comment%>
+        <%= link_to "Lame", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn btn-mini btn-inverse downvote', method: :put %>
+      <%else%>
+        <%= link_to "Lame", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn btn-mini downvote', method: :put %>
+      <%end%>
+
+    <% else%>
+    <%= link_to "Lame", {:controller =>"comments", :action => "downvote", :id => comment.id}, :class => 'btn btn-mini downvote', method: :put %>
+    <%end%>
+  </div>
+  <div class="comment-area">
+    <header class="comment-header">
+      
+      <%= comment.title %> <i>by</i>
+      <% if comment.user_id == nil %>
+        Anonymous
+      <% else%>
+        <%= User.find(comment.user_id).username %>
+      <%end%>
+    </header>
+    <%=comment.comment%></br>
+    <% if user_signed_in? %>
+      <% if current_user.id == comment.user_id %>
+        <%= link_to 'Delete Comment', [comment.commentable, comment],
+                 :method => :delete,
+                 remote: true %>
+      <%end%>
+    <%end%>
+  </div>
+</div>
+
+  
+

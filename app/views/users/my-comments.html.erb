@@ -1,0 +1,24 @@
+<div role="main" class="main-page-container">
+My Comments
+<% if user_signed_in? %>
+ <% current_user.comments.each do |comment| %>
+    <div class="comment-container">
+      <header class="comment-header">
+        <%= comment.title %> 
+      </header>
+      <%= comment.comment %> </br>
+      <% if comment.commentable_type == "Ride"%>
+        <%= link_to comment.commentable.user.username+'s Ride', [comment.commentable.user,comment.commentable] %>,
+      <%else%>
+        <%= link_to comment.commentable.name, comment.commentable %>,
+      <%end%>
+      <%= link_to 'Delete Comment', [comment.commentable, comment],
+               confirm: 'Are you sure?',
+               method: :delete
+               %>
+    </div>
+  <%end%>
+
+
+<%end%>
+</div>

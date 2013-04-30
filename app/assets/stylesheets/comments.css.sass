@@ -1,0 +1,33 @@
+@import 'bootstrap'
+
+$brown: #5d3c1d
+
+.comment-container
+  background-color: rgba(220, 220, 220, 0.8)
+  @include border-radius(5px)
+  padding: 5px
+  border: 1px solid #000
+  margin-bottom: 5px
+  min-height: 65px
+  .vote-area
+    float: left
+    width: 40px
+    display: inline-block
+    text-align: center
+    vertical-align: middle
+    .btn
+      width: 25px
+  .comment-area
+    display: inline-block
+    width: 75%
+    margin-left: 5px
+    .comment-header
+      border-bottom: 1px solid #000
+
+.comment-form
+  background-color: rgba(190, 190, 190, 0.2)
+  @include border-radius(5px)
+  padding: 5px 5px 0px 5px
+  border: 1px solid #000
+  line-height: 0px
+

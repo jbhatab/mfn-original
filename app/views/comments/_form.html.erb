@@ -1,0 +1,7 @@
+<div class="comment-form">
+  <%= simple_form_for([commentable, commentable.comments.build])  do |f| %>
+    <%= f.input :title, :placeholder=>"Title" %>
+    <%= f.input :comment, :placeholder=>"Add comment here...", :input_html => { :cols => 50, :rows => 3 }%>
+    <%= f.button :submit %>
+  <% end %>
+</div>

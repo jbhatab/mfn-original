@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Festival Nation - Info, Maps, and More</title>
+  <meta name="description=" content="Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
+
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  
+  <%= csrf_meta_tags %>
+
+
+
+
+
+<!--[if lt IE 9]>
+<script src="dist/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  
+  <div id="application-container" class="container">
+
+    <%= render 'layouts/header' %>
+  <%= yield %>
+  </div>
+  <!--for google maps, keep in footer for speed-->
+  <%= yield :scripts %>
+  
+</body>
+</html>
