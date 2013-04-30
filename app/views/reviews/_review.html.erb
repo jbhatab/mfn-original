@@ -37,7 +37,7 @@
       <%end%>
       
     </header>
-    <b>Review: </b><%=review.content%></br>
+    <b> Review: </b><%=review.content%></br>
     <% [ :atmosphere, :music, :staging, :vendors, :amenities, :vip, :parking ].each do |a|  %>
       <% unless review[a] == '' or review[a] ==nil%>
       <span >
