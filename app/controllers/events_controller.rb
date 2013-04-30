@@ -18,15 +18,18 @@ class EventsController < ApplicationController
   end
 
   def map
+    
+
+  end
+
+  def get_events_map
     if params[:commit].eql?('Reset')
       redirect_to '/festival-map'
     end
     @events = Event.includes(:festival_year => :festival).search(params[:search])
     addresses = []
-    @events.each do |event|
-      unless event.address.longitude == 0
-        addresses << event.address
-      end
+    @events.joins(:address).where("addresses.longitude != ?", 0).each do |event|
+      addresses << event.address
     end  
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})
@@ -39,26 +42,13 @@ class EventsController < ApplicationController
     end
     
     respond_with @json
-    @events = Event.all
+    
   end
 
-
-  def rideshare
-    if params[:commit].eql?('Reset')
-      redirect_to '/rideshare'
-    end
-    @events = Event.includes(:festival_year => :festival).search(params[:search])
+  def get_events_rideshare
     addresses = []
-    list = []
-    @events.all.each do |event|
-      unless event.address.longitude == 0
-        list << event
-      end
-    end  
-    Event.all.each do |event|
-      unless event.address.longitude == 0
-        addresses << event.address
-      end
+    Event.joins(:address).where("addresses.longitude != ?", 0).each do |event|
+      addresses << event.address
     end  
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})
@@ -74,8 +64,21 @@ class EventsController < ApplicationController
         marker.json({ :start_at =>address.addressable.start_at.month, :id => address.addressable.id, :event_type => address.addressable.event_type})
       end
     end
-    @list = list.paginate(:page => params[:page], :per_page => 13)
     respond_with @json
+  end
+  def rideshare
+    if params[:commit].eql?('Reset')
+      redirect_to '/rideshare'
+    end
+    @events = Event.includes(:festival_year => :festival).search(params[:search])
+    list = []
+    @events.joins(:address).where("addresses.longitude != ?", 0).each do |event|
+      list << event
+    end  
+    
+    @list = list.paginate(:page => params[:page], :per_page => 13)
+    
+
   end
 
   def create

@@ -74,6 +74,8 @@ Mfn::Application.routes.draw do
   match '/contact', :to => 'homes#contact'
   match '/survivalguide', :to => 'homes#survivalguide'
   match '/rides_gmap', :to => 'rides#rides_gmap'
+  match '/get_events_map', :to => 'events#get_events_map'
+  match '/get_events_rideshare', :to => 'events#get_events_rideshare'
 
   root :to => 'homes#index'
 

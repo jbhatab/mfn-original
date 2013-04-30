@@ -29,6 +29,9 @@ gem 'will_paginate', '~> 3.0'
 gem 'simple_form'
 gem 'country_select'
 
+#track info
+gem 'newrelic_rpm'
+
 
 #google maps for rails
 gem 'gmaps4rails'

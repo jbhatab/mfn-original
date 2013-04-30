@@ -25,10 +25,30 @@
 
 
 <section id ="events-map">
-<%= gmaps("markers" => {"data" => @json, "options" => { 'randomize'=>true, 'max_random_distance'=>10  } } ) %> 
+  <div class="loader">
+</div>
+
+<%= gmaps("markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>10  } }, :last_map => false ) %> 
 
 </section>
 
+<script type="text/javascript" charset="utf-8">
+$(function() {
+ 
+//hide the empty container
+$(".map_container").hide();
+
+ 
+  $.getJSON('/get_events_map', function(json){
+    $(".map_container").show();
+    $('.loader').hide();
+    Gmaps.loadMaps();
+    Gmaps.map.addMarkers(json);
+  })
+
+ 
+});
+</script>
 <% content_for :scripts do %>
   <script type="text/javascript">
     
