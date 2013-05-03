@@ -3,6 +3,7 @@
 <head>
   <title>Music Festival Nation - Info, Maps, and More</title>
   <meta name="description=" content="Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
+  <%= analytics_init if Rails.env.production? %>
 
   <%= javascript_include_tag "application" %>
   <%= yield :head %>
