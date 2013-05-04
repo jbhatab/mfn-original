@@ -11,6 +11,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'google-analytics-rails'
+
 #importing csv files for festivals
 gem 'roo'
 
