@@ -2,7 +2,7 @@
   
   <h3><%=link_to event.festival_year.festival.name, event.festival_year.festival %></h3>
   <div class= 'top-left-ride'>
-  <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn btn-mini', method: :post %>
+  
   <p>Type: <%= event.event_type %></p>
 
   <p>Location: <%= event.address.city %>, <%= event.address.state %>, <%= event.address.region %></p>
@@ -17,6 +17,4 @@
     <%end%>
   </div>
 
-  <p>Facebook: <%=link_to event.festival_year.festival.name+"'s Facebook", event.festival_year.festival.facebook, :target => '_blank' %></p>
-  <p>Website: <%= link_to event.festival_year.festival.name+"'s Website", event.festival_year.festival.website, :target => '_blank' %></p>
 </div>
