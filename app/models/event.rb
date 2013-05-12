@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   has_event_calendar
-
+  search_methods :region_search, :event_type_search
   
   has_many :events_users, :dependent => :destroy
   has_many :users, through: :events_users
@@ -17,12 +17,14 @@ class Event < ActiveRecord::Base
 
   self.per_page = 15
 
-  def self.search(search)
-    if search
-      where('lower(festivals.name) LIKE ?', "%#{search}%".downcase)
-    else
-      scoped
-    end
-  end
+  scope :region_search,
+    lambda {|region|
+      includes(:address).where('LOWER(addresses.region) = ?', region.downcase)
+    }
 
+  scope :event_type_search,
+    lambda {|type|
+      where('LOWER(event_type) = ?', type.downcase)
+    }
+ 
 end

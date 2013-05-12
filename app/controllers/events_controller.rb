@@ -4,11 +4,14 @@ class EventsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @events = Event.includes(:address,  :festival_year, :festival_year =>:festival)
-                   .search(params[:search])
-                   .where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year])
-                   .order('festivals.name ASC')
-                   .paginate(:page => params[:page])
+    @search = Event.search(params[:search])
+                   
+            
+                   
+    @events = @search.includes(:address,  :festival_year, :festival_year =>:festival)
+                     .where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year])
+                     .order('festivals.name ASC')
+                     .paginate(:page => params[:page])
     
   end
 

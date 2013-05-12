@@ -19,6 +19,8 @@ gem 'roo'
 #user messages and such
 gem "has_mailbox"
 
+#filter and search gem
+gem "meta_search"
 
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'

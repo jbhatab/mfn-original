@@ -4,12 +4,43 @@
     <%= link_to "Don't see a festival on our list? Submit Here", new_festival_path, :class=>'festival-submit-link' %>
   </aside>
 
-  <%= form_tag '/festival-list/'+params[:country]+'/'+params[:year], :method => 'get', :id =>'festivals_search' do %>
-    <p>
-      <%= text_field_tag :search, params[:search]  %>
-      
-      <%= submit_tag "Search", :name => nil %>
-    </p>
+  <%= form_for @search, :url => '/festival-list/'+params[:country]+'/'+params[:year], :html => {:method => :get, :class => "form-horizontal", :id => "event_search"} do |f| %>
+    <div class="row">
+      <div class="control-group span4">
+        <%= f.label :festival_year_festival_name_contains , "Name:  ", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :festival_year_festival_name_contains %>
+        </div>
+      </div>
+      <div class="control-group span4">
+        <%= f.label :event_type_search , "Type:  ", class: "control-label" %>
+        <div class="controls">
+          <%= f.select :event_type_search, ["camping", "no camping", "multi-venue", "cruise"], :include_blank => true %>
+        </div>
+      </div>
+      <div class="control-group span4">
+        <%= f.label :region_search, 'Region:  ', class: "control-label" %>
+        <div class="controls">
+          <%= f.select :region_search, ["Northeast", "Northwest", "Southeast", "Midwest", "South", "West"], :include_blank => true %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span5">
+        <%= f.label :start_at_gte, "Dates Range: ", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :start_at_gte, :include_blank => true, :id => "start-at-field" %>
+        </div>
+      </div>
+      <div class="control-group span5">
+        <%= f.label :end_at_lte, "To", class: "control-label to-label" %>
+        <div class="controls">
+          <%= f.text_field :end_at_lte, :include_blank => true, :id => "end-at-field"%>
+        </div>
+      </div>
+    </div>
+
+    <%= f.submit %>
   <% end %>
 
 
