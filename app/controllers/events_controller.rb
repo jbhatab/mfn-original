@@ -69,6 +69,7 @@ class EventsController < ApplicationController
     end
     respond_with @json
   end
+  
   def rideshare
     if params[:commit].eql?('Reset')
       redirect_to '/rideshare'

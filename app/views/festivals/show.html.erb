@@ -10,13 +10,13 @@
       <%end%>
     
       <p>
-        <%= link_to @festival.name+"'s Website", @festival.website %>
+        <%= link_to @festival.name+"'s Website", @festival.website, :target => "_blank" %>
       </p>
       <p>
-        <%= link_to @festival.name+"'s Facebook", @festival.facebook %>
+        <%= link_to @festival.name+"'s Facebook", @festival.facebook, :target => "_blank" %>
       </p>
       <p>
-        <%= link_to @festival.name+"'s Twitter", @festival.twitter %>
+        <%= link_to @festival.name+"'s Twitter", @festival.twitter, :target => "_blank" %>
       </p>
       <%= render @festival.reviews %>
       <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>

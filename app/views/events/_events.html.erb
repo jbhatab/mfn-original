@@ -2,11 +2,11 @@
   <table class="table">
     <thead>
       <tr>
-        <th><h3>Name</h3></th>
-        <th><h3>Location</h3></th>
-        <th><h3>Region</h3></th>
-        <th><h3>Date</h3></th>
-        <th><h3>Type</h3></th>
+        <th><h3><%= sort_link @search, :festival_year_festival_name, "Name", :default_order => :asc %></h3></th>
+        <th><h3><%= sort_link @search, :address_state, "Location", :default_order => :asc %></h3></th>
+        <th><h3><%= sort_link @search, :address_region, "Region", :default_order => :asc %></h3></th>
+        <th><h3><%= sort_link @search, :start_at, "Date", :default_order => :asc %></h3></th>
+        <th><h3><%= sort_link @search, :event_type, "Type", :default_order => :asc %></h3></th>
         <th></th>
         <th></th>
         <th></th>
