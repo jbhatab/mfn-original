@@ -27,17 +27,24 @@
 
 
 <section class="rideshare-sidebar">
-  <%= form_tag '/rideshare/', :method => 'get', :id =>'rideshare_search' do %>
+  <%= form_for @search, :url => '/rideshare/', :html => {:method => :get, :class => "form-horizontal"}, :remote => true do |f| %>
+    <div class="row">
+      <div class="control-group span4">
+        <%= f.label :festival_year_festival_name_contains , "Name:  ", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :festival_year_festival_name_contains %>
+        </div>
+      </div>
+      <div class="span2">
+        <%= f.submit %>
+      </div>
+    </div>
 
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-    <% if false%>
-    <%= submit_tag 'Reset' %>
+    
+  <% end %>
 
-    <%end%>
-<% end %>
   <div id="rideshare-event-list">
-    <%= render :partial => 'ridesharelist'%>
+    <%= render 'ridesharelist'%>
   </div>
 </section>
 

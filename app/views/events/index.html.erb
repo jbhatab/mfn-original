@@ -4,7 +4,7 @@
     <%= link_to "Don't see a festival on our list? Submit Here", new_festival_path, :class=>'festival-submit-link' %>
   </aside>
 
-  <%= form_for @search, :url => '/festival-list/'+params[:country]+'/'+params[:year], :html => {:method => :get, :class => "form-horizontal", :id => "event_search"} do |f| %>
+  <%= form_for @search, :url => '/festival-list/'+params[:country]+'/'+params[:year], :html => {:method => :get, :class => "form-horizontal"} do |f| %>
     <div class="row">
       <div class="control-group span4">
         <%= f.label :festival_year_festival_name_contains , "Name:  ", class: "control-label" %>
@@ -50,7 +50,7 @@
   <%= render 'events' %>
 
 
-
+<%if false %>
   <h2>Import Festivals</h2>
 
   <%= form_tag import_festivals_path, multipart: true do %>
@@ -59,7 +59,7 @@
   <% end %>
 
 
-
+<%end%>
 
   <br />
 

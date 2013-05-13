@@ -50,9 +50,7 @@ class EventsController < ApplicationController
 
   def get_events_rideshare
     addresses = []
-    Event.joins(:address).where("addresses.longitude != ?", 0).each do |event|
-      addresses << event.address
-    end  
+    addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event")
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})
       marker.picture({
@@ -69,18 +67,12 @@ class EventsController < ApplicationController
     end
     respond_with @json
   end
-  
+
   def rideshare
-    if params[:commit].eql?('Reset')
-      redirect_to '/rideshare'
-    end
-    @events = Event.includes(:festival_year => :festival).search(params[:search])
-    list = []
-    @events.joins(:address).where("addresses.longitude != ?", 0).each do |event|
-      list << event
-    end  
-    
-    @list = list.paginate(:page => params[:page], :per_page => 13)
+    @search = Event.search(params[:search])
+    @events = @search.joins(:address)
+                     .where("addresses.longitude != ?", 0)
+                     .paginate(:page => params[:page], :per_page => 13)
     
 
   end
