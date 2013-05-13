@@ -85,7 +85,7 @@ $(".map_container").hide();
       var activeFilterType;
       var activeDate=false;
 
-      $(".rideshare-link").click(function(e) {
+      $(document).on("click", ".rideshare-link", function(e) {
         e.preventDefault();
 
         fest = $(this).attr('id');
