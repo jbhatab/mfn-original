@@ -9,6 +9,7 @@
     <div id='date-range' style="width: 300px"></div>
     <input type="text" id="filtered-pop-map" style="width: 160px"/>
   </div>
+  <% if false%>
   <div class='map-search'>
   <%= form_for @search, :url => "/get_map_events/" , :html => {:method => :get, :class => "form-inline"} do |f| %>
         <%= f.label :addressable_event_type_festival_year_festival_name_contains , "Name:  " %>
@@ -16,6 +17,7 @@
        <%= f.submit %>
 
     </div>
+    <%end%>
   <% end %>
   </div>
 
@@ -27,10 +29,11 @@
 
 <section id ="events-map">
   <div class="loader">
-</div>
+  </div>
 
-<%= gmaps("markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>10  } }, :last_map => false ) %> 
+  <%= gmaps("markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>10  } }, :last_map => false ) %> 
 
+  
 </section>
 
 <script type="text/javascript" charset="utf-8">
@@ -39,7 +42,6 @@ $(function() {
 //hide the empty container
   $(".map_container").hide();
 
- 
   $.getJSON('/get_map_events/', function(json){
     $(".map_container").show();
     $('.loader').hide();
@@ -47,8 +49,6 @@ $(function() {
     Gmaps.map.addMarkers(json);
   })
 
-
- 
 });
 </script>
 
@@ -56,6 +56,7 @@ $(function() {
   <script type="text/javascript">
     
     Gmaps.map.callback = function() {
+
 <% if false%>
         for (var i = 0; i <  this.markers.length; ++i) {
        //Gmaps.map.markers[i] is the marker's wrapper
