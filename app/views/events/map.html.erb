@@ -10,14 +10,15 @@
     <input type="text" id="filtered-pop-map" style="width: 160px"/>
   </div>
   <div class='map-search'>
-    <%= form_tag '/festival-map/', :method => 'get', :id =>'rideshare_search' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-      <%= submit_tag 'Reset' %>
-    </p>
+  <%= form_for @search, :url => "/get_map_events/" , :html => {:method => :get, :class => "form-inline"} do |f| %>
+        <%= f.label :addressable_event_type_festival_year_festival_name_contains , "Name:  " %>
+          <%= f.text_field :addressable_event_type_festival_year_festival_name_contains %>
+       <%= f.submit %>
+
+    </div>
   <% end %>
   </div>
+
 </div>
 
 
@@ -36,24 +37,49 @@
 $(function() {
  
 //hide the empty container
-$(".map_container").hide();
+  $(".map_container").hide();
 
  
-  $.getJSON('/get_events_map', function(json){
+  $.getJSON('/get_map_events/', function(json){
     $(".map_container").show();
     $('.loader').hide();
     Gmaps.loadMaps();
     Gmaps.map.addMarkers(json);
   })
 
+
  
 });
 </script>
+
 <% content_for :scripts do %>
   <script type="text/javascript">
     
     Gmaps.map.callback = function() {
-      
+<% if false%>
+        for (var i = 0; i <  this.markers.length; ++i) {
+       //Gmaps.map.markers[i] is the marker's wrapper
+       //Gmaps.map.markers[i].serviceObject is the google map's object
+       google.maps.event.addListener(Gmaps.map.markers[i].serviceObject, 'click', loadAndDisplayInfowindow(Gmaps.map.markers[i]) });
+      }
+    };
+    function loadAndDisplayInfowindow(markerContainer){
+      return function(){
+         //your code to get the html with ajax, the user id is available in markerContainer.id
+         var @evid = markerContainer.id;
+         <% @ev = Event.find(@evid)%>
+         var yourHTML = <%= render_to_string(:partial => "/events/infowindow", :locals => { :event => @ev}) %>;
+         //basic google map code to display infowindow
+         var infowindow = new google.maps.InfoWindow({content: yourHTML });
+         currentMap = Gmaps.map
+         if (currentMap.visibleInfoWindow !== null)
+         { currentMap.visibleInfoWindow.close(); }
+         infowindow.open(currentMap.map, markerContainer.serviceObject)
+         currentMap.visibleInfoWindow = infowindow;
+
+      }
+    }
+        <%end%>
 
       var activeFilter=false;
       var activeFilterType;

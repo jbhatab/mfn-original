@@ -2,6 +2,8 @@ class EventsController < ApplicationController
 
   respond_to :json, :html
   helper_method :sort_column, :sort_direction
+  caches_action :get_map_events
+  caches_action :get_events_rideshare
 
   def index
     @search = Event.search(params[:search])
@@ -21,22 +23,17 @@ class EventsController < ApplicationController
   end
 
   def map
+    @search = Address.search(params[:search])
     
 
   end
 
-  def get_events_map
-    if params[:commit].eql?('Reset')
-      redirect_to '/festival-map'
-    end
-    @events = Event.includes(:festival_year => :festival).search(params[:search])
-    addresses = []
-    @events.joins(:address).where("addresses.longitude != ?", 0).each do |event|
-      addresses << event.address
-    end  
+  def get_map_events
+
+    @search = Address.search(params[:search])
+    addresses = @search.where("longitude != ? and addressable_type = ?", 0, "Event")
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})
-      marker.title "#{address.addressable.festival_year.festival.name}"
       if address.addressable.start_at == nil
         marker.json({ :id => address.addressable.id, :event_type => address.addressable.event_type})
       else
@@ -45,11 +42,12 @@ class EventsController < ApplicationController
     end
     
     respond_with @json
+
     
   end
 
   def get_events_rideshare
-    addresses = []
+    
     addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event")
     @json = addresses.to_gmaps4rails do |address, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})

@@ -9,12 +9,6 @@ class Ride < ActiveRecord::Base
 
   validates_presence_of :user_id, :event_id, :leave_date, :return_date
 
-  def self.search(search)
-    if search
-      where('festivals.name LIKE ?', "%#{search}%")
-    else
-      scoped
-    end
-  end
+
 
 end
