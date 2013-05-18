@@ -28,7 +28,7 @@
       <% if comment.user_id == nil %>
         Anonymous
       <% else%>
-        <%= User.find(comment.user_id).username %>
+        <%= link_to User.find(comment.user_id).username, new_mailboxes_path %>
       <%end%>
     </header>
     <%=comment.comment%></br>

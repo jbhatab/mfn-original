@@ -1,33 +1,56 @@
-<div role="main" class="main-page-container">
-  <h2> My Summer Lineup</h2>
-  <% if user_signed_in? %>
+<h2 class='profile-header'> My Summer Lineup</h2>
 
-    <% current_user.events.order('start_at ASC').each do |event| %>
-
-      <div class="lineup-box">
-        <a href="festivals/<%=event.festival_year.festival.id%>">
-          <span class="lineup-span">
-            <div class="lineup-date">
-              <% unless event.start_at == nil%>
-              <%= l event.start_at, format: :full %>
-              <%end%>
-
-            </div>
-
-              <%unless event.festival_year.festival.img_url=='-'%>
-                <%=image_tag(event.festival_year.festival.img_url+'?width=200&height=200', alt:event.festival_year.festival.name+" Facebook Image") %>
-              <%end%>
-              
-              <%= event.festival_year.festival.name %> 
-
-              
-            
-
-          </span>
-        </a>
-        <%= link_to "Remove From Lineup", {:controller =>"users", :action => "remove_from_festival_lineup", :id => event.id}, :class => 'btn remove-button btn-danger', method: :post %>
+<% if user_signed_in? %>
+  <% current_user.events.order('start_at ASC').each do |event| %>
+    <div class='row-fluid lineup-row'>
+      <div class="span7 left-side">
+        <div>
+          <%unless event.festival_year.festival.img_url=='-' or nil%>
+            <%=link_to image_tag(event.festival_year.festival.img_url+'?width=200&height=200', alt: event.festival_year.festival.name+" Facebook Image", class: 'img-circle lineup-pic'), 'festivals/'+event.festival_year.festival.id.to_s %>
+          <%end%>
+        </div>
+        <div class='lineup-info'>
+          <p><%= event.festival_year.festival.name %></p>
+          <p>Type: <%= event.event_type.capitalize%></p>
+          <% unless event.start_at == nil or event.end_at == nil or event.start_at =='-' or event.end_at == '-'%>
+            <p><%=l event.start_at, format: :full%> -</p>
+            <p><%=l event.end_at, format: :full%></p>
+          <% end %>
+        </div>
       </div>
+      <div class="span5">
+        <div id="countdown_<%=event.id%>"> </div>
+        <%= link_to "Remove From Lineup", {:controller =>"users", :action => "remove_from_festival_lineup", :id => event.id}, :class => 'btn remove-button btn-danger', method: :post %>
+      </div> 
+      
+    </div>
+    <%if false%>
+    <script>
+    function updateWCTime<%=event.id%>() {
+      now      = new Date();
+      kickoff  = <%=event.start_at%>;
+      diff = kickoff - now;
 
+      days  = Math.floor( diff / (1000*60*60*24) );
+      hours = Math.floor( diff / (1000*60*60) );
+      mins  = Math.floor( diff / (1000*60) );
+      secs  = Math.floor( diff / 1000 );
+
+      dd = days;
+      hh = hours - days  * 24;
+      mm = mins  - hours * 60;
+      ss = secs  - mins  * 60;
+
+            document.getElementById("countdown_<%=event.id%>")
+                .innerHTML =
+                    dd + ' days ' +
+                    hh + ' hours ' +
+                    mm + ' minutes ' +
+                    ss + ' seconds';
+    }
+    setInterval('updateWCTime<%=event.id%>()', 1000 );
+    </script>
     <%end%>
   <%end%>
-</div>
+<%end%>
+

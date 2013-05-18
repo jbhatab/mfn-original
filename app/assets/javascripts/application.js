@@ -30,7 +30,5 @@
 //= require reviews
 //= require rides
 //= require users
-
-
-
+//= require dates
 

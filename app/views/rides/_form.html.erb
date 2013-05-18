@@ -1,19 +1,21 @@
-<%= simple_form_for([current_user,@ride]) do |f| %>
+<%= simple_form_for([current_user,@ride], :html => {:class => "form-horizontal new-ride-form"}) do |f| %>
 
   <%= f.association :event, label_method: :name,collection: Festival.all(order: 'name')%>
-  <%= f.input :leave_date %>
-  <%= f.input :return_date %>
+  <%= f.input :leave_date, :placeholder => '2013-06-25', :as => :datepicker  %>
+  <%= f.input :return_date, :placeholder => '2013-06-27', :as => :datepicker %>
   <%= f.input :cost %>
-  <%= f.collection_radio_buttons :giving_ride, [[true, 'Giving A Ride'] ,[false, 'Looking For A Ride']],  :first, :last%>
+  <div class='radio-buttons'>
+    <%= f.collection_radio_buttons :giving_ride, [[true, 'Giving A Ride'] ,[false, 'Looking For A Ride']],  :first, :last%>
+  </div>
   <%= f.simple_fields_for :address_attributes do |d| %>
-    <%= d.input :line1, label_html: { class: 'unrequired' } %>
-    <%= d.input :line2, label_html: { class: 'unrequired' } %>
-    <%= d.input :city %>
-    <%= d.input :state %>
+    <%= d.input :line1, :label => 'Address Line 1', :placeholder => '420 Make Believe Lane', label_html: { class: 'unrequired' } %>
+    <%= d.input :line2, :label => 'Address Line 2', :placeholder => 'Apartment 99', label_html: { class: 'unrequired' } %>
+    <%= d.input :city, :placeholder => 'Minneapolis' %>
+    <%= d.input :state, :placeholder => 'MN' %>
     <%= d.input :country, priority: [ "United States" ] %>
-    <%= d.input :zip, label_html: { class: 'unrequired' } %>
+    <%= d.input :zip, :placeholder => '55414', label_html: { class: 'unrequired' } %>
     <%= d.hidden_field :gmaps, :value => true %>
   <%end%>
-  <%= f.input :message, label_html: { class: 'unrequired' }, :input_html => { :cols => 50, :rows => 3 } %>
+  <%= f.input :message, :placeholder => "We're taking a flying dragon to EDC, you in?" , label_html: { class: 'unrequired' }, :input_html => { :cols => 50, :rows => 3 } %>
   <%= f.button :submit %>
 <% end %>

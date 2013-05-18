@@ -19,8 +19,8 @@
     <tr onclick="document.location = '/festivals/<%=event.festival_year.festival.id%>';"class='fest-list-item'>
 
       <td>
-        <%unless event.festival_year.festival.img_url=='-'%>
-          <%=image_tag(event.festival_year.festival.img_url, alt:event.festival_year.festival.name+" Facebook Image") %>
+        <%unless event.festival_year.festival.img_url=='-' or event.festival_year.festival.img_url==nil%>
+          <%=image_tag(event.festival_year.festival.img_url, class: 'img-rounded', alt:event.festival_year.festival.name+" Facebook Image") %>
         <%end%><%= event.festival_year.festival.name %></td>
         
       <td><%= event.address.city %>, <%= event.address.state %></td>

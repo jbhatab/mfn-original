@@ -2,15 +2,18 @@
   
   <h3><%=link_to event.festival_year.festival.name, event.festival_year.festival %></h3>
   <div class= 'top-left-ride'>
-  
-  <p>Type: <%= event.event_type %></p>
+    
+    <p>Type: <%= event.event_type %></p>
 
-  <p>Location: <%= event.address.city %>, <%= event.address.state %>, <%= event.address.region %></p>
-  <% unless event.start_at ==nil or event.end_at == nil %>
-  <p>Date: <%= l event.start_at, format: :full  %> - 
-  <%= l event.end_at, format: :full %></p>
-  <%end%>
-</div>
+    <p>Location: <%= event.address.city %>, <%= event.address.state %>, <%= event.address.region %></p>
+    <% unless event.start_at ==nil or event.end_at == nil %>
+    <p>Date: <%= l event.start_at, format: :full  %> - 
+    <%= l event.end_at, format: :full %></p>
+    <%end%>
+    <p>
+      <%=link_to 'Show rides for this festival', '#', class: 'rideshare-link btn btn-mini', :data => { :festid => 'fest_'+event.id.to_s}%>
+    </p> 
+  </div>
   <div class = 'top-right-ride'>
     <% unless event.festival_year.festival.img_url == '-' or event.festival_year.festival.img_url == nil %>
     <%= image_tag event.festival_year.festival.img_url+'?width=60&height=60', alt: event.festival_year.festival.name+"'s event infowindow picture"%>

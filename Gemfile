@@ -11,6 +11,10 @@ group :production do
   gem 'pg'
 end
 
+#seo gem
+#gem 'meta-tags', :require => 'meta_tags'
+
+#google analytics
 gem 'google-analytics-rails'
 
 #importing csv files for festivals

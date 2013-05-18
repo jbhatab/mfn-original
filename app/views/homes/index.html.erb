@@ -1,12 +1,5 @@
-  <aside class="todays-festivals-container">
-    <h3>Festivals Going On Right Now </h3>
-    <% @events.each do |event| %>
-      <div class="todays-festival">
-        <%=link_to event.festival_year.festival.name, event.festival_year.festival%>
-      </div>
-    <%end%>
-  </aside>
-  <div role="main" class="main-page-container">
+<div class='row-fluid'>
+  <div class='span9'>
     <section id="carousel">
       <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner">
@@ -69,28 +62,30 @@
         <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
         <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </section>
+  </div>
+
+  <div class='span3'>
     <div class= "sidebar">
-      <section id="facebook-widget">
+      <div id="facebook-widget">
         <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like-box" data-href="https://www.facebook.com/MusicFestivalNation" data-width="292" data-height="190" data-show-faces="true" data-stream="false" data-header="false"></div>
-      </section>
-      <section id="twitter-widget">
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-like-box" data-href="https://www.facebook.com/MusicFestivalNation" data-width="292" data-height="250" data-show-faces="true" data-stream="false" data-header="false"></div>
+      </div>
+      <div id="twitter-widget">
         <a class="twitter-timeline"  href="https://twitter.com/MusicFestNation"  data-widget-id="300359219029360640">Tweets by @MusicFestNation</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </section>
-      
+      </div>
     </div>
   </div>
-  <footer>
-
-  </footer>
+</div>
+<footer>
+</footer>
 
 
 

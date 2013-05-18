@@ -1,8 +1,6 @@
-<div role="main" class="main-page-container">
-<h3> My Rides</h3>
+<h3 class='profile-header'> My Rides</h3>
 <% if user_signed_in? %>
+  
   <%= render current_user.rides %>
 
-
 <%end%>
-</div>

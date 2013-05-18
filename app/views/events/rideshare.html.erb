@@ -1,52 +1,70 @@
-<div class="row">
-  <div class="filter-bar">
-    <%= link_to "Camping Festivals",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
-    <%= link_to "Non Camping Festivals",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
-    <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
-    <%= link_to "All",'#', id: 'all', class: 'btn btn-success' %>
-    <%if user_signed_in?%>
-      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary' %>
-    <%else%>
-      <%= link_to 'Do you need or have a ride to a fesitval? Post it here!', 'users/login', class: 'btn btn-primary' %>
-    <%end%>
+<div class="row-fluid rideshare-top">
+  <div class='span6 '>
+    <div class='btn-group filter-bar'>
+      <%= link_to "Camping",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
+      <%= link_to "Non Camping",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
+      <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
+      <%= link_to "All",'#', id: 'all', class: 'btn btn-success active' %>
+    </div>
+    <div class='btn-group filter-bar'>
+      <%= link_to "Festivals",'#', id: 'festivals', class: 'filter-button btn btn-success' %> 
+      <%= link_to "Rides",'#', id: 'rides', class: 'filter-button btn btn-success' %> 
+      <%= link_to "Both",'#', id: 'both', class: 'clear-button btn btn-success active' %>
+    </div>
   </div>
-  <div class="slider-box">
-    <div id='date-range' style="width: 300px"></div>
-    <input type="text" id="filtered-pop" style="width: 160px"/>
+  <div class='span6'>
+    <div class="row-fluid">
+      <div class='span6'>
+        <%if user_signed_in?%>
+          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary post-ride-button' %>
+        <%else%>
+          <%= link_to 'Add a ride', 'users/login', class: 'btn btn-primary' %>
+        <%end%>
+      </div>
+      <div class='span6'>
+        <div id='date-range' style="width: 98%"></div>
+          <input type="text" id="filtered-pop" style="width: 49%"/>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 
 
 <div class="loader">
 </div>
 
+<div class='row-fluid'>
+  <div class='span8'>
+    <%= gmaps("map_options" => { :raw => "{scrollwheel: false}"}, "markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>30  } }, :last_map => false ) %> 
 
-<%= gmaps("markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>10  } }, :last_map => false ) %> 
-
-
-
-<section class="rideshare-sidebar">
-  <%= form_for @search, :url => '/rideshare/', :html => {:method => :get, :class => "form-horizontal"}, :remote => true do |f| %>
-    <div class="row">
-      <div class="control-group span4">
-        <%= f.label :festival_year_festival_name_contains , "Name:  ", class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :festival_year_festival_name_contains %>
-        </div>
-      </div>
-      <div class="span2">
-        <%= f.submit %>
-      </div>
-    </div>
-
-    
-  <% end %>
-
-  <div id="rideshare-event-list">
-    <%= render 'ridesharelist'%>
   </div>
-</section>
+  <div class='span4'>
+    <section class="rideshare-sidebar">
+      <%= form_for @search, :url => '/rideshare/', :html => {:method => :get, :class => "form-horizontal"}, :remote => true do |f| %>
+        <div class="row">
+          <div class="control-group">
+            <%= f.label :festival_year_festival_name_contains , "Name ", class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :festival_year_festival_name_contains %>
+            </div>
+          </div>
+          <div>
+            <%= f.submit 'Search', class: 'btn' %>
+          </div>
+        </div>
+
+        
+      <% end %>
+
+      <div id="rideshare-event-list">
+        <%= render 'ridesharelist'%>
+      </div>
+    </section>
+  </div>
+</div>
 
 
 <script type="text/javascript" charset="utf-8">
@@ -88,7 +106,9 @@ $(".map_container").hide();
       $(document).on("click", ".rideshare-link", function(e) {
         e.preventDefault();
 
-        fest = $(this).attr('id');
+        $(".filter-bar").children('.btn').removeClass('active')
+
+        fest = $(this).data('festid');
         festivalFilters(fest);
       });
     
@@ -130,7 +150,7 @@ $(".map_container").hide();
 
       $(".filter-button").click(function(e) {
         e.preventDefault();
-        $(".filter-bar").children('.btn').removeClass('active')
+        $(this).parent(".filter-bar").children('.btn').removeClass('active')
         $(this).addClass('active')
         var type = $(this).attr('id');
         if(type=='no-camping') {
@@ -142,9 +162,10 @@ $(".map_container").hide();
         buttonFilters(type)
       });
 
-      $("#all").click(function(e) {
+
+      $(".clear-button").click(function(e) {
         e.preventDefault();
-        $(".filter-bar").children('.btn').removeClass('active')
+        $(this).parent(".filter-bar").children('.btn').removeClass('active')
         activeFilter = false;
         $(this).addClass('active')
         if(!activeDate){

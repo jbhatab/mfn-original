@@ -1,6 +1,6 @@
 <ul>
     <% @events.each do |event| %>
-      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link', id:'fest_'+event.id.to_s%></li>
+      <li><%=link_to event.festival_year.festival.name, '#', class: 'rideshare-link', :data => { :festid => 'fest_'+event.id.to_s}%></li>
     <%end%>
   </ul>
   <%= will_paginate @list%>

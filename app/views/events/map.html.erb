@@ -14,7 +14,7 @@
   <%= form_for @search, :url => "/get_map_events/" , :html => {:method => :get, :class => "form-inline"} do |f| %>
         <%= f.label :addressable_event_type_festival_year_festival_name_contains , "Name:  " %>
           <%= f.text_field :addressable_event_type_festival_year_festival_name_contains %>
-       <%= f.submit %>
+       <%= f.submit 'Search' %>
 
     </div>
     <%end%>
@@ -31,7 +31,7 @@
   <div class="loader">
   </div>
 
-  <%= gmaps("markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>10  } }, :last_map => false ) %> 
+  <%= gmaps("map_options" => { :raw => "{scrollwheel: false}"}, "markers" => {"data" => [], "options" => { 'randomize'=>true, 'max_random_distance'=>30  } }, :last_map => false ) %> 
 
   
 </section>

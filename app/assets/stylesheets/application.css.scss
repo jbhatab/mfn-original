@@ -14,16 +14,17 @@
  *= require jquery.ui.slider
  *= require jquery.ui.accordion
  *= require jquery.ui.datepicker
- *= require addresses
  *= require authentications
  *= require comments
  *= require festival_years
  *= require festivals
  *= require fonts
  *= require gmaps4rails
- *= require homes
- *= require omniauth_callbacks
  *= require reviews
  *= require rides
  *= require users
+ *= require homes
  */
+
+@import 'bootstrap';
+@import 'bootstrap-responsive';

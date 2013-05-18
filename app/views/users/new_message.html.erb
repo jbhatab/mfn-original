@@ -1,8 +1,0 @@
-<div class='main-page-container'>
-  <h4><%= link_to 'My Messages', '/my-messages'%></h4>
-  <%= simple_form_for([current_user,@message]) do |f| %>
-    <%= f.input :subject %>
-    <%= f.input :body %>
-  <%= f.button :submit %>
-<% end %>
-</div>

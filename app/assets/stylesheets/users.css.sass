@@ -1,71 +1,147 @@
-@import 'bootstrap'
-
-
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
 
 $lavender: #CE7898
 $gold: #CDAD00
 $grey: #696969
+$lightblue: #9ecaed
 $unopened: rgba(233, 86, 36, .6)
+$heavywhite: rgba(241,241,241,.9)
+$brown: #5d3c1d
 
-
-
-body
-  font-size: 62.5%
-  padding: 0px
-  margin-top: 0px
-  background-image: url('mfn-bg.png')
-  background-position: center center fixed
-  @include background-size(100% auto)
-  overflow-x: hidden
-
-
-//lineup
+// Login and Sign Up 
 
 .login-container
-  position: relative
-  margin-top: 40px
-  padding-bottom: 20px
-  width: 94%
+  padding: 15px
+  width: 300px
+  @media (max-width: 767px)
+    width: 90%
+    padding: 5%
   height: auto
-  margin-left: 2%
-  float: left
-  background-color: rgba(241,241,241, .5)
+  background-color: $heavywhite
   @include border-radius(10px)
-  h2
-    line-height: 0px
-    margin-bottom: 20px
+  border: 1px solid $lightblue
+  @include box-shadow(0 0 30px $lightblue)
+  h3
+    line-height: 25px
+    margin-top: 0px
+    text-align: center
+  h4
+    text-align: center
 
-.login-form
-  margin: 40px 0px 0px 30px
+#new_user
+  label
+    margin-bottom: 2px
+  input
+    margin-bottom: 4px
 
-.lineup-box
-  float: left
-  margin-left: 5%
-  width: 80%
-  height: auto
-  min-height: 150px
-  border: 2px solid $grey
-  font-size: 3em
-  @include border-radius(5px)
-  background-color: rgba(190, 190, 190, 0.2)
-  .lineup-date
-    vertical-align: middle
-    display: inline
-  img
-    display: inline
-    padding-left: 15px
+.bottom-login
   .btn
-    position: absolute
-    left: 65%
-    margin-top: 5px
-    z-index: 100
-    
+    margin: 2px 20px 0 0
+  label
+    display: inline-block
+  input
+    display: inline-block
+
+.facebook-twitter-row
+  text-align: center
+
+.horizontal-divider
+  border: 0
+  height: 1px
+  background: #333
+  background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc) 
+  background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc) 
+  background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc) 
+  background-image:      -o-linear-gradient(left, #ccc, #333, #ccc) 
+  margin: 0 0 10px 0
+
+.lame-links
+  a
+    font-size: 12px
+  a:first-child
+    margin-right: 15px
+
+// My Profile
+
+.profile-header
+  font-family: 'StereofidelicRegular', sans-serif, Georgia
+  text-align: center
+  font-size: 50px
+
+.profile-row
+  font-family: 'StereofidelicRegular', sans-serif, Georgia
+  text-align: center
 
 
+.profile-box
+  height: 150px
+  @include border-radius(15px)
+  border: 2px solid #000
+  @include background-size(cover)
+  margin-bottom: 4px
+  h3
+    font-size: 40px
+    margin-top: 35px
+    color: #000
+  h3:hover
+    text-decoration: none
+#festival-lineup
+  background-image: url('lineup.png')
+#my-comments
+  background-image: url('my-comments.png')
+#my-rides
+  background-image: url('my-rides.png')
+#my-messages
+  background-image: url('my-messages.png')
+#my-reviews
+  background-image: url('my-reviews.png')
+
+.profile-span
+  position: relative
+  float: left !important
+  margin: 0px
+  z-index: 100
+  width: 100%
+  height: 100%
+  top: 0px
+  left: 0px
+  @include border-radius(15px)
+
+
+.profile-span:hover
+  background-color: rgba(205,173,0, .7)
+
+// Festival Lineup
+
+.lineup-row
+  margin-bottom: 15px
+
+.remove-button
+  width: 60%
+  margin-left: 20%
+  vertical-align: bottom
+  height: 100%
+
+.left-side
+  div
+    vertical-align: middle
+    display: inline-block
+    margin-left: 15px
+
+.lineup-info
+  width: 10px
+  white-space: nowrap
+  overflow: show
+  p
+    font-size: 3em
+    line-height: .7em
+
+.lineup-pic
+  @include box-shadow(0px 0px 30px $brown)
 
 .lineup-box:hover
   background-color: $gold
-
 
 .lineup-span
   position: relative
@@ -78,51 +154,6 @@ body
   top: 0px
   left: 0px
   color: #000
-
-
-.profile-row
-  font-family: 'StereofidelicRegular', sans-serif, Georgia
-  text-align: center
-  margin-bottom: 10px
-  h1
-    font-size: 60px
-  .profile-box
-    height: 150px
-    @include border-radius(15px)
-    border: 2px solid #000
-    @include background-size(cover)
-    h3
-      margin-top: 35px
-      font-size: 40px
-      color: #000
-    h3:hover
-      text-decoration: none
-  #festival-lineup
-    background-image: url('lineup.png')
-  #my-comments
-    background-image: url('my-comments.png')
-  #my-rides
-    background-image: url('my-rides.png')
-  #my-messages
-    background-image: url('my-messages.png')
-  #my-reviews
-    background-image: url('my-reviews.png')
-
-
-
-.profile-span
-  position: relative
-  margin: 0px
-  z-index: 100
-  width: 100%
-  height: 100%
-  top: 0px
-  left: 0px
-  @include border-radius(15px)
-
-.profile-span:hover
-  background-color: rgba(205,173,0, .7)
-
 
 #message-container
   font-size: 1.2em

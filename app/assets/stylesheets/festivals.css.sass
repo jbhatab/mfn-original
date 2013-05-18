@@ -1,4 +1,5 @@
-@import 'bootstrap'
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
 
 $lightyellow: rgb(255,225,94)
 $red: rgb(239,49,34)
@@ -10,32 +11,36 @@ $darkorange: rgb(233, 74, 19)
 
 
 
-.festival-container
-  position: relative
-  margin-top: 30px
-  width: 95%
-  height: auto
-  margin-left: 2.5%
-  background-color: rgba(255,255,255, .5)
-  @include border-radius(5px)
-  border: 2px solid $darkorange
-  .festival-submit-link
-    font-size: 16px
-    margin: 5px 0 0 5px
-    color: $brown
-
-
+.festival-submit-link
+  font-size: 1.6em
+  color: $brown
 
 #event_search
   margin-bottom: 0px
+  .row-fluid
+    .control-group
+      margin-top: 0px
+      margin-bottom: 4px
+      label
+        padding-top: 5px
+      input
+        float: right
+      select
+        float: right
+      @media (max-width: 1000px)
+        float: none
+        margin-left: 0px
+        width: 100%
+        .control-label
+          float: left
   .control-label
     width: auto
     font-size: 1.5em
     font-weight: bold
   .controls
     margin-left: 0px
-  .to-label
-    margin-left: -55px
+
+
 
 .festival-list
   width: 100%
@@ -66,77 +71,23 @@ $darkorange: rgb(233, 74, 19)
       margin-left: 10px
     .fest-list-item:hover
       background-color: $orange
-    
-
-.festival-show-container
-  margin-top: 40px
-  width: 94%
-  height: auto
-  margin-left: 3%
-  margin-right: 3%
-  background-color: rgba(241,241,241, .8)
-  @include border-radius(10px)
 
 
-.festival-show
+#festival-show
   p
     font-size: 2em
+  .fest-img
+    vertical-align: top
 
-.festival-show-comments
-  margin-left: -20px !important
-  margin-right: 20px
-  
-.festival-left
-  padding: 15px 15px 0px 30px
-  img
-    margin-bottom: 5px
-
-.festival-right
-  padding-right: 30px
-  
-
-
-.paginate-container
-  text-align: center
-
-.pagination 
-  display: inline-block
-  width: auto
-  text-align: center
-  cursor: default
-  height: 22px
-  a, span, em 
-    padding: 0.2em 0.5em
-    display: block
-    float: left
-    margin-right: 1px
-  .disabled 
+.ticket-exchange
+  .vote-area
     display: none
-  .current 
-    font-style: normal
-    font-weight: bold
-    background: $brown
-    color: white
-    border: 1px solid #000
-  a 
-    text-decoration: none
-    background: $green
-    color: #000
-    border: 1px solid #000
-    &:hover, &:focus 
-      color: white
-      text-decoration: none
-      background: $brown
-  .page_info 
-    background: #2e6ab1
-    color: white
-    padding: 0.4em 0.6em
-    width: 22em
-    margin-bottom: 0.3em
-    text-align: center
-    b 
-      color: #000033
-      background: #2e6ab1 + 60
-      padding: 0.1em 0.25em
-    
   
+.festival-social-buttons
+  display: inline-block
+  width: 75px
+  img
+    width: 75px
+
+
+

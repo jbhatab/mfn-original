@@ -8,7 +8,6 @@ Mfn::Application.routes.draw do
   mailboxes_for :users, :user_object_name => "current_user", :user_attribute_name => "username", :user_display_attribute => "username"       
   match '/festival-list/:country/:year', :to => 'events#index'
 
-
   #for sessions and logging in
   #get "log_out" => "sessions#destroy", :as => "log_out"
   #get "log_in" => "sessions#new", :as => "log_in"
@@ -64,7 +63,6 @@ Mfn::Application.routes.draw do
   resources :homes
 
   match '/my-reviews', :to => 'users#my-reviews'
-  match '/my-messages', :to => 'users#my-messages'
   match '/new_message', :to => 'users#new_message'
   match '/my-rides', :to => 'users#my-rides'
   match '/my-profile', :to => 'users#my-profile'

@@ -1,4 +1,5 @@
-@import 'bootstrap'
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
 
 $brown: #5d3c1d
 $gold: #CDAD00
@@ -17,7 +18,7 @@ body
 
 .ec-calendar 
   font-family: verdana, arial, helvetica, sans-serif
-  font-size: 11px
+  font-size: 1em
   line-height: 14px
   margin: 0
   padding: 0
@@ -40,9 +41,18 @@ table.ec-calendar-header
   height: 40px
   background: $green
   border-bottom: 3px solid $brown
+  @media (max-width: 649px)
+    font-size: 2em
 
 th.ec-month-nav 
   height: 50px !important
+  font-size: 2.2em
+  @media (max-width: 979px) and (min-width: 768px)
+    font-size: 1.7em
+  @media (max-width: 767px) and (min-width: 650px)
+    font-size: 1.45em
+  @media (max-width: 649px)
+    font-size: 1.2em
   border: none !important
   border-bottom: 3px solid $brown !important
   background: $green !important
@@ -55,14 +65,17 @@ th.ec-month-nav
 th.ec-month-nav:hover
   a
     color: $brown !important
-    font-size: 2em !important
+    font-size: 1.6em 
+    @media (max-width: 649px)
+      font-size: 1em
+
     
 
 th.ec-next-month
-  font-size: 2.5em
+  border-left: 3px solid $brown !important
 
 th.ec-previous-month
-  font-size: 2.5em
+  border-right: 3px solid $brown !important
 
 
 

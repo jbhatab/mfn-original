@@ -1,5 +1,5 @@
-<div role="main" class="main-page-container">
-My Comments
+
+<h3 class="profile-header">My Comments</h3>
 <% if user_signed_in? %>
  <% current_user.comments.each do |comment| %>
     <div class="comment-container">
@@ -21,4 +21,3 @@ My Comments
 
 
 <%end%>
-</div>

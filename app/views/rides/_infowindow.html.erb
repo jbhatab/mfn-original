@@ -1,13 +1,15 @@
 <div class="ride-infowindow">
-  <h4> <%= link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> </h4>
+
   <% if ride.giving_ride %>
-    <h5><%=link_to 'I got your ride right here', [ride.user,ride]%></h5>
+    <h4><%=link_to 'I have a ride, click here for info.', [ride.user,ride]%>
+    </h4>
   <%else%>
-    <h5><%=link_to 'Can I snag a ride? see more..', [ride.user,ride]%> </h5>
+    <h4><%=link_to 'I need a ride! Click here for info.', [ride.user,ride]%> </h4>
   <%end%>
+  <p><b>Festival:</b> <%= link_to ride.event.festival_year.festival.name %></p>
   <p><b>Festival Dates:</b> <%= l ride.event.start_at, format: :full %>,<%= l ride.event.end_at, format: :full %></p>
   <p><b>Ride Dates:</b> <%= l ride.leave_date, format: :full %>,<%= l ride.return_date, format: :full %></p>
   <p><b>Location:</b> <%= ride.address.city %>,<%= ride.address.state %></p>
 
-  
+
 </div>

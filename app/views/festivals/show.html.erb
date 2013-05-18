@@ -1,40 +1,43 @@
-<div class="festival-show-container">
-  <section class="row-fluid">
-    <article class="span5 festival-show festival-left">
-      <h2>
-        <%= @festival.name %>
-      </h2>
-
+<div id='festival-show' class='row-fluid'>
+  <article class="span6">
+    <h2>
+      <%= @festival.name %>
+    </h2>
       <%unless @festival.img_url=='-' or @festival.img_url == nil%>
-        <%=image_tag(@festival.img_url+'?width=200&height=200', alt:@festival.name+" Facebook Image") %>
+        <%=image_tag(@festival.img_url+'?width=150&height=150', alt:@festival.name+" Facebook Image", class: 'fest-img img-polaroid') %>
+
       <%end%>
     
-      <p>
-        <%= link_to @festival.name+"'s Website", @festival.website, :target => "_blank" %>
-      </p>
-      <p>
-        <%= link_to @festival.name+"'s Facebook", @festival.facebook, :target => "_blank" %>
-      </p>
-      <p>
-        <%= link_to @festival.name+"'s Twitter", @festival.twitter, :target => "_blank" %>
-      </p>
-      <%= render @festival.reviews %>
-      <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>
-    </article>
-    
-    <article class="span3 festival-show festival-show-comments">
-      <h3>Comments</h3>
-      <div id="comments">
+    <div class='festival-social-buttons'>
+      <%= link_to image_tag('facebook-128x128.png'), @festival.facebook, :target => "_blank" %>
+
+      <%= link_to image_tag('twitter-128x128.png'), @festival.twitter, :target => "_blank" %>
+    </div>
+
+    <p>
+      <%= link_to @festival.name+"'s Website", @festival.website, :target => "_blank" %>
+    </p>
+
+    <%= render 'festival_years/showyear' %>
+    <article>
+      <h3>Ticket Exchange</h3>
+      <div class="ticket-exchange">
         <%= render @festival.comments %>
       </div>
       <%= render :partial => 'comments/form', :locals => {:commentable => @festival} %>
+    </article>
+    
+  </article>
+  
+  
+  <article class="span6">
+    <%= render @festival.reviews %>
+    <%= render :partial => 'reviews/form', :locals => {:festival => @festival, :user_review => @user_review} %>
+    
 
 
-      
-    </article>
-    <article class="span4 festival-show festival-right">
-      <%= render 'festival_years/showyear' %>
-    </article>
-  </section>
+    
+  </article>
+  
 </div>
 

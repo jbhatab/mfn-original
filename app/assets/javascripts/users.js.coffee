@@ -3,3 +3,6 @@ $ ->
   $( "#outbox" ).accordion({ active: 1000000})
   $('.message-header').click ->
     $(this).removeClass('unopened')
+
+
+	

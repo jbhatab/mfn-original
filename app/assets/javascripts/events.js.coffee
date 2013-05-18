@@ -1,8 +1,5 @@
 $ ->
-  $('#start-at-field').datepicker
-    dateFormat: 'yy-mm-dd'
-
-  $('#end-at-field').datepicker
+  $('.event-list-date').datepicker
     dateFormat: 'yy-mm-dd'
 
   $("#event_search input").keyup ->

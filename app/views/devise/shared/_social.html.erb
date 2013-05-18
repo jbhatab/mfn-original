@@ -1,0 +1,9 @@
+<div class='facebook-twitter-row row-fluid'>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <div class='span6'>
+        <%= link_to image_tag(provider.to_s+"-btn.png"), user_omniauth_authorize_path(provider) %>
+      </div>
+    <% end -%>
+  <% end -%>
+</div>
