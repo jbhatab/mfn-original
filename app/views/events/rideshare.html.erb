@@ -1,15 +1,15 @@
 <div class="row-fluid rideshare-top">
   <div class='span6 '>
     <div class='btn-group filter-bar'>
-      <%= link_to "Camping",'#', id: 'camping', class: 'filter-button btn btn-success' %> 
-      <%= link_to "Non Camping",'#', id: 'no-camping', class: 'filter-button btn btn-success' %> 
-      <%= link_to "Cruises",'#', id: 'cruise', class: 'filter-button btn btn-success' %> 
-      <%= link_to "All",'#', id: 'all', class: 'btn btn-success active' %>
+      <%= link_to "Camping",'#', id: 'camping', class: 'type-filter-button btn btn-success' %> 
+      <%= link_to "Non Camping",'#', id: 'no-camping', class: 'type-filter-button btn btn-success' %> 
+      <%= link_to "Cruises",'#', id: 'cruise', class: 'type-filter-button btn btn-success' %> 
+      <%= link_to "All",'#', id: 'type-all', class: 'btn btn-success active' %>
     </div>
     <div class='btn-group filter-bar'>
-      <%= link_to "Festivals",'#', id: 'festivals', class: 'filter-button btn btn-success' %> 
-      <%= link_to "Rides",'#', id: 'rides', class: 'filter-button btn btn-success' %> 
-      <%= link_to "Both",'#', id: 'both', class: 'clear-button btn btn-success active' %>
+      <%= link_to "Festivals",'#', id: 'Festival', class: 'ride-filter-button btn btn-success' %> 
+      <%= link_to "Rides",'#', id: 'Ride', class: 'ride-filter-button btn btn-success' %> 
+      <%= link_to "Both",'#', id: 'ride-all', class: ' btn btn-success active' %>
     </div>
   </div>
   <div class='span6'>
@@ -17,8 +17,10 @@
       <div class='span6'>
         <%if user_signed_in?%>
           <%= link_to 'Need/Have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary post-ride-button' %>
+        <%elsif Rails.env.production?%>
+          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', 'http://www.musicfestivalnation.com/users/login', class: 'btn btn-primary post-ride-button' %>
         <%else%>
-          <%= link_to 'Add a ride', 'users/login', class: 'btn btn-primary' %>
+          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', 'users/login', class: 'btn btn-primary post-ride-button' %>
         <%end%>
       </div>
       <div class='span6'>
@@ -98,10 +100,12 @@ $(".map_container").hide();
         });
 
       
+      var isRideFilterActive=false;
+      var isTypeFilterActive=false;
+      var isDateFilterActive=false;
+      var activeFilterRide="";
+      var activeFilterType="";
 
-      var activeFilter=false;
-      var activeFilterType;
-      var activeDate=false;
 
       $(document).on("click", ".rideshare-link", function(e) {
         e.preventDefault();
@@ -143,40 +147,79 @@ $(".map_container").hide();
           $( "#filtered-pop" ).val( (monthes[ui.values[ 0 ]])+ " - " + (monthes[ui.values[ 1 ]]))
           DateFilter.min = ui.values[ 0 ]
           DateFilter.max = ui.values[ 1 ]
-          activeDate=true;
-          DateFilter()
+          isDateFilterActive=true;
+          DateFilter(activeFilterType, activeFilterRide);
         }
       });
 
-      $(".filter-button").click(function(e) {
+      $(".type-filter-button").click(function(e) {
         e.preventDefault();
         $(this).parent(".filter-bar").children('.btn').removeClass('active')
         $(this).addClass('active')
-        var type = $(this).attr('id');
-        if(type=='no-camping') {
-          type='no camping'
-        } 
-        activeFilter = true;
-        activeFilterType = type;
+        activeFilterType = $(this).attr('id');
+        if(activeFilterType=='no-camping') {
+          activeFilterType='no camping';
+        };
+        isTypeFilterActive = true;
         
-        buttonFilters(type)
+        typeButtonFilters(activeFilterType,activeFilterRide);
+      });
+
+      $(".ride-filter-button").click(function(e) {
+        e.preventDefault();
+        $(this).parent(".filter-bar").children('.btn').removeClass('active')
+        $(this).addClass('active')
+        activeFilterRide = $(this).attr('id');
+
+        isRideFilterActive = true;
+        
+        rideButtonFilters(activeFilterType , activeFilterRide)
       });
 
 
-      $(".clear-button").click(function(e) {
+      $("#type-all").click(function(e) {
         e.preventDefault();
         $(this).parent(".filter-bar").children('.btn').removeClass('active')
-        activeFilter = false;
+        isTypeFilterActive = false;
         $(this).addClass('active')
-        if(!activeDate){
+        
         AllMarkers();
-        }else{
-          AllMarkers();
+        if(isDateFilterActive){
           _.each(HiddenDates(), function(marker) {
           Gmaps.map.hideMarker(marker)
         })
         }
+        if(isRideFilterActive){
+          _.each(HiddenRide(activeFilterRide), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+
       });
+
+      $("#ride-all").click(function(e) {
+        e.preventDefault();
+        $(this).parent(".filter-bar").children('.btn').removeClass('active')
+        $(this).addClass('active')
+        isRideFilterActive = false;
+        
+        AllMarkers();
+        if(isDateFilterActive){
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+        if(isTypeFilterActive){
+          _.each(HiddenType(activeFilterType), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        }
+
+      });
+
+
+
+
 
       var HiddenDates = function() {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
@@ -187,16 +230,18 @@ $(".map_container").hide();
         return filtered
        }
 
-      var DateFilter = function() {
-        if (!activeFilter){
-          AllMarkers();
-        }else{
-          AllMarkers();
+      var DateFilter = function(activeFilterType, activeFilterRide) {
+        AllMarkers();
+        if (isTypeFilterActive){
           _.each(HiddenType(activeFilterType), function(marker) {
-          Gmaps.map.hideMarker(marker)
-        })
-
-        }
+            Gmaps.map.hideMarker(marker)
+          })
+          };
+        if (isRideFilterActive){
+          _.each(HiddenRide(activeFilterRide), function(marker) {
+            Gmaps.map.hideMarker(marker)
+          })
+          };
         _.each(HiddenDates(), function(marker) {
           Gmaps.map.hideMarker(marker)
         })
@@ -204,15 +249,26 @@ $(".map_container").hide();
         
       };
 
-      var HiddenType = function(type) {
+      var HiddenType = function(activeFilterType) {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
           if( marker.id >0){
-            return marker.event_type == type;
-          }else{return marker.ride_event_type ==type;}
+            return marker.event_type == activeFilterType;
+          }else{return marker.ride_event_type ==activeFilterType;}
         });
 
         return filtered
        };
+
+       var HiddenRide = function(activeFilterRide) {
+       var filtered = _.reject(Gmaps.map.markers, function(marker) {
+          if( activeFilterRide == "Festival"){
+            return marker.id > 0;
+          }else{return !(marker.id > 0);}
+        });
+
+        return filtered
+       };
+
 
       var HiddenFestival = function(fest) {
       var filtered = _.reject(Gmaps.map.markers, function(marker) {
@@ -241,16 +297,45 @@ $(".map_container").hide();
         })
       }
 
-      var buttonFilters = function(type) {
+      var typeButtonFilters = function(activeFilterType, activeFilterRide) {
         AllMarkers();
-        if(activeDate){
-          AllMarkers();
+        if(isDateFilterActive){
           _.each(HiddenDates(), function(marker) {
           Gmaps.map.hideMarker(marker)
         })
+        };
+
+        if (isRideFilterActive){
+          _.each(HiddenRide(activeFilterRide), function(marker) {
+            Gmaps.map.hideMarker(marker)
+          })
+          };
+
+        _.each(HiddenType(activeFilterType), function(marker) {
+
+          Gmaps.map.hideMarker(marker)
+        })
+    
+        
+
+        
+      };
+
+      var rideButtonFilters = function(activeFilterType, activeFilterRide) {
+        AllMarkers();
+        if(isDateFilterActive){
+          _.each(HiddenDates(), function(marker) {
+          Gmaps.map.hideMarker(marker)
+        })
+        } 
+        if(isTypeFilterActive) {
+          _.each(HiddenType(activeFilterType), function(marker) {
+          Gmaps.map.hideMarker(marker)
+          })
+
         }
 
-        _.each(HiddenType(type), function(marker) {
+        _.each(HiddenRide(activeFilterRide), function(marker) {
 
           Gmaps.map.hideMarker(marker)
         })

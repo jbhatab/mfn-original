@@ -1,19 +1,4 @@
-
-#no over botting 
+# robots.txt generated at http://www.mcanerin.com
 User-agent: *
-Crawl-delay: 17
-
-# Allow Googlebot anywhere
-
-User-agent: Googlebot
-
 Disallow: 
-
-User-agent: Mediapartners-Google 
-Disallow:
-
-# Allow no other bots on the site
-
-User-agent: *
-
-Disallow: /
+Crawl-delay: 5
