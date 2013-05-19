@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Music Festival Nation - Info, Maps, and More</title>
-  <meta name="description=" content="Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.">
+  <%= display_meta_tags :site => 'Music Festival Nation', :title => 'Info, Maps, and More', :description => "Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.", :author => 'Blaine Hatab'%>
+
+  <meta name="description=" content=>
 
   <%= analytics_init if Rails.env.production? %>
 

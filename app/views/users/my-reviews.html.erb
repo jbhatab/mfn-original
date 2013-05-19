@@ -1,8 +1,9 @@
-<div role="main" class="main-page-container">
-<h3> My Reviews</h3>
+<% title 'My Reviews' %>
+<% description 'All of your festival reviews in one section.' %>
+
+<h3 class='profile-header'> My Reviews</h3>
 <% if user_signed_in? %>
   <%= render current_user.reviews %>
 
 
 <%end%>
-</div>
