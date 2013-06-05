@@ -7,7 +7,7 @@ $car-rad: 0px
 $darkorange: rgb(233, 74, 19)
 $green: #3fad49
 $brown: #5d3c1d
-$clearwhite: rgba(241,241,241, .6)
+$clearwhite: rgba(241,241,241, .7)
 
 
 
@@ -175,7 +175,18 @@ body
 #application-container
   width: 94%
   height: auto
-  margin: 30px 2%
+  margin: 30px 2% 0px 2%
+  padding: 10px
+  background-color: $clearwhite
+  @include border-radius(10px)
+  min-height: 400px
+
+
+
+#footer-container
+  width: 94%
+  height: auto
+  margin: 10px 2%
   padding: 10px
   background-color: $clearwhite
   @include border-radius(10px)
@@ -185,11 +196,11 @@ body
 #myCarousel
   width: 100%%
   float: left
-  height: 400px
-  @media (min-width: 980px)
-    height: 500px
+  height: 300px
+  @media (min-width: 1025px)
+    height: 400px
   @media (max-width: 579px)
-    height: 300px
+    height: 200px
   @include border-radius($car-rad)
   border: 1px solid #000000
   @include box-shadow(1px 1px 1px #000000)
@@ -198,11 +209,11 @@ body
   img
     @include border-radius($car-rad)
     position: static
-    height: 400px
-    @media (min-width: 980px)
-      height: 500px
+    height: 300px
+    @media (min-width: 1025px)
+      height: 400px
     @media (max-width: 579px)
-      height: 300px
+      height: 200px
     width: 100%
     z-index: -100
   .item-header

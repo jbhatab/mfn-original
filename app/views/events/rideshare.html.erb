@@ -3,7 +3,7 @@
 
 <div class="row-fluid rideshare-top">
   <div class='span6 '>
-    <div class='btn-group filter-bar'>
+    <div class='btn-group filter-bar camping-bar'>
       <%= link_to "Camping",'#', id: 'camping', class: 'type-filter-button btn btn-success' %> 
       <%= link_to "Non Camping",'#', id: 'no-camping', class: 'type-filter-button btn btn-success' %> 
       <%= link_to "Cruises",'#', id: 'cruise', class: 'type-filter-button btn btn-success' %> 
@@ -13,7 +13,8 @@
       <%= link_to "Festivals",'#', id: 'Festival', class: 'ride-filter-button btn btn-success' %> 
       <%= link_to "Rides",'#', id: 'Ride', class: 'ride-filter-button btn btn-success' %> 
       <%= link_to "Both",'#', id: 'ride-all', class: ' btn btn-success active' %>
-    </div>
+    </div></br>
+    <i><b>Click a marker to get more information about the festival.</i></b>
   </div>
   <div class='span6'>
     <div class="row-fluid">
@@ -27,7 +28,7 @@
         <%end%>
       </div>
       <div class='span6'>
-        <div id='date-range' style="width: 98%"></div>
+        <div id='date-range' style="width: 98%">
           <input type="text" id="filtered-pop" style="width: 49%"/>
         </div>
       </div>
@@ -47,6 +48,7 @@
 
   </div>
   <div class='span4'>
+
     <section class="rideshare-sidebar">
       <%= form_for @search, :url => '/rideshare/', :html => {:method => :get, :class => "form-horizontal"}, :remote => true do |f| %>
         <div class="row">
@@ -57,13 +59,17 @@
             </div>
           </div>
           <div>
-            <%= f.submit 'Search', class: 'btn' %>
+            <i style="margin:6px;"class="icon icon-search"></i>
           </div>
+         
+            
+ 
         </div>
 
         
       <% end %>
-
+      <i><b>Click on the festival name to find it on the map
+            </i></b>
       <div id="rideshare-event-list">
         <%= render 'ridesharelist'%>
       </div>
