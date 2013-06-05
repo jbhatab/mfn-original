@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   acts_as_voter
 
   has_many :authentications
+  has_many :blogs
   
   
   #allows users to have events (festival lineup)
