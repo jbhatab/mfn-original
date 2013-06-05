@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321182107) do
+ActiveRecord::Schema.define(:version => 20130530180145) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(:version => 20130321182107) do
   end
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "cover"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "blogs", ["user_id"], :name => "index_blogs_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""

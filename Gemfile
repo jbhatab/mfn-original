@@ -17,6 +17,9 @@ gem 'meta-tags', :require => 'meta_tags'
 #google analytics
 gem 'google-analytics-rails'
 
+#upload images
+gem 'carrierwave'
+
 #importing csv files for festivals
 gem 'roo'
 
