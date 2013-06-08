@@ -31,4 +31,5 @@
 //= require rides
 //= require users
 //= require dates
-
+//= require blogs
+//= require ckeditor/init

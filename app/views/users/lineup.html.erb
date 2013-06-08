@@ -1,7 +1,7 @@
 <% title 'Festival Lineup' %>
 <% description 'Create your lineup for the summer.' %>
 
-<h2 class='profile-header'> My Summer Lineup</h2>
+<h2 class='profile-header'> Festival Lineup</h2>
 
 <% if user_signed_in? %>
   <% current_user.events.order('start_at ASC').each do |event| %>

@@ -20,6 +20,9 @@ gem 'google-analytics-rails'
 #upload images
 gem 'carrierwave'
 
+#rich text editor for blogs
+gem "ckeditor"
+
 #importing csv files for festivals
 gem 'roo'
 

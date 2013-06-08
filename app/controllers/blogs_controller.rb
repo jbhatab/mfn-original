@@ -1,4 +1,6 @@
 class BlogsController < ApplicationController
+  http_basic_authenticate_with :name => ENV['BLOG_USERNAME'], :password => ENV['BLOG_PASSWORD'], :except => :show
+  before_filter :authenticate_user!, :only => :new 
   # GET /blogs
   # GET /blogs.json
   def index
@@ -41,6 +43,7 @@ class BlogsController < ApplicationController
   # POST /blogs.json
   def create
     @blog = Blog.new(params[:blog])
+    @blog.user = current_user
 
     respond_to do |format|
       if @blog.save

@@ -37,6 +37,7 @@
       <td><%= event.event_type %>
       </td>
       
+      <% if false %>
       <td>
 
       <% if user_signed_in? %>
@@ -59,6 +60,7 @@
         <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
       <%end%>
       </td>
+      <%end%>
     </tr>
     
   <%end%>

@@ -1,15 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @blog.title %>
-</p>
+<div class='row-fluid'>
+  <div class='span12'>
+    <article class='blog-container show-blog'>
+      <h2>
+        <%= @blog.title %>
+      </h2>
+      <hr class='horizontal-divider-2'>
+      <p>
+        <pre class='blog-area'>
+        <%= raw @blog.content %>
+      </pre>
+      </p>
+    </article>
+    <h3>Comments</h3>
+    <div class="ticket-exchange">
+      <%= render @blog.comments %>
+    </div>
+    <%= render :partial => 'comments/form', :locals => {:commentable => @blog} %>
 
-<p>
-  <b>Content:</b>
-  <%= @blog.content %>
-</p>
 
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+  </div>
+</div>

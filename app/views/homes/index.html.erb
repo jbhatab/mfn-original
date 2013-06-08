@@ -64,10 +64,23 @@
     </section>
     <section id="blogs">
       <% @blogs.each do |blog| %>
-        <article class='blog-container'>
-          Badurp
+        <article class='blog-container home-blog'>
+          <h2>
+            <%= link_to blog.title, blog %>
+          </h2>
+          <hr class='horizontal-divider-2'>
+          <pre class='blog-area'>
+            <%= raw blog.content %>
+          </pre>
+          <footer class='blog-footer'>
+            by <i><%=blog.user.username%></i>
+            <%= link_to 'Read More...', blog %>
+
+          </footer>
+
         </article>
       <%end%>
+      <%= will_paginate @blogs %>
     </section>
   </div>
 

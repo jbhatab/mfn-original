@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20130530180145) do
   create_table "blogs", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.string   "cover"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
