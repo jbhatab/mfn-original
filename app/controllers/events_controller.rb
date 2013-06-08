@@ -47,20 +47,20 @@ class EventsController < ApplicationController
   end
 
   def get_events_rideshare
-    
-    addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event")
-    @json = addresses.to_gmaps4rails do |address, marker|
-      marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => address.addressable})
+    events = Event.includes(:address, :festival_year => :festival).all
+    #addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event").includes(:addressable => {:festival_year => :festival})
+    @json = events.to_gmaps4rails do |event, marker|
+      marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => event})
       marker.picture({
                 'picture' => view_context.image_path("red-dot.png"),
                 'width'   => 20,
                 'height'  => 20
                })
-      marker.title "#{address.addressable.festival_year.festival.name}"
-      if address.addressable.start_at == nil
-        marker.json({ :id => address.addressable.id, :event_type => address.addressable.event_type})
+      marker.title "#{event.festival_year.festival.name}"
+      if event.start_at == nil
+        marker.json({ :id => event.id, :event_type => event.event_type})
       else
-        marker.json({ :start_at =>address.addressable.start_at.month, :id => address.addressable.id, :event_type => address.addressable.event_type})
+        marker.json({ :start_at => event.start_at.month, :id => event.id, :event_type => event.event_type})
       end
     end
     respond_with @json
