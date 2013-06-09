@@ -71,16 +71,8 @@ class FestivalsController < ApplicationController
   # POST /festivals.json
   def create
     @festival = Festival.new(params[:festival])
-    respond_to do |format|
-      if @festival.save
-        FestivalMailer.submit_festival(@festival).deliver
-        format.html { redirect_to '/festival-list/US/2013', notice: 'Festival was successfully submitted.' }
-        format.json { render json: @festival, status: :created, location: @festival }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @festival.errors, status: :unprocessable_entity }
-      end
-    end
+    FestivalMailer.submit_festival(@festival).deliver
+    redirect_to '/festival-list/US/2013', notice: 'Festival was successfully submitted.'
   end
 
   # PUT /festivals/1

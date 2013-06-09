@@ -1,4 +1,15 @@
 class Event < ActiveRecord::Base
+
+  acts_as_gmappable process_geocoding: lambda { |obj| obj.address.latitude.blank? && obj.address.longitude.blank? }
+
+  def latitude
+    address.latitude
+  end
+
+  def longitude
+    address.longitude
+  end
+
   has_event_calendar
   search_methods :region_search, :event_type_search
   
@@ -27,4 +38,9 @@ class Event < ActiveRecord::Base
       where('LOWER(event_type) = ?', type.downcase)
     }
  
+
+  def gmaps4rails_address
+    "#{self.address.line1}, #{self.address.line2}, #{self.address.city}, #{self.address.state}, #{self.address.country}, #{self.address.zip} " 
+  end
+
 end
