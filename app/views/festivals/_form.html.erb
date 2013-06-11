@@ -4,7 +4,7 @@
   <%= f.input :website %>
   <%= f.input :facebook %>
   <%= f.input :twitter %>
-<%if false%>
+<%if current_user.admin == true%>
   <h3>Have An Event Coming Up?</h3>
   <%= f.simple_fields_for :festival_years do |y| %>
     <%= y.input :year %>

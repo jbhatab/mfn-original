@@ -18,16 +18,16 @@
   </div>
   <div class='span6'>
     <div class="row-fluid">
-      <div class='span6'>
+      <div class='span4'>
         <%if user_signed_in?%>
-          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', new_user_ride_path(current_user), class: 'btn btn-primary post-ride-button' %>
+          <%= link_to 'Post a Ride', new_user_ride_path(current_user), class: 'btn btn-primary post-ride-button' %>
         <%elsif Rails.env.production?%>
-          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', 'http://www.musicfestivalnation.com/users/login', class: 'btn btn-primary post-ride-button' %>
+          <%= link_to 'Post a Ride', 'http://www.musicfestivalnation.com/users/login', class: 'btn btn-primary post-ride-button' %>
         <%else%>
-          <%= link_to 'Need/Have a ride to a fesitval? Post it here!', 'users/login', class: 'btn btn-primary post-ride-button' %>
+          <%= link_to 'Post a Ride', 'users/login', class: 'btn btn-primary post-ride-button' %>
         <%end%>
       </div>
-      <div class='span6'>
+      <div class='span8'>
         <div id='date-range' style="width: 98%">
           <input type="text" id="filtered-pop" style="width: 49%"/>
         </div>
@@ -68,7 +68,7 @@
 
         
       <% end %>
-      <i><b>Click on the festival name to find it on the map
+      <i><b>Click on the festival name to filter it on the map
             </i></b>
       <div id="rideshare-event-list">
         <%= render 'ridesharelist'%>

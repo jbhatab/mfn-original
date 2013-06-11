@@ -77,6 +77,7 @@ Mfn::Application.routes.draw do
   match '/festival-map', :to => 'events#map'
   match '/about', :to => 'homes#about'
   match '/contact', :to => 'homes#contact'
+  match '/advertising', :to => 'homes#advertising'
   match '/survivalguide', :to => 'homes#survivalguide'
   match '/rides_gmap', :to => 'rides#rides_gmap'
   get '/get_map_events' => 'events#get_map_events'

@@ -8,6 +8,7 @@
   <% @festival.festival_years.each do |year| %>
     <div class="tab-pane" id="<%=year.id%>">
       <% year.events.each do |event| %>
+        <% if false %>
         <% if user_signed_in? %>
           <%if current_user.events.empty? %>
               <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, class: "btn", method: :post %>
@@ -27,6 +28,7 @@
         
         <%else%>
           <%= link_to "Add To Lineup", {:controller =>"users", :action => "add_to_festival_lineup", :id => event.id}, :class => 'btn', method: :post %>
+        <%end%>
         <%end%>
         <p>
         <%unless event.start_at ==nil%>

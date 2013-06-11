@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
   # PUT /addresses/1.json
   def update
     @address = @addressable.find(params[:id])
-
+    
     respond_to do |format|
       if @address.update_attributes(params[:address])
         format.html { redirect_to @address, notice: 'Address was successfully updated.' }

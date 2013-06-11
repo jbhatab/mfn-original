@@ -31,7 +31,7 @@ gem "has_mailbox"
 
 #filter and search gem
 gem "meta_search"
-gem "squeel"
+
 
 #comments and voting
 gem 'acts_as_commentable', '3.0.1'

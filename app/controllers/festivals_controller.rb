@@ -3,7 +3,16 @@ class FestivalsController < ApplicationController
   # GET /festivals.json
   respond_to :json, :html
   helper_method :sort_column, :sort_direction
+  before_filter :check_admin, :only => [:edit, :destroy]
   
+  def check_admin
+    if user_signed_in?
+      if current_user.admin == false
+        redirect_to '/'
+      end
+    end
+  end
+
   def import
     Festival.import(params[:file])
     redirect_to root_url, notice: "festivals imported"
@@ -65,6 +74,7 @@ class FestivalsController < ApplicationController
   # GET /festivals/1/edit
   def edit
     @festival = Festival.find(params[:id])
+
   end
 
   # POST /festivals

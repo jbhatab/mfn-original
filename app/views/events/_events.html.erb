@@ -36,6 +36,14 @@
       
       <td><%= event.event_type %>
       </td>
+      <% if user_signed_in?%>
+      <% if current_user.admin == true %>
+        <td><%= link_to "Edit", edit_festival_path(event.festival_year.festival) %>
+        </td>
+        <td><%= link_to 'Destroy', event.festival_year.festival, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      <%end%>
+      <%end%>
       
       <% if false %>
       <td>
