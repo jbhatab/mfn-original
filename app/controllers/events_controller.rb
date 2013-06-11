@@ -68,7 +68,7 @@ class EventsController < ApplicationController
   end
 
   def rideshare
-    expire_action :action => :get_events_rideshare
+    #expire_action :action => :get_events_rideshare
     @search = Event.search(params[:search])
     @events = @search.joins(:address)
                      .where("addresses.longitude != ?", 0)
