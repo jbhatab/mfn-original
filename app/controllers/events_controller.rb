@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   end
 
   def get_events_rideshare
-    events = Event.includes(:address, :festival_year => :festival).all
+    events = Event.includes(:address, :festival_year => :festival).where('addresses.longitude != ?', 0)
     #addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event").includes(:addressable => {:festival_year => :festival})
     @json = events.to_gmaps4rails do |event, marker|
       marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => event})
@@ -68,7 +68,7 @@ class EventsController < ApplicationController
   end
 
   def rideshare
-    #expire_action :action => :get_events_rideshare
+    expire_action :action => :get_events_rideshare
     @search = Event.search(params[:search])
     @events = @search.joins(:address)
                      .where("addresses.longitude != ?", 0)
