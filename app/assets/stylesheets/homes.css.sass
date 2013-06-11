@@ -199,7 +199,9 @@ body
   width: 100%%
   float: left
   height: 300px
-  @media (min-width: 1025px)
+  @media (min-width: 1440px)
+    height: 500px
+  @media (min-width: 1025px) and (max-width: 1439px)
     height: 400px
   @media (max-width: 579px)
     height: 200px
@@ -212,7 +214,9 @@ body
     @include border-radius($car-rad)
     position: static
     height: 300px
-    @media (min-width: 1025px)
+    @media (min-width: 1440px)
+      height: 500px
+    @media (min-width: 1025px) and (max-width: 1439px)
       height: 400px
     @media (max-width: 579px)
       height: 200px

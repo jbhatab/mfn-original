@@ -44,6 +44,10 @@ Mfn::Application.routes.draw do
     resources :rides, :only => [:index, :show]
   end
 
+  resources :blogs do
+    resources :comments
+  end
+
   #calender routes  match '/calendar/new', :to => 'calendar#new'
   
   #calendar route
