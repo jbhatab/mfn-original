@@ -1,5 +1,5 @@
 <%unless user_signed_in?%>
-  <% if Rails.env.development? %>
+  <% if Rails.env.production? %>
     <h3><%=link_to 'Sign In', 'http://www.musicfestivalnation.com/users/login'%> So You Can Review/Rate!</h3>
   <% else%>
     <h3><%=link_to 'Sign In', '/users/login'%> So You Can Review/Rate!</h3>

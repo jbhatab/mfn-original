@@ -9,7 +9,7 @@ class CustomFailure < Devise::FailureApp
   def respond
     if http_auth?
       http_auth
-    elsif Rails.env.development?
+    elsif Rails.env.production?
       redirect_to 'http://www.musicfestivalnation.com/users/login'
     else
       redirect_to '/users/login'
