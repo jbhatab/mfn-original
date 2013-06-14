@@ -76,6 +76,7 @@ Mfn::Application.routes.draw do
   match '/rideshare', :to => 'events#rideshare'
   match '/festival-map', :to => 'events#map'
   match '/about', :to => 'homes#about'
+  match '/admin', :to => 'homes#admin'
   match '/contact', :to => 'homes#contact'
   match '/advertising', :to => 'homes#advertising'
   match '/survivalguide', :to => 'homes#survivalguide'

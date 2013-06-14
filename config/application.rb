@@ -49,6 +49,9 @@ module Mfn
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    #change authenticate user redirect, this includes failureapp
+    config.autoload_paths += %W(#{config.root}/lib)
+
     #font-face configuration
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.assets.precompile += %w( .svg .eot .woff .ttf )

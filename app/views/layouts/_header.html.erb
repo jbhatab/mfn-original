@@ -6,6 +6,9 @@
   <div id="user_nav">
     <% if user_signed_in? %>
       Signed in as <%= current_user.username %>. Not you?
+      <% if current_user.admin == true %>
+        <%= link_to "Admin", '/admin', :class => 'btn btn-mini' %>
+      <%end%>
       <%if current_user.inbox.exists?(:opened => false)%>
       <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini btn-danger' %>
       <%else%>

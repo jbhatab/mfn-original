@@ -1,5 +1,9 @@
 <%unless user_signed_in?%>
-<h3><%=link_to 'Sign In', '/users/login'%> So You Can Review/Rate!</h3>
+  <% if Rails.env.development? %>
+    <h3><%=link_to 'Sign In', 'http://www.musicfestivalnation.com/users/login'%> So You Can Review/Rate!</h3>
+  <% else%>
+    <h3><%=link_to 'Sign In', '/users/login'%> So You Can Review/Rate!</h3>
+  <% end %>
 <%end%>
 <div class="review-form">
   <% form_id = 'review_'+festival.id.to_s+'_rating'%>
