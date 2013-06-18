@@ -4,6 +4,7 @@
   <%= f.input :website %>
   <%= f.input :facebook %>
   <%= f.input :twitter %>
+<% if user_signed_in? %>
 <%if current_user.admin == true%>
   <h3>Have An Event Coming Up?</h3>
   <%= f.simple_fields_for :festival_years do |y| %>
@@ -23,6 +24,7 @@
       <%end%>
     <%end%>
   <%end%>
+<%end%>
 <%end%>
   <%= f.button :submit %>
 <% end %>
