@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_mailbox
   validates :password, :presence => true, :if => :password_required?
   
+
   has_many :reviews
   accepts_nested_attributes_for :reviews
   has_many :comments
@@ -23,6 +24,9 @@ class User < ActiveRecord::Base
   #allows users to have events (festival lineup)
   has_many :events_users, :dependent => :destroy
   has_many :events, through: :events_users
+
+  has_many :contests_users, :dependent => :destroy
+  has_many :contests, through: :contests_users
 
   has_many :rides, :dependent => :destroy
 

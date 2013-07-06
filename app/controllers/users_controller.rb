@@ -2,7 +2,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   before_filter :authenticate_user!
+  before_filter :check_email, :only => :add_to_contests
 
+  def check_email
+    if current_user.email == ""
+      redirect_to '/giveaways', notice: 'You have to enter your email on your account in "Edit Profile"'
+    end
+  end
+  
   def new_message
     @message = current_user.messages.build
   end
@@ -16,6 +23,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_to_contests
+    
+    current_user.contests << Contest.find(params[:id])
+    redirect_to '/giveaways', notice: 'You have successfully been entered.'
+  end
+
+  def remove_from_contests
+    contest    = Contest.find(params[:id])
+    contest = ContestsUser.find_by_user_id_and_contest_id(current_user.id, contest.id)
+
+    contest.delete
+
+    redirect_to '/giveaways', notice: 'You have left the giveaway.'
+  end
+
   def add_to_festival_lineup
     current_user.events << Event.find(params[:id])
     redirect_to '/festival-lineup'
@@ -23,7 +45,7 @@ class UsersController < ApplicationController
 
   def remove_from_festival_lineup
     @event = current_user.events.find(params[:id])
-    current_user.events.destroy(@event.id)
+    current_user.events.delete(@event.id)
     redirect_to '/festival-lineup'
   end
 

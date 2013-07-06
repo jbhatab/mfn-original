@@ -1,3 +1,10 @@
+GIT
+  remote: http://github.com/rezwyi/jcountdown-rails.git
+  revision: 8a296ede6729e8413f9ee6afd82b147236f68cad
+  specs:
+    jcountdown-rails (0.2.0)
+      jquery-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -296,6 +303,7 @@ DEPENDENCIES
   google-analytics-rails
   guard-rspec
   has_mailbox
+  jcountdown-rails!
   jquery-rails
   jquery-ui-rails
   libnotify

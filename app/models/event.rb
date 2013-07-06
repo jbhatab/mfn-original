@@ -16,6 +16,9 @@ class Event < ActiveRecord::Base
   has_many :events_users, :dependent => :destroy
   has_many :users, through: :events_users
 
+  has_many :contests_events, :dependent => :destroy
+  has_many :contests, through: :contests_events
+
   attr_accessible :address_attributes, :start_at, :end_at, :event_type, :festival_year_id
   
   belongs_to :festival_year

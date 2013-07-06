@@ -30,6 +30,8 @@ Mfn::Application.routes.draw do
     resources :comments
   end
 
+  resources :contests
+
   #need both nested so you can create the reviews
   #and comments in the festival show
   resources :festivals do
@@ -57,7 +59,8 @@ Mfn::Application.routes.draw do
 
   match '/my-comments', :to => 'users#my-comments'
 
-
+  post '/giveaways/:id/:action' => 'users#add_to_contests'
+  post '/giveaways/:id/:action' => 'users#remove_from_contests'
   post '/events/:id/:action' => 'users#add_to_festival_lineup'
   post '/events/:id/:action' => 'users#remove_from_festival_lineup'
   put '/comments/:id/:action' => 'comments#upvote'
@@ -72,6 +75,7 @@ Mfn::Application.routes.draw do
   match '/my-reviews', :to => 'users#my-reviews'
   match '/new_message', :to => 'users#new_message'
   match '/my-rides', :to => 'users#my-rides'
+  match '/my-giveaways', :to => 'users#my-giveaway'
   match '/my-profile', :to => 'users#my-profile'
   match '/rideshare', :to => 'events#rideshare'
   match '/festival-map', :to => 'events#map'
@@ -81,6 +85,7 @@ Mfn::Application.routes.draw do
   match '/advertising', :to => 'homes#advertising'
   match '/survivalguide', :to => 'homes#survivalguide'
   match '/rides_gmap', :to => 'rides#rides_gmap'
+  match '/giveaways', :to => 'contests#index'
   get '/get_map_events' => 'events#get_map_events'
   match '/get_events_rideshare', :to => 'events#get_events_rideshare'
 

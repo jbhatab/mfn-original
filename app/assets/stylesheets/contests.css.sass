@@ -1,0 +1,90 @@
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
+
+$lightgrey: rgba(100,100,100,.2)
+$clearwhite: rgba(241,241,241, .9)
+$darkorange: rgb(233, 74, 19)
+$greenbrown: rgb(90, 58, 0)
+
+$contest-font-size: 30px
+
+
+
+
+.contest-row
+  margin-top: 10px
+
+.contest-title
+  color: #333333
+
+.contest-title:hover
+  text-decoration: none
+  color: $darkorange
+
+.contest-button
+  display: inline-block 
+  height: 90px
+  float: left
+  @include box-shadow(1px 1px 4px $lightgrey)
+  a
+    width: 100px
+    background-color: $clearwhite 
+    font-family: sans-serif
+    background-image: none
+    height: 68px
+    padding: 19px 5px 5px 5px
+    font-size: 22px
+    border: none
+    @include border-radius(0px)
+  .leave-btn
+    color: rgba(211,40,40, .9)
+
+.contest-body
+  font-size: 15px
+
+
+
+.contest-title-div
+  font-size: 24px
+  display: inline-block
+  @include box-shadow(1px 1px 4px $lightgrey)
+  background-color: $clearwhite 
+  padding: 7px
+  width: calc(20% - 14px)
+  float: left
+  line-height: 26px
+  overflow: hidden
+  height: 78px
+  @include border-left-radius(8px)
+
+
+.contest-countdown
+  background-color: $clearwhite
+  @include border-right-radius(8px)
+  float: left
+  padding: 12px 2% 20px 2%
+  @include box-shadow(1px 1px 4px $lightgrey)
+  width: calc(76% - 110px)
+  display: inline-table
+  span
+    display: table-cell
+    text-align: center
+    font-size: $contest-font-size
+    label
+      font: normal $contest-font-size sans-serif !important
+
+@media (max-width: 979px)
+  .contest-countdown
+    clear: both
+    width: 100%
+    padding: 10px 0 20px 0
+    @include border-radius(8px)
+  .contest-button
+    float: left
+    width: calc(50% - 10px)
+    a
+      width: 100% 
+      @include border-right-radius(8px)
+  .contest-title-div
+    width: calc(50% - 14px)
+    text-align: center

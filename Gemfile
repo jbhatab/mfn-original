@@ -74,6 +74,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git'
 
 gem 'event-calendar', :require => 'event_calendar'
 

@@ -1,0 +1,45 @@
+<div class='row-fluid contest-row'>
+  <div class='span12'>
+    <div class='contest-title-div'>
+      <%= link_to contest.title, contest, class: 'contest-title', href: "#myModal_"+contest.id.to_s, data: {toggle: "modal"}%>
+      
+      <%= javascript_tag do %>
+        window.contestsURL = "<%=j contests_url %>";
+      <% end %>
+    </div>
+    <div class='contest-button'>
+      <%if user_signed_in?%>
+        <% if current_user.contests.find(:all, :conditions => [contest.id.to_s+" in (?)", current_user.contest_ids]) != []%>
+          <%= link_to "Leave Giveaway", {:controller =>"users", :action => "remove_from_contests", :id => contest.id}, class: "btn leave-btn", method: :post %>
+        <%else%>
+          <%= link_to "Enter Giveaway", {:controller =>"users", :action => "add_to_contests", :id => contest.id}, class: "btn", method: :post %>
+        <%end%>
+      <%else%>
+        <%= link_to "Sign Up\ To Enter", {:controller =>"users", :action => "add_to_contests", :id => contest.id}, class: "btn", method: :post %>
+      <%end%>
+    </div>
+    <div id="contest_<%=contest.id%>" class='contest-countdown' data-enddate='<%=contest.end_date%>'>
+    </div>
+   
+
+    <div id="myModal_<%=contest.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><%=contest.title%></h3>
+      </div>
+      <div class="modal-body contest-body">
+        <p><%= contest.description %></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+    <script>
+     $("#contest_<%=contest.id%>").setCountdown({
+      targetDate: $("#contest_<%=contest.id%>").data('enddate'),
+      format: 'yowdHMS'
+    });
+     </script>
+
+  </div>
+</div>

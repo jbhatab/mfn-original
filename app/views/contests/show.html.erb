@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+
+<%= link_to 'Show', @contest %>
+<%= link_to 'Edit', edit_contest_path(@contest) %>
+<%= link_to 'Destroy', @contest, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'New', new_contest_path %>
+<%= link_to 'Back', contests_path %>

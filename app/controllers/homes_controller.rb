@@ -7,7 +7,7 @@ class HomesController < ApplicationController
 
   def index
     @events = Event.find(:all, :conditions => ["start_at <= ? AND end_at >= ? ", Date.today, Date.today])
-    @blogs = Blog.paginate(:page => params[:page])
+    @blogs = Blog.paginate(:order=>"created_at DESC", :page => params[:page])
     @blog = Blog.first
   end
 

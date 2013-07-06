@@ -10,6 +10,8 @@ class FestivalsController < ApplicationController
       if current_user.admin == false
         redirect_to '/'
       end
+    else
+      redirect_to '/'
     end
   end
 
