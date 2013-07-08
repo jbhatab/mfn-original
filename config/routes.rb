@@ -76,6 +76,8 @@ Mfn::Application.routes.draw do
   match '/new_message', :to => 'users#new_message'
   match '/my-rides', :to => 'users#my-rides'
   match '/my-giveaways', :to => 'users#my-giveaway'
+  match '/festival-submission', :to => 'festivals#submit_festival'
+  post '/submit_a_new_festival', :to => 'festivals#submit_a_new_festival'
   match '/my-profile', :to => 'users#my-profile'
   match '/rideshare', :to => 'events#rideshare'
   match '/festival-map', :to => 'events#map'

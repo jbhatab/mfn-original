@@ -1,1 +1,28 @@
+<h1> Festivals </h1>
+
+
+
+
+<h1> Contests/Giveaways </h1>
+
 <%= link_to 'Add A Contest', new_contest_path, class: 'admin-link' %>
+
+
+<div class='row-fluid'>
+  <div class='span6'>
+    <h1> Recent Comments </h1>
+     <%= render @comments %>
+  </div>
+  <div class='span6'>
+    <h1> Recent Reviews </h1>
+      <%= render @reviews %>
+  </div>
+  
+</div>
+
+<div class='row-fluid'>
+  <div class='span12'>
+      <h1> Recent Rides </h1>
+      <%= render @rides %>
+  </div>
+</div>

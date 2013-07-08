@@ -46,7 +46,7 @@
     <% end %>
     <%end%>
     <% if user_signed_in? %>
-      <% if current_user.id == review.user_id %>
+      <% if current_user.id == review.user_id or current_user.admin == true%>
       <span class="review-link">
         <%= link_to 'Delete review', [review.festival, review],
                  :method => :delete,

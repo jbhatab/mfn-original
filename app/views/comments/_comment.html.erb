@@ -33,7 +33,7 @@
     </header>
     <%=comment.comment%></br>
     <% if user_signed_in? %>
-      <% if current_user.id == comment.user_id %>
+      <% if current_user.id == comment.user_id or current_user.admin == true%>
         <%= link_to 'Delete Comment', [comment.commentable, comment],
                  :method => :delete,
                  remote: true %>

@@ -1,9 +1,9 @@
-class FestivalsController < ApplicationController
+ class FestivalsController < ApplicationController
   # GET /festivals
   # GET /festivals.json
   respond_to :json, :html
   helper_method :sort_column, :sort_direction
-  before_filter :check_admin, :only => [:edit, :destroy]
+  before_filter :check_admin, :only => [:create, :new, :edit, :destroy]
   
   def check_admin
     if user_signed_in?
@@ -73,6 +73,15 @@ class FestivalsController < ApplicationController
     end
   end
 
+  def submit_festival
+    @festival = Festival.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @festival }
+    end
+  end
+
   # GET /festivals/1/edit
   def edit
     @festival = Festival.find(params[:id])
@@ -82,6 +91,19 @@ class FestivalsController < ApplicationController
   # POST /festivals
   # POST /festivals.json
   def create
+    
+    @festival = Festival.new(params[:festival])
+    respond_to do |format|
+      if @blog.save
+        format.html { redirect_to '/admin', notice: 'Festival was successfully created.' }
+      else
+        format.html { render action: "new" }
+      end
+    end
+      
+  end
+
+  def submit_a_new_festival
     @festival = Festival.new(params[:festival])
     FestivalMailer.submit_festival(@festival).deliver
     redirect_to '/festival-list/US/2013', notice: 'Festival was successfully submitted.'

@@ -3,11 +3,11 @@
   <div class='span12'>
     <%if ride.giving_ride %>
       <div class="row-fluid">
-        <h4> Giving a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if ride.user.id == current_user.id%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></h4>
+        <h4> Giving a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if user_signed_in?%><%if ride.user.id == current_user.id or current_user.admin == true%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%><%end%></h4>
         </div>
     <%else%>
       <div class="row-fluid">
-        <h4> Looking for a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if ride.user.id == current_user.id%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></h4>
+        <h4> Looking for a ride - <%=link_to ride.event.festival_year.festival.name, ride.event.festival_year.festival %> - <%=link_to 'Show/Hide Comments', '#', class: 'comment-link'%> - <%= link_to 'Show More...', '/users/'+ride.user.id.to_s+'/rides/'+ride.id.to_s %> <%if user_signed_in?%><%if ride.user.id == current_user.id or current_user.admin == true%> - <%= link_to 'Delete Ride',  ride, method: :delete, data: { confirm: 'Are you sure?' } %><%end%><%end%></h4>
         </div>
     <%end%>
 
