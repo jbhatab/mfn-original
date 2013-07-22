@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def add_to_contests
     
     current_user.contests << Contest.find(params[:id])
-    redirect_to '/giveaways', notice: 'You have successfully been entered.'
+    redirect_to '/contests', notice: 'You have successfully been entered.'
   end
 
   def remove_from_contests
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     contest.delete
 
-    redirect_to '/giveaways', notice: 'You have left the giveaway.'
+    redirect_to '/contests', notice: 'You have left the contest.'
   end
 
   def add_to_festival_lineup

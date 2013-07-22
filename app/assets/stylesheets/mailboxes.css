@@ -5,7 +5,7 @@
 
 /* TABLE
 ---------------------------------------------------- */
-table { font-size: 0.9em; color: #333333; padding: 5px; margin-top: 5px;}
+table { font-size: 1.3em; color: #333333; padding: 5px; margin-top: 5px;}
 td 	{ padding: 7px; text-align: left;}
 th 	{ font-size: 1em; color: #333333; text-align: left; background-color: #EBEBEB; padding: 7px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #999999;}
 tr.alt { background-color: #EBEBEB; }
@@ -109,6 +109,7 @@ form input.submit, a.submit {
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 1em; }
 .ui-widget-content { border: 1px solid #e1e1e1; background-color: #ffffff; color: #333333; }
 .ui-widget-content a { color: #333333; }
+.ui-widget-content p { font-size: 1.3em; }
 .ui-widget-header { border: 1px solid #258cd1; background-color: #258cd1; color: #ffffff; font-weight: bold; }
 .ui-widget-header a { color: #ffffff; }
 

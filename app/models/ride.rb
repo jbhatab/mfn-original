@@ -7,7 +7,7 @@ class Ride < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
 
-  validates_presence_of :user_id, :event_id, :leave_date, :return_date
+  validates_presence_of :user_id, :event_id, :leave_date, :return_date, :giving_ride
 
 
 

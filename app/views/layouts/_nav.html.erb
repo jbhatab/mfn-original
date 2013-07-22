@@ -32,7 +32,7 @@
                     </li>
                   </ul> 
                 </li>   
-                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes')or current_page?('/my-giveaways') %>">
+                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes')or current_page?('/my-contests') %>">
                   <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
@@ -44,7 +44,7 @@
 
                     </li>
                     <li class="dropdown-li">
-                      <%= link_to 'My Giveaways', '/my-giveaways' %>
+                      <%= link_to 'My contests', '/my-contests' %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'My Comments', '/my-comments' %>
@@ -82,8 +82,8 @@
                 <li class="main-nav-li <%='active' if current_page?('/about')%>">
                   <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
                 </li> 
-                <li class="main-nav-li <%='active' if current_page?('/giveaways')%>">
-                  <%= link_to 'Giveaways', '/giveaways', :class => 'dropdown-toggle' %>
+                <li class="main-nav-li <%='active' if current_page?('/contests')%>">
+                  <%= link_to 'Contests', '/contests', :class => 'dropdown-toggle' %>
                 </li> 
                 <li class="main-nav-li <%='active' if current_page?('/survivalguide')%>">
                   <%= link_to 'Survival Guide', '/survivalguide', :class => 'dropdown-toggle' %>
@@ -118,7 +118,7 @@
                   </ul> 
                 </li>   
                 <li class="hidden-phone main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes') or
-                  current_page?('/my-giveaways') %>">
+                  current_page?('/my-contests') %>">
                   <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-li">
@@ -130,7 +130,7 @@
 
                     </li>
                     <li class="dropdown-li">
-                      <%= link_to 'My Giveaways', '/my-giveaways' %>
+                      <%= link_to 'My Contests', '/my-contests' %>
                     </li>
                     <li class="dropdown-li">
                       <%= link_to 'My Comments', '/my-comments' %>
@@ -166,8 +166,8 @@
                 <li class="main-nav-li <%='active' if current_page?('/about')%>">
                   <%= link_to 'About', '/about', :class => 'dropdown-toggle' %>
                 </li> 
-                <li class="main-nav-li <%='active' if current_page?('/giveaways')%>">
-                  <%= link_to 'Giveaways', '/giveaways', :class => 'dropdown-toggle' %>
+                <li class="main-nav-li <%='active' if current_page?('/contests')%>">
+                  <%= link_to 'Contests', '/contests', :class => 'dropdown-toggle' %>
                 </li> 
                 <li class="main-nav-li <%='active' if current_page?('/survivalguide')%>">
                   <%= link_to 'Survival Guide', '/survivalguide', :class => 'dropdown-toggle' %>
@@ -196,7 +196,7 @@
                 
 
                 <li class="main-nav-li dropdown <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes') or
-                  current_page?('/my-giveaways') %>">
+                  current_page?('/my-contests') %>">
                   <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle' %>
                 </li>      
                 <li class="main-nav-li dropdown <%='active' if current_page?('/rideshare') %>">

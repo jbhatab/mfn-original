@@ -1,0 +1,36 @@
+<div class="iframe-ride-infowindow">
+  <% if ride.giving_ride %>
+    <h4><%=link_to 'I have a ride!', '#modal_'+ride.id.to_s, data: {toggle: 'modal'}%></h4>
+  <%else%>
+    <h4><%=link_to 'I need a ride!', '#modal_'+ride.id.to_s, data: {toggle: 'modal'}%></h4>
+  <%end%>
+  <hr class='horizontal-divider ride-divider'>
+  <div class='row-fluid iframe-ride-row'>
+    <div class='iframe-ride-date'>
+      <h5>Leave</h5>
+      <p>
+      <%= l ride.leave_date, format: :full %></p>
+
+    </div>
+
+    <div class='iframe-ride-date'>
+      <h5>Return</h5>
+      <p>
+      <%= l ride.return_date, format: :full %></p>
+    </div>
+    
+  </div>
+  <hr class='horizontal-divider ride-divider'>
+  <div class='row-fluid iframe-ride-row'>
+    <div class='iframe-ride-location'>
+      <h5>Location</h5>
+      <p>
+      <%= ride.address.city.capitalize %>, <%= ride.address.state %></p>
+    </div>
+  </div>
+
+
+</div>
+
+
+

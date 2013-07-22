@@ -6,4 +6,5 @@ class FestivalYear < ActiveRecord::Base
   has_many :events, :dependent => :destroy
   accepts_nested_attributes_for :events, :allow_destroy => true
 
+  validates_presence_of :year
 end

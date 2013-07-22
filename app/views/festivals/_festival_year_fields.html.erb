@@ -1,0 +1,10 @@
+<h4>Festival Year</h4>
+<div class="row-fluid">
+  <div class='remove-label-input'>
+    <%= f.input :year %>
+  </div>
+  <div class="remove-label">
+  <%= f.input :_destroy, :as => :boolean, :inline_label => 'Remove', :label => false%>
+  </div>
+</div>
+<%= link_to_add_fields "Add Event", f, :events %></br>

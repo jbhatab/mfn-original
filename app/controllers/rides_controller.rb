@@ -1,11 +1,45 @@
 class RidesController < ApplicationController
   respond_to :json, :html
-  before_filter :load_rideable, :except => :rides_gmap
-  before_filter :authenticate_user!, :except => [:index, :rides_gmap]
+  before_filter :load_rideable, :except => [:rides_gmap, :iframe_rides_gmap]
+  before_filter :authenticate_user!, :except => [:index, :rides_gmap, :iframe_rides_gmap]
 
   
   def index
     @rides = @rideable.rides
+  end
+
+  def iframe_rides_gmap
+    @rides = Ride.where(:event_id => params[:event])
+    addresses = []
+    @rides.each do |ride|
+      if ride.address.gmaps
+        addresses << ride.address
+      end
+    end  
+    @json = addresses.to_gmaps4rails do |address, marker|
+      marker.infowindow render_to_string(:partial => "/rides/iframe_infowindow", :locals => { :ride => address.addressable})
+      if address.addressable.giving_ride
+        marker.picture({
+                'picture' => view_context.image_path("iframe-car.png"),
+                'width'   => 32,
+                'height'  => 37
+               })
+      else
+        marker.picture({
+                'picture' => view_context.image_path("iframe-person.png"),
+                'width'   => 32,
+                'height'  => 37
+               })
+      end
+      marker.title "#{address.addressable.user.username}"
+      if address.addressable.event.start_at == nil
+        marker.json({:ride_id => address.addressable.id, :event_id => address.addressable.event.id, :ride_event_type => address.addressable.event.event_type })
+      else
+        marker.json({:ride_id => address.addressable.id, :event_id => address.addressable.event.id, :ride_event_type => address.addressable.event.event_type, :ride_event_date => address.addressable.event.start_at.month })
+      end
+    end
+    
+    respond_with @json
   end
 
   def rides_gmap

@@ -6,3 +6,4 @@ en:
   date:
     formats:
       full: "%b %d, %Y"
+      short: "%b %d"

@@ -1,0 +1,25 @@
+<div id='comment_<%=comment.id%>' class="iframe-comment-container">
+  <div class="comment-area">
+    <header class="comment-header">
+      
+      <%= comment.title %> <i>by</i>
+      <% if comment.user_id == nil %>
+        Anonymous
+      <% else%>
+        <%= link_to User.find(comment.user_id).username, new_mailboxes_path %>
+      <%end%>
+    </header>
+    <%=comment.comment%></br>
+    
+    <% if user_signed_in? %>
+      <% if current_user.id == comment.user_id or current_user.admin == true%>
+        <%= link_to 'Delete Comment', [comment.commentable, comment],
+                 :method => :delete,
+                 remote: true %>
+      <%end%>
+    <%end%>
+  </div>
+</div>
+
+  
+

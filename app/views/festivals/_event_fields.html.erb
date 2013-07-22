@@ -1,0 +1,14 @@
+<h4>Event</h4>
+<%= f.input :start_at %>
+<%= f.input :end_at %>
+<%= f.input :event_type, collection: ['camping','no camping', 'cruise'] %>
+<%= f.simple_fields_for :address do |d| %>
+     
+  <%= d.input :line1 %>
+  <%= d.input :line2 %>
+  <%= d.input :city %>
+  <%= d.input :state %>
+  <%= d.input :region %>
+  <%= d.input :country, priority: [ "United States" ] %>
+  <%= d.input :zip %>
+<%end%>

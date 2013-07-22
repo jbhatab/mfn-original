@@ -61,11 +61,11 @@
   # GET /festivals/new.json
   def new
     @festival = Festival.new
-    if false
-      fy = @festival.festival_years.build
-      e = fy.events.build
-      a = e.build_address
-    end
+    
+    fy = @festival.festival_years.build
+    e = fy.events.build
+    a = e.build_address
+    
 
     respond_to do |format|
       format.html # new.html.erb

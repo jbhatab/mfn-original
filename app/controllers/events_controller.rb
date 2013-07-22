@@ -47,11 +47,38 @@ class EventsController < ApplicationController
     
   end
 
+  def iframe_rideshare
+    @event = Event.find(params[:event])
+    render :layout => false
+    
+  end
+
+  def iframe_get_events_rideshare
+    events = Event.find(params[:event])
+    #addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event").includes(:addressable => {:festival_year => :festival})
+    @json = events.to_gmaps4rails do |event, marker|
+      marker.infowindow render_to_string(:partial => "/events/iframe_infowindow", :locals => { :event => event})
+      marker.picture({
+                'picture' => view_context.image_path("iframe-event.png"),
+                'width'   => 75,
+                'height'  => 75
+               })
+      marker.title "#{event.festival_year.festival.name}"
+      if event.start_at == nil
+        marker.json({ :id => event.id, :event_type => event.event_type})
+      else
+        marker.json({ :start_at => event.start_at.month, :id => event.id, :event_type => event.event_type})
+      end
+    end
+    respond_with @json
+  end
+
   def get_events_rideshare
+
     events = Event.includes(:address, :festival_year => :festival).where('addresses.longitude != ?', 0)
     #addresses = Address.where("longitude != ? and addressable_type = ?", 0, "Event").includes(:addressable => {:festival_year => :festival})
     @json = events.to_gmaps4rails do |event, marker|
-      marker.infowindow render_to_string(:partial => "/events/infowindow", :locals => { :event => event})
+      marker.infowindow render_to_string(:partial => "/events/iframe_infowindow", :locals => { :event => event})
       marker.picture({
                 'picture' => view_context.image_path("red-dot.png"),
                 'width'   => 20,

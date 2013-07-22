@@ -1,0 +1,24 @@
+<% @contests.each do |contest| %>
+  <div class='row-fluid contest-row'>
+    <div class='span12'>
+      <div class='contest-title-div'>
+        <%= link_to contest.title, '#', class: 'contest-title'%>
+        
+       
+        
+        
+
+      </div>
+      <div class='contest-countdown'>
+        <b>Description: </b><%= contest.description %>
+      </div>
+      <%= link_to 'Edit', edit_contest_path(contest) %>
+      <%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    </div>
+  </div>
+
+<% end %>
+<%= link_to 'New Contest', new_contest_path %>
+
+

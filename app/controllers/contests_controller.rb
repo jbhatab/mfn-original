@@ -1,5 +1,5 @@
 class ContestsController < ApplicationController
-  before_filter :check_admin, :only => [:new, :edit, :destroy]
+  before_filter :check_admin, :only => [:new, :edit, :destroy, :admin_index]
   
   def check_admin
     if user_signed_in?
@@ -11,6 +11,9 @@ class ContestsController < ApplicationController
     end
   end
 
+  def admin_index
+    @contests = Contest.all
+  end
   # GET /contests
   # GET /contests.json
   def index

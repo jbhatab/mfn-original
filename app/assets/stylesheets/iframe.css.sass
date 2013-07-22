@@ -1,0 +1,142 @@
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
+
+$lightyellow: rgb(255,225,94)
+$red: rgb(239,49,34)
+$darkblue: #23238E
+$orange: rgb(233, 86, 36)
+$brown: #5d3c1d
+$greenbrown: rgb(90, 58, 0)
+$lightblue: #9ecaed
+$darkorange: rgb(233, 74, 19)
+$clearwhite: rgba(241,241,241, .6)
+$heavywhite: rgba(255,255,255, .9)
+
+
+.iframe-ride-row
+  display: table
+  div
+    display: table-cell
+    vertical-aligin: middle
+    text-align: center
+
+.iframe-banner
+  width: 20%
+  min-width: 100px
+  position: absolute
+  top: 0
+  right: 0
+
+
+.iframe-event-infowindow
+  .btn
+    margin-bottom: 5px
+  .top-left-ride
+    display: inline-block
+    margin-top: 5px
+    p
+      line-height: 7px 
+      font-size: 1.5em
+    a
+      font-size: 15px
+  .top-right-ride
+    display: inline-block
+    min-width: 60px
+    vertical-align: top
+  h3
+    line-height: 10px
+    a
+      color: $brown
+      text-decoration: none
+    a:hover
+      color: $orange
+  img
+    margin-bottom: 5px
+  p
+    line-height: 7px
+
+.iframe-ride-modal
+  padding-left: 15px
+  width: calc(90% - 15px)
+  height: 90%
+  margin: 0
+  background-color: $heavywhite
+  top: 5% !important
+  left: 5%
+  @include border-radius(10px)
+  border: 1px solid $lightblue
+  @include box-shadow(0 0 30px $lightblue)
+  overflow: scroll
+
+.iframe-ride-content
+  div
+    overflow: hidden
+    @include border-radius(5px)
+    padding: 5px
+    border: 1px solid #000
+    height: 80px
+
+.modal-backdrop 
+  background: $clearwhite
+
+.iframe-ride-infowindow
+  h4
+    line-height: 16px
+    margin-top: 0px
+    margin-bottom: 4px
+    text-align: center
+    a
+      color: $brown
+      text-decoration: none
+    a:hover
+      color: $orange
+  h5
+    line-height: 0px
+  img
+    margin-bottom: 5px
+  p
+    margin: 0px
+    line-height: 15px
+    font-size: 1.5em
+
+.iframe-comment-form
+  line-height: 0px
+  label
+    display: none
+  input
+    width: 95%
+    margin-bottom: 0px
+  textarea
+    width: 95%
+    margin-bottom: 0px
+
+.iframe-comment-container
+  padding: 5px
+  margin-bottom: 5px
+  min-height: 65px
+  font-size: 15px
+  .vote-area
+    float: left
+    width: 40px
+    display: inline-block
+    text-align: center
+    vertical-align: middle
+    .btn
+      width: 25px
+  .comment-area
+    display: inline-block
+    margin-left: 5px
+    .comment-header
+      border-bottom: 1px solid #000
+
+.ride-divider
+  margin: 9px 0 3px 0
+
+.ride-close
+  position: absolute
+  top: 10
+  right: 10
+
+
+
+

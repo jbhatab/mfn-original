@@ -39,10 +39,12 @@ class CommentsController < ApplicationController
     if @comment.commentable_type == 'Ride'
       respond_to do |format|
         format.html { redirect_to([@comment.commentable.user,@commentable]) }
+        format.js 
       end
     else
       respond_to do |format|
         format.html { redirect_to(@commentable) }
+        format.js 
       end
     end
     

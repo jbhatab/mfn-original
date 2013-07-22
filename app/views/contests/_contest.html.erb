@@ -10,9 +10,9 @@
     <div class='contest-button'>
       <%if user_signed_in?%>
         <% if current_user.contests.find(:all, :conditions => [contest.id.to_s+" in (?)", current_user.contest_ids]) != []%>
-          <%= link_to "Leave Giveaway", {:controller =>"users", :action => "remove_from_contests", :id => contest.id}, class: "btn leave-btn", method: :post %>
+          <%= link_to "Drop From Contest", {:controller =>"users", :action => "remove_from_contests", :id => contest.id}, class: "btn leave-btn", method: :post %>
         <%else%>
-          <%= link_to "Enter Giveaway", {:controller =>"users", :action => "add_to_contests", :id => contest.id}, class: "btn", method: :post %>
+          <%= link_to "Enter Contest", {:controller =>"users", :action => "add_to_contests", :id => contest.id}, class: "btn", method: :post %>
         <%end%>
       <%else%>
         <%= link_to "Sign Up\ To Enter", {:controller =>"users", :action => "add_to_contests", :id => contest.id}, class: "btn", method: :post %>
