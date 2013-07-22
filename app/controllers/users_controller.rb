@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def check_email
     if current_user.email == ""
-      redirect_to '/giveaways', notice: 'You have to enter your email on your account in "Edit Profile"'
+      redirect_to '/contests', notice: 'You have to enter your email on your account in "Edit Profile"'
     end
   end
   
