@@ -22,13 +22,7 @@
     </p>
 
     <%= render 'festival_years/showyear' %>
-    <article>
-      <h3>Ticket Exchange</h3>
-      <div class="ticket-exchange">
-        <%= render @festival.comments %>
-      </div>
-      <%= render :partial => 'comments/form', :locals => {:commentable => @festival} %>
-    </article>
+
     
   </article>
   

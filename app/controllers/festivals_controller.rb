@@ -86,6 +86,8 @@
   def edit
     @festival = Festival.find(params[:id])
 
+
+
   end
 
   # POST /festivals
@@ -93,8 +95,9 @@
   def create
     
     @festival = Festival.new(params[:festival])
+
     respond_to do |format|
-      if @blog.save
+      if @festival.save
         format.html { redirect_to '/admin', notice: 'Festival was successfully created.' }
       else
         format.html { render action: "new" }

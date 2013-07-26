@@ -1,9 +1,10 @@
 <%= simple_form_for(@festival) do |f| %>
-
-  <%= f.input :name %>
-  <%= f.input :website %>
-  <%= f.input :facebook %>
-  <%= f.input :twitter %>
+  <div class="festival-form-top">
+    <%= f.input :name%>
+    <%= f.input :website%>
+    <%= f.input :facebook%>
+    <%= f.input :twitter%>
+  </div>
   
   <%= f.simple_fields_for :festival_years do |y| %>
     <%= render 'festival_year_fields', f: y %>

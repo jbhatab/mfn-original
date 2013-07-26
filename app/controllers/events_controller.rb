@@ -14,6 +14,7 @@ class EventsController < ApplicationController
                      .where('addresses.country = ? AND festival_years.year = ? ', params[:country], params[:year])
                      .order('festivals.name ASC')
                      .paginate(:page => params[:page])
+                     
     
   end
 

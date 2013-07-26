@@ -1,6 +1,12 @@
 <h4>Event</h4>
-<%= f.input :start_at %>
-<%= f.input :end_at %>
+<%= f.label :start_at, "Start", class: "control-label" %>
+<div class="controls">
+  <%= f.text_field :start_at, :placeholder => '2013-06-01', :class => "event-form-date" %>
+</div>
+<%= f.label :end_at, "End", class: "control-label" %>
+<div class="controls">
+  <%= f.text_field :end_at, :placeholder => '2013-06-03', :class => "event-form-date" %>
+</div>
 <%= f.input :event_type, collection: ['camping','no camping', 'cruise'] %>
 <%= f.simple_fields_for :address do |d| %>
      

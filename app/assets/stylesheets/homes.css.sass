@@ -224,22 +224,6 @@ body
       height: 200px
     width: 100%
     z-index: -100
-  .item-header
-    position: absolute
-    top: 20px
-    right: 20px
-    @include border-radius(7px)
-    @include gradient-vertical($startColor: $lightblue, $endColor: $darkblue)
-    @include box-shadow(3px 3px #000000)
-    float: right
-    height: 35px
-    width: 300px
-    padding-top: 5px
-    h2
-      font-size: 2em
-      margin-top: -5px
-      text-align: center
-      color: #000000
   .item-footer
     position: absolute
     bottom: 5px
@@ -248,7 +232,7 @@ body
     width: 100%
     border: none
     @include border-radius(0px)
-    @include gradient-horizontal($startColor: #000000, $endColor: rgba(0, 0, 0, 0.0))
+    @include gradient-horizontal($startColor: rgba(0,0,0,.7), $endColor: rgba(0, 0, 0, 0.4))
     h3
       color: #FFFFFF
       margin: -5px 0 0 0 
