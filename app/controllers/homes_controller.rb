@@ -19,6 +19,7 @@ class HomesController < ApplicationController
     @comments = Comment.order("created_at").limit(10)
     @reviews = Review.order("created_at").limit(10)
     @rides = Ride.order("created_at").limit(10)
+    @posts = Post.order("created_at").limit(10)
 
   end
 

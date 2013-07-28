@@ -6,7 +6,9 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <p>  
-      <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>  
+      <textarea style='width:80%;min-width: 350px;' name="post[content]" cols="80" rows="20">
+
+        <%= @post.content %></textarea>  
     </p>  
 
 

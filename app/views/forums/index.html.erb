@@ -20,7 +20,14 @@
             <% else %>
               no posts
             <% end %>
-          </td>  
+          </td> 
+          <%if user_signed_in?%>
+          <%if current_user.admin == true %>
+            <td><%= link_to 'Edit', edit_forum_path(forum), class: 'btn btn-success'%></td>
+            <td><%= link_to "Delete", forum, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger' %>  </td>
+
+          <%end%>
+          <%end%> 
 
         </tr>  
       <% end %>  
