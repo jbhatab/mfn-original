@@ -14,9 +14,38 @@
       <%else%>
         <%= link_to "Messages", '/mailboxes', :class => 'btn btn-mini' %>
       <%end%>
+        <a class="dropdown-toggle btn btn-mini" id="profile-dropdown" role="button" data-toggle="dropdown" >
+          My Profile
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu profile-dropdown-list" role="menu">
+          <li class="dropdown-li">
+            <%= link_to 'My Contests', '/my-contests' %>
+          </li>
+          <li class="dropdown-li">
+            <%= link_to 'My Comments', '/my-comments' %>
+          </li>
+          <li class="dropdown-li">
+            <%= link_to 'My Reviews', '/my-reviews' %>
+          </li>
+          <%if false %>
+          <li class="dropdown-li">
+            <%= link_to 'My Festival  Lineup', '/festival-lineup' %>
+          </li>
+          <%end%>
+          <li class="dropdown-li">
+            <%= link_to 'My Rides', '/my-rides' %>
+          </li>
+          <li class="dropdown-li">
+            <%= link_to "Edit Profile",edit_user_registration_path%>
+          </li>
+          <li class="dropdown-li">
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          </li>
 
-      <%= link_to "Edit Profile",edit_user_registration_path, :class => 'btn btn-mini'%>
-      <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-mini' %>
+        </ul> 
+
+      
     <% else %>
       <%if Rails.env.production? %>
         <%= link_to "Login", 'http://www.musicfestivalnation.com/users/login', :class => 'sign-in-btn btn btn-mini btn-primary' %>

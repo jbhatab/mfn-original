@@ -1,10 +1,10 @@
 class BlogsController < ApplicationController
-  http_basic_authenticate_with :name => ENV['BLOG_USERNAME'], :password => ENV['BLOG_PASSWORD'], :except => :show
+  http_basic_authenticate_with :name => ENV['BLOG_USERNAME'], :password => ENV['BLOG_PASSWORD'], :except => [:show, :index]
   before_filter :authenticate_user!, :only => :new 
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.paginate(:order=>"created_at DESC", :page => params[:page], :per_page => 6)
 
     respond_to do |format|
       format.html # index.html.erb

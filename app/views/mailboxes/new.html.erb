@@ -11,7 +11,11 @@
     	</h5>
 			<p>
 			  	<%= label_tag :user_tokens, "User :" %>
-			  	<%= text_field_tag :user_tokens, "", :class => "text small" %>
+          <%if params[:user] %>
+			  	  <%= text_field_tag :user_tokens, "", :class => "text small", input_html: {value: params[:user]} %>
+          <%else%>
+            <%= text_field_tag :user_tokens, "", :class => "text small" %>
+          <%end%>
 			</p>
 			<p>
 			    <%= label_tag :subject, "Subject :" %>

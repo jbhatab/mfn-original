@@ -1,0 +1,15 @@
+<%= simple_form_for(@post) do |f| %>
+  <%= f.error_notification %>
+  <% if params[:topic] %>
+    <%= f.input :topic_id, as: :hidden, :input_html => { :value => params[:topic] } %>
+  <%end%>
+  
+  <div class="form-inputs">
+    <%= f.input :content %>
+
+  </div>
+
+
+    <%= f.button :submit %>
+
+<% end %>

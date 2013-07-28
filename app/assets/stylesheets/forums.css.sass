@@ -1,0 +1,85 @@
+@import 'bootstrap/variables'
+@import 'bootstrap/mixins'
+
+$clearwhite: rgba(241,241,241, .7)
+$heavywhite: rgba(255,255,255, .85)
+$brown: #5d3c1d
+$gold: #CDAD00
+$green: #3fad49
+$forestgreen: #228B22
+$darkorange: rgb(233, 74, 19)
+$darkgrey: #333333
+
+.forum-table
+  border-spacing: 2px
+  border-color: gray
+  background-color: $heavywhite
+  width: 100%
+  tr
+    th 
+      text-align: left
+      vertical-align: bottom
+      background: $green
+      color: #fff
+      font-size: 15px
+      border-bottom: 3px solid #232323
+    td 
+      border: 1px #ccc solid
+      padding: 5px
+      font-size: 11px
+    td:first-child
+      a
+        color: $darkgrey
+      a:hover
+        color: $darkorange
+  tr:nth-child(even) 
+    td
+      background-color: rgba(211,211,211,.2)
+
+#forum-list
+  th
+    padding: 10px
+  td:first-child
+    font-size: 18px
+    h4
+      font-size: 25px
+    a
+      text-decoration: underline
+
+#topic-list
+  th
+    padding: 5px
+  td:first-child
+    font-size: 20px
+
+
+.directory
+  list-style-type: none
+  li
+    display: inline-block
+    vertical-align: middle
+    font-size: 25px
+    h3
+      margin: 0
+      padding: 0 2px 2px 2px
+      line-height: 20px
+
+.posts-container
+  background-color: $heavywhite
+  margin-top: 10px
+  padding: 15px
+  @include border-radius(5px)
+  font-size: 1.4em
+  .post
+    margin-bottom: 20px
+
+.horizontal-divider-3
+  border: 0
+  height: 1px
+  padding: 0
+  background: #333
+  background-image: -webkit-linear-gradient(left, #333, #333, #333) 
+  background-image:    -moz-linear-gradient(left, #333, #333, #333) 
+  background-image:     -ms-linear-gradient(left, #333, #333, #333) 
+  background-image:      -o-linear-gradient(left, #333, #333, #333) 
+  margin: 4px 0 8px 0

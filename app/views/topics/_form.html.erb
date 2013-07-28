@@ -1,0 +1,17 @@
+<%= simple_form_for(@topic) do |f| %>
+  <%= f.error_notification %>
+  <% if params[:forum] %>
+    <%= f.input :forum_id, :as => :hidden, :input_html => { :value => params[:forum] } %>
+  <%end%>
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <p>  
+      <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>  
+    </p>  
+
+
+  </div>
+
+    <%= f.button :submit %>
+  
+<% end %>

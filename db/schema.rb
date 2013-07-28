@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705183033) do
+ActiveRecord::Schema.define(:version => 20130727024428) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -139,6 +139,13 @@ ActiveRecord::Schema.define(:version => 20130705183033) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "forums", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "message_copies", :force => true do |t|
     t.integer  "sent_messageable_id"
     t.string   "sent_messageable_type"
@@ -164,6 +171,17 @@ ActiveRecord::Schema.define(:version => 20130705183033) do
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
+
+  create_table "posts", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.integer  "user_id"
@@ -202,9 +220,22 @@ ActiveRecord::Schema.define(:version => 20130705183033) do
   add_index "rides", ["event_id"], :name => "index_rides_on_event_id"
   add_index "rides", ["user_id"], :name => "index_rides_on_user_id"
 
+  create_table "topics", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "forum_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "last_poster_id"
+    t.datetime "last_post_at"
+  end
+
+  add_index "topics", ["forum_id"], :name => "index_topics_on_forum_id"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",    :null => false
-    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "email",                  :default => "",               :null => false
+    t.string   "encrypted_password",     :default => "",               :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -216,8 +247,12 @@ ActiveRecord::Schema.define(:version => 20130705183033) do
     t.string   "full_name"
     t.string   "username"
     t.boolean  "admin",                  :default => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.boolean  "forem_admin",            :default => false
+    t.string   "forem_state",            :default => "pending_review"
+    t.boolean  "forem_auto_subscribe",   :default => false
+    t.boolean  "forum_admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

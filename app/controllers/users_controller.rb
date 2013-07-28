@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :show
   before_filter :check_email, :only => :add_to_contests
 
   def check_email
@@ -47,6 +47,15 @@ class UsersController < ApplicationController
     @event = current_user.events.find(params[:id])
     current_user.events.delete(@event.id)
     redirect_to '/festival-lineup'
+  end
+
+  def show
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user  }
+    end
   end
 
   def edit

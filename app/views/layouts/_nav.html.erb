@@ -20,7 +20,7 @@
                 <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festival-list/US/2013') or current_page?('/calendar') or
                   current_page?('/festival-map') %>">
                   <%= link_to 'US Festivals', '/festival-list/US/2013', class: "dropdown-toggle"%>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu main-dropdown-menu">
                     <li class="dropdown-li">
                       <%= link_to 'List', '/festival-list/US/2013' %>
                     </li>
@@ -32,40 +32,15 @@
                     </li>
                   </ul> 
                 </li>   
-                <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes')or current_page?('/my-contests') %>">
-                  <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-li">
-                      <%if user_signed_in? %>
-                        <%= link_to 'My Messages', '/mailboxes' %>
-                      <% else%>
-                        <%= link_to 'My Messages', 'http://www.musicfestivalnation.com/users/login' %>
-                      <%end%>
-
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My contests', '/my-contests' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Comments', '/my-comments' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Reviews', '/my-reviews' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'Festival  Lineup', '/festival-lineup' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Rides', '/my-rides' %>
-                    </li>
-
-                  </ul> 
-                </li>      
+                <li class="main-nav-li dropdown  <%='active' if "#{request.fullpath}".match(/forums/) or "#{request.fullpath}".match(/topics/) %>">
+                  <%= link_to 'Forum', '/forums', class: 'dropdown-toggle' %>
+                
+                </li>          
                 <li class="main-nav-li dropdown dropdown-helper <%='active' if current_page?('/rideshare') %>">
                   <a class="dropdown-toggle"  href='/rideshare' role="button">
                     Ride Share
                   </a>
-                  <ul class="dropdown-menu" >
+                  <ul class="dropdown-menu main-dropdown-menu" >
                     <li class="dropdown-li">
                       <%= link_to 'Ride Share Map', '/rideshare' %>
                     </li>
@@ -85,8 +60,8 @@
                 <li class="main-nav-li <%='active' if current_page?('/contests')%>">
                   <%= link_to 'Contests', '/contests', :class => 'dropdown-toggle' %>
                 </li> 
-                <li class="main-nav-li <%='active' if current_page?('/survivalguide')%>">
-                  <%= link_to 'Survival Guide', '/survivalguide', :class => 'dropdown-toggle' %>
+                <li class="main-nav-li <%='active' if current_page?('/blogs')%>">
+                  <%= link_to 'Blogs', '/blogs', :class => 'dropdown-toggle' %>
                 </li> 
                 
                 
@@ -105,7 +80,7 @@
                 <li class="hidden-phone main-nav-li dropdown dropdown-helper <%='active' if current_page?('/festival-list/US/2013') or current_page?('/calendar') or
                   current_page?('/festival-map') %>">
                   <%= link_to 'US Festivals', '/festival-list/US/2013', class: "dropdown-toggle"%>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu main-dropdown-menu">
                     <li class="dropdown-li">
                       <%= link_to 'List', '/festival-list/US/2013' %>
                     </li>
@@ -116,41 +91,17 @@
                       <%= link_to 'Map', '/festival-map' %>
                     </li>
                   </ul> 
-                </li>   
-                <li class="hidden-phone main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes') or
-                  current_page?('/my-contests') %>">
-                  <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-li">
-                      <%if user_signed_in? %>
-                        <%= link_to 'My Messages', '/mailboxes' %>
-                      <% else%>
-                        <%= link_to 'My Messages', 'http://www.musicfestivalnation.com/users/login' %>
-                      <%end%>
-
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Contests', '/my-contests' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Comments', '/my-comments' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Reviews', '/my-reviews' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'Festival Lineup', '/festival-lineup' %>
-                    </li>
-                    <li class="dropdown-li">
-                      <%= link_to 'My Rides', '/my-rides' %>
-                    </li>
-                  </ul> 
-                </li>      
+                </li> 
+                <li class="hidden-phone main-nav-li dropdown  <%='active' if "#{request.fullpath}".match(/forums/) or "#{request.fullpath}".match(/topics/) %>">
+                  <%= link_to 'Forum', '/forums', class: 'dropdown-toggle' %>
+                
+                </li>        
+                
                 <li class="hidden-phone main-nav-li dropdown dropdown-helper <%='active' if current_page?('/rideshare') %>">
                   <a class="dropdown-toggle"  href='/rideshare' role="button">
                     Ride Share
                   </a>
-                  <ul class="dropdown-menu" >
+                  <ul class="dropdown-menu main-dropdown-menu" >
                     <li class="dropdown-li">
                       <%if user_signed_in?%>
                       <%= link_to 'Post A Ride', new_user_ride_path(current_user) %>
@@ -169,8 +120,8 @@
                 <li class="main-nav-li <%='active' if current_page?('/contests')%>">
                   <%= link_to 'Contests', '/contests', :class => 'dropdown-toggle' %>
                 </li> 
-                <li class="main-nav-li <%='active' if current_page?('/survivalguide')%>">
-                  <%= link_to 'Survival Guide', '/survivalguide', :class => 'dropdown-toggle' %>
+                <li class="main-nav-li <%='active' if current_page?('/blogs')%>">
+                  <%= link_to 'Blogs', '/blogs', :class => 'dropdown-toggle' %>
                 </li> 
                 
                 
@@ -195,10 +146,10 @@
               
                 
 
-                <li class="main-nav-li dropdown <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes') or
-                  current_page?('/my-contests') %>">
-                  <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle' %>
-                </li>      
+                <li class="main-nav-li dropdown  <%='active' if "#{request.fullpath}".match(/forums/) or "#{request.fullpath}".match(/topics/) %>">
+                  <%= link_to 'Forum', '/forums', class: 'dropdown-toggle' %>
+                
+                </li>         
                 <li class="main-nav-li dropdown <%='active' if current_page?('/rideshare') %>">
                   <%= link_to 'Ride Share', '/rideshare', :class => 'dropdown-toggle' %>
                 </li>
@@ -212,6 +163,38 @@
     </div>
   </div>
 </nav>
+
+<%if false %>
+  <li class="hidden-phone main-nav-li dropdown dropdown-helper <%='active' if current_page?('/my-comments') or current_page?('/festival-lineup') or current_page?('/users/login') or current_page?('/my-comments') or current_page?('/my-profile') or current_page?('/my-reviews') or current_page?('/my-rides') or current_page?('/mailboxes') or
+                  current_page?('/my-contests') %>">
+    <%= link_to 'My Profile', '/my-profile', :class=>'dropdown-toggle', :role =>'button' %>
+    <ul class="dropdown-menu main-dropdown-menu" role="menu">
+      <li class="dropdown-li">
+        <%if user_signed_in? %>
+          <%= link_to 'My Messages', '/mailboxes' %>
+        <% else%>
+          <%= link_to 'My Messages', 'http://www.musicfestivalnation.com/users/login' %>
+        <%end%>
+
+      </li>
+      <li class="dropdown-li">
+        <%= link_to 'My Contests', '/my-contests' %>
+      </li>
+      <li class="dropdown-li">
+        <%= link_to 'My Comments', '/my-comments' %>
+      </li>
+      <li class="dropdown-li">
+        <%= link_to 'My Reviews', '/my-reviews' %>
+      </li>
+      <li class="dropdown-li">
+        <%= link_to 'Festival Lineup', '/festival-lineup' %>
+      </li>
+      <li class="dropdown-li">
+        <%= link_to 'My Rides', '/my-rides' %>
+      </li>
+    </ul> 
+  </li>      
+<%end%>
 
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>

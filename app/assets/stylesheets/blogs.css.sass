@@ -2,17 +2,17 @@
 @import 'bootstrap/variables'
 @import 'bootstrap/mixins'
 
-$creamwhite: #f5f5f5
+
 $green: #3fad49
 $orange: rgb(233, 86, 36)
 $brown: #5d3c1d
+$clearwhite: rgba(241,241,241, .6)
 
 .blog-input
   width: 98% !important
 
 .blog-container
-  border: 1px solid rgba(0, 0, 0, 0.15)
-  background: $creamwhite
+  background: #fff
   padding: 9.5px
   display: inline-block
   width: 98%
@@ -26,6 +26,9 @@ $brown: #5d3c1d
       color: $orange
 
 .show-blog
+  @include border-radius(10px)
+  border: 1px solid $clearwhite
+  @include box-shadow(0 0 30px $clearwhite)
   .blog-area
     word-break: normal
     p
@@ -34,8 +37,10 @@ $brown: #5d3c1d
 
 
 
+
 .home-blog
   height: 500px
+  border: 1px solid rgba(0, 0, 0, 0.15)
   .blog-area
     word-break: normal
     overflow: hidden

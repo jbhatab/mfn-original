@@ -1,0 +1,46 @@
+<% title @forum.name  %> 
+
+<ul class="directory">
+  <li><%= link_to 'Forums', forums_path%></li>
+  <li><h3>>></h3></li>
+  <li><%=@forum.name%></li>
+
+</ul>
+<p>
+  <%if user_signed_in?%>
+    <%= link_to "New Topic", "/topics/new?forum=#{@forum.id}", class: 'btn ' %>
+  <%else%>
+    <%if Rails.env.production? %>
+      <%= link_to "Login", 'http://www.musicfestivalnation.com/users/login' %> or
+      <%= link_to "Sign Up", 'http://www.musicfestivalnation.com/users/sign_up' %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path %> or
+      <%= link_to "Sign Up", new_user_registration_path%>
+    <% end %>
+    to create a topic
+  <%end%>
+  </p>  
+
+
+<div class='row-fluid'>
+  <div class='span12'>
+      <table id='topic-list' class='forum-table'>  
+        <tr>  
+          <th width="60%">Topic Title</th>  
+          <th width="10%">Posts</th>  
+          <th width="30%">Last Post</th>  
+        </tr>  
+        <% for topic in @forum.topics %>  
+          <tr>  
+            <td><%= link_to h(topic.name), topic_path(topic.id) %>  
+            <td><%= topic.posts.length - 1 %></td>  
+            <td class="right"><%= distance_of_time_in_words_to_now topic.last_post_at %> ago by <%= link_to topic.user.username, "/users/#{topic.last_poster_id}" %></td>  
+  
+          </tr>  
+        <% end %>  
+      </table>  
+   
+
+  </div>
+
+</div>

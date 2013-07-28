@@ -1,4 +1,4 @@
-<div id='comment_<%=comment.id%>' class="comment-container">
+<div id='comment_<%=comment.id%>' class="iframe-comment-container">
   <div class="vote-area">
     <% if user_signed_in? %>
       <%if current_user.voted_up_on? comment%>
@@ -32,6 +32,7 @@
       <%end%>
     </header>
     <%=comment.comment%></br>
+    
     <% if user_signed_in? %>
       <% if current_user.id == comment.user_id or current_user.admin == true%>
         <%= link_to 'Delete Comment', [comment.commentable, comment],
@@ -41,6 +42,3 @@
     <%end%>
   </div>
 </div>
-
-  
-

@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
 
   has_many :authentications
   has_many :blogs
+
+  has_many :topics
+  has_many :posts
   
   
   #allows users to have events (festival lineup)

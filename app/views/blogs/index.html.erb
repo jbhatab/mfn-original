@@ -1,25 +1,22 @@
-<h1>Listing blogs</h1>
+<section id="blogs">
+  <% @blogs.each do |blog| %>
+    <article class='blog-container home-blog'>
+      <h2>
+        <%= link_to blog.title, blog %>
+      </h2>
+      <hr class='horizontal-divider-2'>
+      <pre class='blog-area'>
+        <%= raw blog.content %>
+      </pre>
+      <footer class='blog-footer'>
+        by <i><%=blog.author%></i>
+        <%= link_to 'Read More...', blog %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+      </footer>
 
-<% @blogs.each do |blog| %>
-  <tr>
-    <td><%= blog.title %></td>
-    <td><%= blog.content %></td>
-    <td><%= link_to 'Show', blog %></td>
-    <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-    <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    </article>
+  <%end%>
 
-<br />
+  <%= will_paginate @blogs %>
 
-<%= link_to 'New Blog', new_blog_path %>
+</section>

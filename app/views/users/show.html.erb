@@ -1,0 +1,9 @@
+<h2><%=@user.username%>'s Profile </h2>
+
+
+<% @user.posts.each do |post|%>
+  <h4><%=link_to post.topic.name.capitalize, post.topic%></h4>
+  <hr class='horizontal-divider-3'/>
+  <p style='font-size: 14px; margin-bottom: 10px;' ><%= post.content %></p>
+<%end%>
+
