@@ -1,5 +1,8 @@
 <% title 'Festival Contests' %>
 <% description 'Music festival ticket giveaways, contests, and more. Just make an account and enter the giveaways!' %> 
+
+<iframe src="http://localhost:3000/iframe-rideshare/7/7/1" style="border:0px #FFFFFF none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="500px" width="500px"></iframe>
+
 <% @contests.each do |contest| %>
   <%= render 'contest', contest: contest%>
 <% end %>
