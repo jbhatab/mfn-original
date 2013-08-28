@@ -12,10 +12,11 @@ $darkorange: rgb(233, 74, 19)
 $clearwhite: rgba(241,241,241, .6)
 $heavywhite: rgba(255,255,255, .9)
 
-#user_login_box
+.iframe-login-box
   position: absolute
-  top: 0
-  right: 0
+  z-index: 100
+
+
 
 .iframe-ride-row
   display: table
@@ -71,6 +72,38 @@ $heavywhite: rgba(255,255,255, .9)
   border: 1px solid $lightblue
   @include box-shadow(0 0 30px $lightblue)
   overflow: scroll
+
+.iframe-login-modal
+  margin: 0
+  background-color: $heavywhite
+  top: 5% !important
+  left: 5%
+  @include border-radius(10px)
+  border: 1px solid $lightblue
+  @include box-shadow(0 0 30px $lightblue)
+  overflow: scroll
+
+.iframe-login-container
+  padding: 15px
+  height: auto
+  h3
+    line-height: 25px
+    margin-top: 0px
+    text-align: center
+  h4
+    text-align: center
+
+#login-modal-btn
+  position: absolute
+
+#signup-modal-btn
+  position: absolute
+  left: 70
+
+#login-modal
+
+#signup-modal
+
 
 .iframe-ride-content
   div

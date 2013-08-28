@@ -10,7 +10,17 @@ class User < ActiveRecord::Base
 
   has_mailbox
   validates :password, :presence => true, :if => :password_required?
-  
+  validates_presence_of :username
+  validates_uniqueness_of :username
+  validates :email,
+            :uniqueness => {:case_sensitive => false }
+
+  validates_format_of :email, :with => /@/
+
+  def email_required?
+    super && provider.blank?
+  end
+            
 
   has_many :reviews
   accepts_nested_attributes_for :reviews
@@ -32,6 +42,8 @@ class User < ActiveRecord::Base
   has_many :contests, through: :contests_users
 
   has_many :rides, :dependent => :destroy
+
+  
 
   #login instead of email replacement that is necessary
   def self.find_first_by_auth_conditions(warden_conditions)

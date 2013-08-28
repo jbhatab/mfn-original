@@ -1,0 +1,43 @@
+<div id="login_modal" class="iframe-login-modal modal hide fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class='container iframe-login-container'>
+    <div class='row-fluid'>
+      <div class='span12'>
+        <h3>Log In With</h3>
+       
+      </div>
+    </div>
+
+    
+
+    <%= render "devise/shared/social" %>
+
+    <div class='row-fluid'>
+      <h4>OR </h4>
+    </div>
+
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => "login_form"}, :remote => true, :format => :json) do |f| %>
+
+
+      <div><%= f.label :login, 'Email or Username:' %>
+      <%= f.text_field :login%></div>
+      <div><%= f.label :password, 'Password:' %>
+      <%= f.password_field :password %></div>
+
+      <div class="bottom-login">
+
+        <%= f.submit "Sign in", :class=>'btn' %>
+
+        <% if devise_mapping.rememberable? -%>
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        <% end -%>
+
+     </div>
+    <% end %>
+    <hr class='horizontal-divider'>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+
+
+

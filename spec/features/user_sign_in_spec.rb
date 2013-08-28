@@ -6,12 +6,12 @@ describe "user sign in" do
     
     visit "/users/login"
 
-    fill_in "Login",    :with => "jbhatab@example.com"
+    fill_in "Email or Username:",    :with => "jbhatab@example.com"
     fill_in "Password", :with => "ilovegrapes"
 
     click_button "Sign in"
 
-    page.should have_content("Signed in successfully.")
+    page.should have_content("Signed in as "+user.username)
 
     click_link "Sign out"
 
@@ -19,12 +19,12 @@ describe "user sign in" do
 
     visit "/users/login"
 
-    fill_in "Login",    :with => "jbhatab"
+    fill_in "Email or Username:",    :with => "jbhatab"
     fill_in "Password", :with => "ilovegrapes"
 
     click_button "Sign in"
     
-    page.should have_content("Signed in successfully.")
+    page.should have_content("Signed in as "+user.username)
 
   end
 end

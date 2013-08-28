@@ -22,15 +22,70 @@
 </head>
 <%= link_to image_tag('MFN_Banner.png', class: 'iframe-banner'), root_path %>
 
-<div id="user_login_box">
-  <%= form_for("user", :url => user_session_path, :html => {:id => "sign_in"}, :remote => true, :format => :json) do |f| %>
-    <%= f.text_field :login %>
-    <%= f.password_field :password %>
-    <%= f.submit 'Sign in' %>
-    <%= link_to "Forgot your password?", new_password_path('user') %>
-  <% end %>
-</div>
 
+<%if false%>
+  <div id="user_nav">
+    <% if user_signed_in? %>
+      Signed in as <%= current_user.username %>. Not you?
+      <a class="dropdown-toggle btn btn-mini" id="profile-dropdown" role="button" data-toggle="dropdown" >
+        My Profile
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu profile-dropdown-list" role="menu">
+
+        <li class="dropdown-li">
+          <%= link_to 'My Rides', '/my-rides' %>
+        </li>
+        <li class="dropdown-li">
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        </li>
+
+      </ul> 
+    <% else %>
+      <%if Rails.env.production? %>
+        <%= link_to "Login", 'http://www.musicfestivalnation.com/users/login', :class => 'sign-in-btn btn btn-mini btn-primary' %>
+        <%= link_to "Sign Up", 'http://www.musicfestivalnation.com/users/sign_up', :class => 'sign-in-btn btn btn-mini btn-primary' %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, :class => 'sign-in-btn btn btn-mini btn-primary' %>
+        <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-mini btn-primary' %>
+      <% end %> 
+      <%= link_to "Sign in with Twitter", "/auth/facebook" %>
+    <% end %>
+  </div>
+<%end%>
+<% if true %>
+  <% if user_signed_in? %>
+    <div class='iframe-login-box' id="user_logged_in_box">
+      Signed in as <%= current_user.username %>. Not you?
+      <a class="dropdown-toggle btn btn-mini" id="profile-dropdown" role="button" data-toggle="dropdown" >
+        My Profile
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu profile-dropdown-list" role="menu">
+
+        <li class="dropdown-li">
+          <%= link_to 'My Rides', '/my-rides' %>
+        </li>
+        <li class="dropdown-li">
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        </li>
+
+      </ul> 
+    </div>
+  <%else%>
+    <div class='iframe-login-box' id="user_login_box">
+      <a class='btn btn-primary' href='#login_modal' id='login-modal-btn' data-toggle="modal">Login </a>
+      <a class='btn btn-primary' href='#signup_modal' id='signup-modal-btn' data-toggle="modal">Sign Up </a>
+    </div>
+    <%= render 'users/login_modal'%>
+    <%= render 'users/signup_modal'%>
+    
+
+      
+  <%end%>
+  
+  
+<%end%>
 
 
 

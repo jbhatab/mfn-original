@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727024428) do
+ActiveRecord::Schema.define(:version => 20130818225504) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -234,8 +234,8 @@ ActiveRecord::Schema.define(:version => 20130727024428) do
   add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",               :null => false
-    t.string   "encrypted_password",     :default => "",               :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -247,11 +247,8 @@ ActiveRecord::Schema.define(:version => 20130727024428) do
     t.string   "full_name"
     t.string   "username"
     t.boolean  "admin",                  :default => false
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.boolean  "forem_admin",            :default => false
-    t.string   "forem_state",            :default => "pending_review"
-    t.boolean  "forem_auto_subscribe",   :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.boolean  "forum_admin"
   end
 

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  respond_to :json, :html
+  respond_to :json, :html, :js
   helper_method :sort_column, :sort_direction
   caches_action :get_map_events
   caches_action :get_events_rideshare

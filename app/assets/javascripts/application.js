@@ -33,5 +33,6 @@
 //= require users
 //= require dates
 //= require blogs
+//= require iframe
 //= require contests
 //= require ckeditor/init
