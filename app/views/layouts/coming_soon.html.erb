@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <%= display_meta_tags :site => 'Music Festival Nation', :title => 'Info, Maps, and More', :description => "Our goal is to make your music festival experience better. We will help you find festivals, get there, and enjoy the already amazing experience a little more.", :author => 'Blaine Hatab'%>
+
+  <meta name="msvalidate.01" content="385050DC0D2B4762B3163D5D48FD6584" />
+  <meta name="description=" content=>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= analytics_init if Rails.env.production? %>
+
+  <%= javascript_include_tag "application" %>
+  <%= yield :head %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  
+  <%= csrf_meta_tags %>
+
+<!--[if lt IE 9]>
+<script src="dist/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  
+  <%= yield %>
+
+
+  <!--for google maps, keep in footer for speed-->
+  <%= yield :scripts %>
+  
+</body>
+</html>

@@ -1,5 +1,7 @@
 class HomesController < ApplicationController
 
+  layout 'coming_soon'
+
   def robots
     robots = File.read(Rails.root + "config/robots.#{Rails.env}.txt")
     render :text => robots, :layout => false, :content_type => "text/plain"
@@ -21,6 +23,9 @@ class HomesController < ApplicationController
     @rides = Ride.order("created_at").limit(10)
     @posts = Post.order("created_at").limit(10)
 
+  end
+
+  def coming_soon
   end
 
   def contact

@@ -107,7 +107,7 @@ Mfn::Application.routes.draw do
   match '/iframe_rides_gmap/:festival/:year/:event', :to => 'rides#iframe_rides_gmap'
   match '/iframe_get_events_rideshare/:festival/:year/:event', :to => 'events#iframe_get_events_rideshare'
 
-  root :to => 'homes#index'
+  root :to => 'homes#coming_soon'
 
   # match ‘/auth/facebook/callback’, :to => ‘profiless#failure’
 
