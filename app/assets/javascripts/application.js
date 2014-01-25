@@ -15,7 +15,6 @@
 //= require jquery.ui.accordion
 //= require jquery.ui.slider
 //= require jquery.ui.datepicker
-//= require jcountdown
 //= require underscore-min
 //= require gmaps4rails/gmaps4rails.base.js
 //= require gmaps4rails/gmaps4rails.googlemaps.js
